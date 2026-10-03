@@ -22,4 +22,4 @@ npx --yes hyperframes@0.8.46 render --resolution portrait-4k --fps 24 --quality 
 python mix.py renders/final.mp4 out/CREA_atelier_octobre_rose_4K.mp4
 ```
 
-The 4K master (~120 MB) is not in the repo (GitHub's limit is 100 MB); the 720p phone copy is.
+The full-bitrate 4K master (~120 MB) is not in the repo (GitHub caps files at 100 MB). The repo has a 4K copy at 9.5 Mbps (`out/CREA_atelier_octobre_rose_4K_lite.mp4`) and the 720p phone copy.

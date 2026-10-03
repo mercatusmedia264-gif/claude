@@ -12,8 +12,8 @@ GAPS_SPEC = [
     (5.24,  [("store", 1.55, 2.55), ("logowall", 1.3, 1.583)]),                            # après « Seulement chez CRÉA ! »
     (9.78,  [("heart", 1.3, 1.667), ("garlandceil", 1.2, 1.7)]),                           # après « … les associations concernées »
     (12.49, [("rackfocus", 1.0, 1.417), ("tablehrt", 0.5, 1.0), ("teal", 1.05, 1.542)]),  # après « … déjà fourni ! » (atelier)
-    (14.87, [("tablewide", 0.75, 1.208), ("interior", 1.55, 2.3)]),                         # après « … tediwhom m3akom ! »
-    (17.30, [("table", 1.55, 2.5), ("drape", 1.15, 1.667)]),                                # après « … f la description »
+    (14.87, [("tablewide", 0.5, 1.208), ("interior", 1.55, 2.3)]),                         # après « … tediwhom m3akom ! »
+    (17.30, [("heartlamp", 1.55, 2.0), ("drape", 1.15, 1.667)]),                                # après « … f la description »
 ]
 BEATS = json.load(open("beats.json"))["grid"]          # temps forts de la musique (déjà calée à 0:30)
 FADE_IN, XFADE, FADE_OUT = 0.5, 0.45, 0.45            # fondus flous des intermèdes
@@ -24,15 +24,34 @@ def beat_after(t, lo, hi):
     after = [b for b in ok if b >= t - 1e-6]
     return after[0] if after else (ok[-1] if ok else min(t, hi))
 
-GAPS, GAPLEN, shift = [], [], 0.0
+import subprocess, numpy as np
+_raw = subprocess.run(["ffmpeg", "-v", "error", "-i", "assets/voice.wav", "-f", "f32le", "-ac", "1", "-ar", "8000", "-"],
+                      capture_output=True, check=True).stdout
+_v = np.frombuffer(_raw, np.float32)
+_db = 20 * np.log10(np.sqrt(np.convolve(_v ** 2, np.ones(80) / 80, "same")) + 1e-9)
+
+def voice_end(at):
+    """fin du dernier mot avant le point de coupe (temps du cut)"""
+    i = int(at * 8000); loud = np.where(_db[max(0, i - 8000):i] > -38)[0]
+    return round((max(0, i - 8000) + loud[-1]) / 8000, 3) if len(loud) else at
+
+# Chaque intermède : le milieu du fondu d'entrée tombe sur le 1er temps après la fin de la phrase,
+# chaque coupe interne et le retour sur Hind tombent sur un temps.
+GAPS, GAPLEN, INTER, shift = [], [], [], 0.0
 for at, shots in GAPS_SPEC:
-    t = at + shift; start = t; plan = []
+    start = at + shift                                   # point de coupe (temps final)
+    ve = voice_end(at) + shift
+    B = next(b for b in BEATS if b >= ve + 0.05)        # 1er temps après la phrase
+    v0 = round(B - FADE_IN / 2, 3)                       # début du fondu d'entrée
+    t = B; plan = []
     for i, (name, want, flen) in enumerate(shots):
-        margin = FADE_OUT if i == len(shots) - 1 else XFADE / 2 + 0.05
-        end = beat_after(t + want, t + min(0.6, want), t + flen - margin)
-        plan.append((name, round(end - t, 3))); t = end
+        st = v0 if i == 0 else t
+        margin = 0.05            # les fondus de sortie passent sur l'image figée en fin de fichier
+        end = beat_after(t + want, t + min(0.6, want), st + flen - margin)
+        plan.append((name, round(st, 3), round(end - st, 3))); t = end
     g = round(t - start, 3)
     GAPS.append((at, plan)); GAPLEN.append(g); shift += g
+    INTER.append((v0, round(t - v0, 3), plan))
 
 def q(t):
     """temps du cut -> temps de la vidéo finale (décalé par les intermèdes)"""
@@ -107,7 +126,7 @@ GLASS = [
     ("disc", 830, 1440, 220, 220, 17.45, 19.60, -30, -20),
     ("capsule", -40, 1650, 400, 150, 17.60, 19.60, 50, -20),
 ]
-SWEEPS = [7.66, 9.76, 10.50, 12.47, 13.50, 14.86, 19.80]   # balayage : entrées/sorties de carte + fin (temps du cut)
+SWEEPS = [7.66, 10.50, 13.50, 19.80]   # balayage : entrées/sorties de carte + fin (temps du cut)
 
 # ---------------------------------------------------------------- traits de lumière
 PATHS = {
@@ -130,25 +149,30 @@ def shift_line(line):
         out.append(f"{w}@{q(float(t))}")
     return " | ".join(out)
 
-CARDS = [[(n, q(a), q(a) + (b - a)) for n, a, b in card] for card in CARDS]
+_cards = []
+for card in CARDS:
+    nc = [[n, q(a), round(q(a) + (b - a), 3)] for n, a, b in card]
+    hit = [k for k, (at, _) in enumerate(GAPS_SPEC) if abs(at - card[-1][2]) < 0.1]
+    into = bool(hit)
+    if into:
+        nc[-1][2] = round(INTER[hit[0]][0] + FADE_IN + 0.05, 3)   # reste sous le fondu de l'intermède
+    _cards.append({"shots": nc, "into": into})
+CARDS = _cards
 CAM = [(q(t), d, p, s0, s1, e) for t, d, p, s0, s1, e in CAM]
 CAPS = [(q(a), q(a) + (b - a), [shift_line(l) for l in lines], y, sz) for a, b, lines, y, sz in CAPS]
 GLASS = [(sh, x, y, w, h, q(a), q(a) + (b - a), dx, dy) for sh, x, y, w, h, a, b, dx, dy in GLASS]
 SWEEPS = [q(t) for t in SWEEPS]
 ARCS = [(k, q(t), d, r, hold) for k, t, d, r, hold in ARCS]
 # intermèdes en temps final : (début, [(plan, début, durée)])
-INTER = []
-for (at, shots), g in zip(GAPS, GAPLEN):
-    t0 = q(at) - g; t = t0; lst = []
-    for name, d in shots:
-        lst.append((name, round(t, 3), d)); t += d
-    INTER.append((round(t0, 3), round(g, 3), lst))
 # morceaux du face caméra : (début final, durée, début dans talk.mp4)
 TALKSEG = []
 for i in range(len(SEGS) - 1):
     a, b = SEGS[i], SEGS[i + 1]
-    tail = 0.95 if i == len(SEGS) - 2 else FADE_IN + 0.1      # passe sous le fondu de l'intermède / sous la fin
-    TALKSEG.append((q(a), round(b - a + tail, 3), a))
+    if i == len(SEGS) - 2:
+        d = b - a + 0.95                                          # passe sous la fin B
+    else:                                                         # image figée jusqu'à ce que l'intermède couvre tout
+        d = max(b - a, INTER[i][0] + FADE_IN + 0.05 - q(a))
+    TALKSEG.append((q(a), round(d, 3), i))
 
 # ---------------------------------------------------------------- SFX (pour mix.py)
 CUES = [("whoosh", 0.00, -12), ("whoosh", HOOK_LOGO - 0.12, -12), ("pop", q(6.28), -11), ("pop", q(11.02), -13),
@@ -163,9 +187,10 @@ json.dump({"cues": CUES, "dur": DUR, "end": END,
 # ================================================================= HTML
 def media_for_cards():
     bg, inner = [], []
-    for ci, card in enumerate(CARDS):
+    for ci, cd in enumerate(CARDS):
+        card = cd["shots"]
         for name, a, b in card:
-            d = round(b - a + (0.30 if (name, a, b) == card[-1] else 0.25), 2)   # marge pour la sortie
+            d = round(b - a + (0.30 if [name, a, b] == card[-1] else 0.25), 2)   # marge pour la sortie
             bg.append(f'<div class="bgb" id="bg-{name}"><video id="vb-{name}" class="clip" src="assets/shots/{name}.mp4" '
                       f'data-start="{a}" data-duration="{d}" data-media-start="0" muted playsinline></video></div>')
             inner.append(f'<div class="card-media" id="cm-{name}" style="opacity:0"><video id="vc-{name}" class="clip" '
@@ -226,7 +251,7 @@ SLOGAN = "".join(f'<span>{c if c != " " else "&nbsp;"}</span>' for c in "Osez l�
 
 bg_html, card_html = media_for_cards()
 talk_html = "\n      ".join(
-    f'<video id="talk{i}" class="clip talk" src="assets/talk.mp4" data-start="{a}" data-duration="{d}" data-media-start="{m}" muted playsinline></video>'
+    f'<video id="talk{i}" class="clip talk" src="assets/talk_s{m}.mp4" data-start="{a}" data-duration="{d}" data-media-start="0" muted playsinline></video>'
     for i, (a, d, m) in enumerate(TALKSEG))
 inter_html = "\n      ".join(
     f'<div class="ish" id="ish-{n}"><video id="vi-{n}" class="clip" src="assets/shots/{n}.mp4" data-start="{t}" '
@@ -259,10 +284,6 @@ html = f"""<!doctype html>
       {talk_html}
     </div></div>
 
-    <div id="inter">
-      {inter_html}
-    </div>
-
     {bg_html}
 
     {glass_html}
@@ -271,6 +292,10 @@ html = f"""<!doctype html>
         {card_html}
         <div class="card-sheen"></div><div class="card-gloss" id="gloss"></div>
     </div></div></div>
+
+    <div id="inter">
+      {inter_html}
+    </div>
 
     <svg id="strokes" viewBox="0 0 1080 1920">
       {strokes_html}
@@ -324,12 +349,13 @@ html = f"""<!doctype html>
   }});
 
   // ---------------- cartes de verre
-  C.CARDS.forEach(card => {{
+  C.CARDS.forEach(cd => {{
+    const card = cd.shots, into = cd.into;
     const a = card[0][1], b = card[card.length - 1][2];
     tl.set("#card", {{ opacity: 1 }}, a);
     tl.fromTo("#card", {{ y: 420, scale: 0.9, rotation: -3 }}, {{ y: 0, scale: 1, rotation: 0, duration: 0.8, ease: "power3.inOut", immediateRender: false }}, a);
-    tl.to("#card", {{ y: 520, rotation: 3, duration: 0.34, ease: "power2.inOut" }}, b - 0.34);
-    tl.set("#card", {{ opacity: 0 }}, b);
+    if (!into) tl.to("#card", {{ y: 520, rotation: 3, duration: 0.34, ease: "power2.inOut" }}, b - 0.34);
+    tl.set("#card", {{ opacity: 0, y: 0, rotation: 0 }}, b);
     card.forEach(([name, s, e], i) => {{
       tl.set("#cm-" + name, {{ opacity: 1 }}, s);
       tl.fromTo("#cm-" + name, {{ scale: 1.0 }}, {{ scale: 1.05, duration: e - s + 0.25, ease: "sine.inOut", immediateRender: false }}, s);
@@ -341,7 +367,9 @@ html = f"""<!doctype html>
       else tl.set("#cm-" + name, {{ opacity: 0 }}, e);
       // fond : le même plan flouté, plein cadre
       tl.fromTo("#bg-" + name, {{ opacity: 0 }}, {{ opacity: 1, duration: i ? 0.2 : 0.4, ease: "power2.out", immediateRender: false }}, s);
-      tl.to("#bg-" + name, {{ opacity: 0, duration: i < card.length - 1 ? 0.2 : 0.34, ease: "power2.inOut" }}, i < card.length - 1 ? e : e - 0.34);
+      if (i < card.length - 1) tl.to("#bg-" + name, {{ opacity: 0, duration: 0.2, ease: "power2.inOut" }}, e);
+      else if (into) tl.set("#bg-" + name, {{ opacity: 0 }}, e);
+      else tl.to("#bg-" + name, {{ opacity: 0, duration: 0.34, ease: "power2.inOut" }}, e - 0.34);
     }});
     tl.fromTo("#gloss", {{ xPercent: -200 }}, {{ xPercent: 260, duration: 0.8, ease: "power2.inOut", immediateRender: false }}, a + 0.45);
   }});

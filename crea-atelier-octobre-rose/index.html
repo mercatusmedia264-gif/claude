@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="fr" data-resolution="portrait">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1080, height=1920" />
+  <script src="assets/gsap.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="root" data-composition-id="main" data-start="0" data-duration="22.4" data-width="1080" data-height="1920">
+    <svg width="0" height="0" style="position:absolute"><defs>
+      <filter id="lf-capsule-400x150" x="0" y="0" width="400" height="150" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feImage href="assets/lens-capsule.png" x="0" y="0" width="400" height="150" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="48" xChannelSelector="R" yChannelSelector="G"/></filter>
+      <filter id="lf-capsule-420x158" x="0" y="0" width="420" height="158" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feImage href="assets/lens-capsule.png" x="0" y="0" width="420" height="158" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="50" xChannelSelector="R" yChannelSelector="G"/></filter>
+      <filter id="lf-capsule-1600x380" x="0" y="0" width="1600" height="380" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feImage href="assets/lens-capsule.png" x="0" y="0" width="1600" height="380" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="121" xChannelSelector="R" yChannelSelector="G"/></filter>
+      <filter id="lf-disc-200x200" x="0" y="0" width="200" height="200" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feImage href="assets/lens-disc.png" x="0" y="0" width="200" height="200" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="64" xChannelSelector="R" yChannelSelector="G"/></filter>
+      <filter id="lf-disc-220x220" x="0" y="0" width="220" height="220" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feImage href="assets/lens-disc.png" x="0" y="0" width="220" height="220" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="70" xChannelSelector="R" yChannelSelector="G"/></filter>
+      <filter id="lf-disc-230x230" x="0" y="0" width="230" height="230" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feImage href="assets/lens-disc.png" x="0" y="0" width="230" height="230" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="73" xChannelSelector="R" yChannelSelector="G"/></filter>
+      <filter id="lf-disc-300x300" x="0" y="0" width="300" height="300" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feImage href="assets/lens-disc.png" x="0" y="0" width="300" height="300" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="96" xChannelSelector="R" yChannelSelector="G"/></filter>
+    </defs></svg>
+
+    <div id="camw"><div id="cam">
+      <video id="talk" class="clip" src="assets/talk.mp4" data-start="0" data-duration="20.75" data-media-start="0" muted playsinline></video>
+    </div></div>
+
+    <div class="bgb" id="bg-pliers"><video id="vb-pliers" class="clip" src="assets/shots/pliers.mp4" data-start="10.5" data-duration="1.3" data-media-start="0" muted playsinline></video></div>
+    <div class="bgb" id="bg-beadbox"><video id="vb-beadbox" class="clip" src="assets/shots/beadbox.mp4" data-start="11.55" data-duration="1.25" data-media-start="0" muted playsinline></video></div>
+    <div class="bgb" id="bg-table"><video id="vb-table" class="clip" src="assets/shots/table.mp4" data-start="13.5" data-duration="1.65" data-media-start="0" muted playsinline></video></div>
+
+    <div class="glass" id="g0" style="left:40px;top:1420px;width:230px;height:230px;border-radius:115.0px;backdrop-filter:url(#lf-disc-230x230) blur(1.5px);-webkit-backdrop-filter:url(#lf-disc-230x230) blur(1.5px);"></div>
+    <div class="glass" id="g1" style="left:690px;top:1640px;width:420px;height:158px;border-radius:79.0px;backdrop-filter:url(#lf-capsule-420x158) blur(1.5px);-webkit-backdrop-filter:url(#lf-capsule-420x158) blur(1.5px);"></div>
+    <div class="glass" id="g2" style="left:840px;top:1400px;width:200px;height:200px;border-radius:100.0px;backdrop-filter:url(#lf-disc-200x200) blur(1.5px);-webkit-backdrop-filter:url(#lf-disc-200x200) blur(1.5px);"></div>
+    <div class="glass" id="g3" style="left:-60px;top:1620px;width:420px;height:158px;border-radius:79.0px;backdrop-filter:url(#lf-capsule-420x158) blur(1.5px);-webkit-backdrop-filter:url(#lf-capsule-420x158) blur(1.5px);"></div>
+    <div class="glass" id="g4" style="left:830px;top:1440px;width:220px;height:220px;border-radius:110.0px;backdrop-filter:url(#lf-disc-220x220) blur(1.5px);-webkit-backdrop-filter:url(#lf-disc-220x220) blur(1.5px);"></div>
+    <div class="glass" id="g5" style="left:-40px;top:1650px;width:400px;height:150px;border-radius:75.0px;backdrop-filter:url(#lf-capsule-400x150) blur(1.5px);-webkit-backdrop-filter:url(#lf-capsule-400x150) blur(1.5px);"></div>
+
+    <div id="card"><div class="card-rim"><div class="card-in">
+        <div class="card-media" id="cm-pliers" style="opacity:0"><video id="vc-pliers" class="clip" src="assets/shots/pliers.mp4" data-start="10.5" data-duration="1.3" data-media-start="0" muted playsinline></video></div>
+        <div class="card-media" id="cm-beadbox" style="opacity:0"><video id="vc-beadbox" class="clip" src="assets/shots/beadbox.mp4" data-start="11.55" data-duration="1.25" data-media-start="0" muted playsinline></video></div>
+        <div class="card-media" id="cm-table" style="opacity:0"><video id="vc-table" class="clip" src="assets/shots/table.mp4" data-start="13.5" data-duration="1.65" data-media-start="0" muted playsinline></video></div>
+        <div class="card-sheen"></div><div class="card-gloss" id="gloss"></div>
+    </div></div></div>
+
+    <svg id="strokes" viewBox="0 0 1080 1920">
+      <g id="arc0" opacity="0"><path class="st-halo" d="M 1100 250 C 820 330, 420 170, -20 290" pathLength="1000"/><path class="st-core" d="M 1100 250 C 820 330, 420 170, -20 290" pathLength="1000"/><path class="st-head" d="M 1100 250 C 820 330, 420 170, -20 290" pathLength="1000"/></g>
+      <g id="arc1" opacity="0"><path class="st-halo" d="M 330 1300 L 90 1300" pathLength="1000"/><path class="st-core" d="M 330 1300 L 90 1300" pathLength="1000"/><path class="st-head" d="M 330 1300 L 90 1300" pathLength="1000"/></g>
+      <g id="arc2" opacity="0"><path class="st-halo" d="M 750 1300 L 990 1300" pathLength="1000"/><path class="st-core" d="M 750 1300 L 990 1300" pathLength="1000"/><path class="st-head" d="M 750 1300 L 990 1300" pathLength="1000"/></g>
+      <g id="arc3" opacity="0"><path class="st-halo" d="M 1010 1480 C 1070 1150, 950 820, 1030 420" pathLength="1000"/><path class="st-core" d="M 1010 1480 C 1070 1150, 950 820, 1030 420" pathLength="1000"/><path class="st-head" d="M 1010 1480 C 1070 1150, 950 820, 1030 420" pathLength="1000"/></g>
+      <g id="arc4" opacity="0"><path class="st-halo" d="M 150 700 L 150 520 Q 150 445 225 445 L 520 445" pathLength="1000"/><path class="st-core" d="M 150 700 L 150 520 Q 150 445 225 445 L 520 445" pathLength="1000"/><path class="st-head" d="M 150 700 L 150 520 Q 150 445 225 445 L 520 445" pathLength="1000"/></g>
+      <g id="arc5" opacity="0"><path class="st-halo" d="M -20 1560 C 300 1470, 720 1650, 1100 1520" pathLength="1000"/><path class="st-core" d="M -20 1560 C 300 1470, 720 1650, 1100 1520" pathLength="1000"/><path class="st-head" d="M -20 1560 C 300 1470, 720 1650, 1100 1520" pathLength="1000"/></g>
+      <g id="arc6" opacity="0"><path class="st-halo" d="M 1100 250 C 820 330, 420 170, -20 290" pathLength="1000"/><path class="st-core" d="M 1100 250 C 820 330, 420 170, -20 290" pathLength="1000"/><path class="st-head" d="M 1100 250 C 820 330, 420 170, -20 290" pathLength="1000"/></g>
+    </svg>
+
+    <div class="cap" id="cap0" data-a="0.02" data-b="2.12" style="top:1150px;font-size:70px"><div class="line"><span class="w" data-t="0.08">Un</span><span class="w" data-t="0.64">atelier</span><span class="w" data-t="0.96">de</span><span class="w" data-t="1.16">confection</span></div><div class="line"><span class="w" data-t="1.58">de</span><span class="w s" data-t="1.80">bijoux</span></div></div>
+    <div class="cap" id="cap1" data-a="2.12" data-b="3.62" style="top:1130px;font-size:84px"><div class="line"><span class="w" data-t="2.16">pour</span></div><div class="line"><span class="w s" data-t="2.42">Octobre</span><span class="w s" data-t="2.84">Rose ?</span></div></div>
+    <div class="cap" id="cap2" data-a="3.62" data-b="4.18" style="top:1150px;font-size:86px"><div class="line"><span class="w" data-t="3.66">Oui !</span></div></div>
+    <div class="cap" id="cap3" data-a="4.18" data-b="5.3" style="top:1110px;font-size:73px"><div class="line"><span class="w" data-t="4.22">Seulement</span><span class="w" data-t="4.52">chez</span></div></div>
+    <div class="cap" id="cap4" data-a="5.3" data-b="6.24" style="top:1150px;font-size:79px"><div class="line"><span class="w" data-t="5.36">W</span><span class="w" data-t="5.44">nzidolkom ?</span></div></div>
+    <div class="cap" id="cap5" data-a="6.24" data-b="7.62" style="top:1170px;font-size:100px"><div class="line"><span class="w s" data-t="6.30">50 %</span></div><div class="line"><span class="w" data-t="6.98">des</span><span class="w" data-t="7.18">bénéfices</span></div></div>
+    <div class="cap" id="cap6" data-a="7.62" data-b="9.74" style="top:1150px;font-size:66px"><div class="line"><span class="w" data-t="7.64">rayhin</span><span class="w" data-t="7.94">yroho</span><span class="w" data-t="8.20">l’les</span></div><div class="line"><span class="w s" data-t="8.32">associations</span><span class="w" data-t="8.74">concernées</span></div></div>
+    <div class="cap" id="cap7" data-a="9.76" data-b="10.52" style="top:1150px;font-size:73px"><div class="line"><span class="w" data-t="9.80">W</span><span class="w" data-t="9.86">ma</span><span class="w" data-t="9.98">tkhmmouch,</span></div></div>
+    <div class="cap" id="cap8" data-a="10.54" data-b="12.46" style="top:300px;font-size:59px"><div class="line"><span class="w" data-t="10.56">parce que</span><span class="w" data-t="10.92">le</span><span class="w s" data-t="11.04">matériel</span></div><div class="line"><span class="w" data-t="11.62">déjà</span><span class="w" data-t="11.86">fourni !</span></div></div>
+    <div class="cap" id="cap9" data-a="12.5" data-b="13.46" style="top:1150px;font-size:79px"><div class="line"><span class="w" data-t="12.60">W</span><span class="w" data-t="12.70">nzidolkom :</span></div></div>
+    <div class="cap" id="cap10" data-a="13.5" data-b="14.82" style="top:300px;font-size:64px"><div class="line"><span class="w" data-t="13.54">les</span><span class="w s" data-t="13.62">créations</span></div><div class="line"><span class="w" data-t="14.05">tediwhom</span><span class="w" data-t="14.30">m3akom !</span></div></div>
+    <div class="cap" id="cap11" data-a="14.86" data-b="16.26" style="top:1150px;font-size:68px"><div class="line"><span class="w" data-t="15.00">Rah</span><span class="w" data-t="15.20">tl9aw</span><span class="w" data-t="15.40">ga3</span></div><div class="line"><span class="w" data-t="15.56">les</span><span class="w" data-t="15.70">informations</span></div></div>
+    <div class="cap" id="cap12" data-a="16.26" data-b="17.36" style="top:1150px;font-size:70px"><div class="line"><span class="w" data-t="16.30">f la</span><span class="w s" data-t="16.46">description</span><svg class="arrow" data-t="16.66" viewBox="0 0 30 40"><path d="M15 3 V33 M4 22 L15 35 L26 22" stroke="#D9A441" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="cap" id="cap13" data-a="17.4" data-b="18.66" style="top:1130px;font-size:73px"><div class="line"><span class="w" data-t="17.46">Venez</span><span class="w" data-t="17.74">nombreux</span></div><div class="line"><span class="w" data-t="17.94">et</span><span class="w s" data-t="18.10">nombreuses !</span></div></div>
+    <div class="cap" id="cap14" data-a="18.7" data-b="19.7" style="top:1150px;font-size:86px"><div class="line"><span class="w s" data-t="18.75">Marhba</span><span class="w s" data-t="19.30">bikom !</span></div></div>
+    <img id="hooklogo" src="assets/logo/logo-bleu-crop.png" alt="CRÉA" />
+
+    <div id="end">
+      <svg id="motif" viewBox="0 0 1080 2100"><defs><pattern id="los" width="120" height="120" patternUnits="userSpaceOnUse"><path d="M60 8 L112 60 L60 112 L8 60 Z" fill="none" stroke="#944826" stroke-width="5"/><path d="M60 38 L82 60 L60 82 L38 60 Z" fill="#944826"/></pattern></defs><rect width="1080" height="2100" fill="url(#los)"/></svg>
+      <div id="endblock">
+        <svg class="frise" id="friseT" style="top:345px" viewBox="0 0 760 34"><circle cx="10" cy="17" r="6" fill="#D9A441"/><path d="M28 9 L36 21 L44 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="62" cy="17" r="6" fill="#D9A441"/><path d="M80 9 L88 21 L96 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="114" cy="17" r="6" fill="#D9A441"/><path d="M132 9 L140 21 L148 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="166" cy="17" r="6" fill="#D9A441"/><path d="M184 9 L192 21 L200 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="218" cy="17" r="6" fill="#D9A441"/><path d="M236 9 L244 21 L252 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="270" cy="17" r="6" fill="#D9A441"/><path d="M288 9 L296 21 L304 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="322" cy="17" r="6" fill="#D9A441"/><path d="M340 9 L348 21 L356 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="374" cy="17" r="6" fill="#D9A441"/><path d="M392 9 L400 21 L408 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="426" cy="17" r="6" fill="#D9A441"/><path d="M444 9 L452 21 L460 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="478" cy="17" r="6" fill="#D9A441"/><path d="M496 9 L504 21 L512 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="530" cy="17" r="6" fill="#D9A441"/><path d="M548 9 L556 21 L564 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="582" cy="17" r="6" fill="#D9A441"/><path d="M600 9 L608 21 L616 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="634" cy="17" r="6" fill="#D9A441"/><path d="M652 9 L660 21 L668 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="686" cy="17" r="6" fill="#D9A441"/><path d="M704 9 L712 21 L720 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="738" cy="17" r="6" fill="#D9A441"/></svg>
+        <svg class="frise" id="friseB" style="top:1235px" viewBox="0 0 760 34"><circle cx="10" cy="17" r="6" fill="#D9A441"/><path d="M28 9 L36 21 L44 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="62" cy="17" r="6" fill="#D9A441"/><path d="M80 9 L88 21 L96 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="114" cy="17" r="6" fill="#D9A441"/><path d="M132 9 L140 21 L148 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="166" cy="17" r="6" fill="#D9A441"/><path d="M184 9 L192 21 L200 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="218" cy="17" r="6" fill="#D9A441"/><path d="M236 9 L244 21 L252 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="270" cy="17" r="6" fill="#D9A441"/><path d="M288 9 L296 21 L304 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="322" cy="17" r="6" fill="#D9A441"/><path d="M340 9 L348 21 L356 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="374" cy="17" r="6" fill="#D9A441"/><path d="M392 9 L400 21 L408 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="426" cy="17" r="6" fill="#D9A441"/><path d="M444 9 L452 21 L460 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="478" cy="17" r="6" fill="#D9A441"/><path d="M496 9 L504 21 L512 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="530" cy="17" r="6" fill="#D9A441"/><path d="M548 9 L556 21 L564 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="582" cy="17" r="6" fill="#D9A441"/><path d="M600 9 L608 21 L616 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="634" cy="17" r="6" fill="#D9A441"/><path d="M652 9 L660 21 L668 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="686" cy="17" r="6" fill="#D9A441"/><path d="M704 9 L712 21 L720 9" stroke="#944826" stroke-width="4" fill="none" stroke-linejoin="round"/><circle cx="738" cy="17" r="6" fill="#D9A441"/></svg>
+        <div id="endlogo"><img src="assets/logo/logo-bleu-crop.png" alt="CRÉA by Hind" /></div>
+        <div id="endshine"><div></div></div>
+        <div class="filet" id="filetL"></div><div class="filet" id="filetR"></div>
+        <div id="slogan"><span>O</span><span>s</span><span>e</span><span>z</span><span>&nbsp;</span><span>l</span><span>’</span><span>u</span><span>n</span><span>i</span><span>q</span><span>u</span><span>e</span><span>,</span><span>&nbsp;</span><span>o</span><span>s</span><span>e</span><span>z</span><span>&nbsp;</span><span class="g">C</span><span class="g">R</span><span class="g">É</span><span class="g">A</span></div>
+        <div id="endsub">ATELIER BIJOUX · OCTOBRE ROSE</div>
+        <div id="endcta"><svg viewBox="0 0 30 40"><path d="M15 3 V33 M4 22 L15 35 L26 22" stroke="#944826" stroke-width="5"
+          fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>INFOS EN DESCRIPTION</span></div>
+      </div>
+      <div class="glass" id="endlens" style="left:60px;top:470px;width:300px;height:300px;border-radius:150.0px;backdrop-filter:url(#lf-disc-300x300) blur(1.5px);-webkit-backdrop-filter:url(#lf-disc-300x300) blur(1.5px);opacity:0;"></div>
+    </div>
+
+    <div class="glass" id="sw0" style="left:-260px;top:2000px;width:1600px;height:380px;border-radius:190.0px;backdrop-filter:url(#lf-capsule-1600x380) blur(1.5px);-webkit-backdrop-filter:url(#lf-capsule-1600x380) blur(1.5px);transform:rotate(-14deg);"></div>
+    <div class="glass" id="sw1" style="left:-260px;top:2000px;width:1600px;height:380px;border-radius:190.0px;backdrop-filter:url(#lf-capsule-1600x380) blur(1.5px);-webkit-backdrop-filter:url(#lf-capsule-1600x380) blur(1.5px);transform:rotate(-14deg);"></div>
+    <div class="glass" id="sw2" style="left:-260px;top:2000px;width:1600px;height:380px;border-radius:190.0px;backdrop-filter:url(#lf-capsule-1600x380) blur(1.5px);-webkit-backdrop-filter:url(#lf-capsule-1600x380) blur(1.5px);transform:rotate(-14deg);"></div>
+    <div class="glass" id="sw3" style="left:-260px;top:2000px;width:1600px;height:380px;border-radius:190.0px;backdrop-filter:url(#lf-capsule-1600x380) blur(1.5px);-webkit-backdrop-filter:url(#lf-capsule-1600x380) blur(1.5px);transform:rotate(-14deg);"></div>
+    <div class="glass" id="sw4" style="left:-260px;top:2000px;width:1600px;height:380px;border-radius:190.0px;backdrop-filter:url(#lf-capsule-1600x380) blur(1.5px);-webkit-backdrop-filter:url(#lf-capsule-1600x380) blur(1.5px);transform:rotate(-14deg);"></div>
+  </div>
+
+  <script>
+  const C = {"CARDS": [[["pliers", 10.5, 11.55], ["beadbox", 11.55, 12.5]], [["table", 13.5, 14.85]]], "FACE": {"A": "583px 648px", "B": "670px 713px", "C": "693px 551px", "D": "713px 616px", "E": "638px 745px", "F": "612px 583px"}, "CAM": [[0.0, 0.8, "A", 1.12, 1.0, "power3.inOut"], [0.8, 1.155, "A", null, 1.04, "sine.inOut"], [2.0, 0.8, "A", null, 1.18, "power2.inOut"], [2.8, 0.685, "A", null, 1.2, "sine.inOut"], [3.53, 0.9, "B", 1.2, 1.1, "power2.inOut"], [4.43, 0.765, "B", null, 1.14, "sine.inOut"], [5.24, 0.615, "C", 1.0, 1.03, "sine.inOut"], [5.9, 0.8, "C", null, 1.22, "power2.inOut"], [6.7, 3.035, "C", null, 1.25, "sine.inOut"], [9.78, 0.9, "D", 1.12, 1.02, "power2.inOut"], [10.68, 1.765, "D", null, 1.05, "sine.inOut"], [12.49, 0.85, "E", 1.14, 1.0, "power2.inOut"], [13.34, 1.485, "E", null, 1.03, "sine.inOut"], [14.87, 0.85, "F", 1.14, 1.0, "power2.inOut"], [15.72, 1.295, "F", null, 1.03, "sine.inOut"], [17.06, 0.8, "F", null, 1.22, "power2.inOut"], [17.86, 1.94, "F", null, 1.25, "sine.inOut"]], "GLASS": [["disc", 40, 1420, 230, 230, 0.55, 3.45, 40, -30], ["capsule", 690, 1640, 420, 158, 0.85, 3.45, -50, -20], ["disc", 840, 1400, 200, 200, 5.45, 9.65, -30, -40], ["capsule", -60, 1620, 420, 158, 5.7, 9.65, 60, -25], ["disc", 830, 1440, 220, 220, 15.05, 19.6, -40, -30], ["capsule", -40, 1650, 400, 150, 17.2, 19.6, 50, -20]], "SWEEPS": [10.5, 12.5, 13.5, 14.86, 19.8], "ARCS": [["high", 0.35, 1.3, 0.8, 0.35], ["logoL", 4.72, 0.4, 0.35, -0.12], ["logoR", 4.72, 0.4, 0.35, -0.12], ["side", 5.6, 1.4, 0.9, 0.35], ["card", 10.95, 0.9, 0.4, 0.2], ["low", 15.1, 1.4, 0.9, 0.35], ["high", 17.3, 1.3, 0.8, 0.3]], "HOOK_LOGO": 4.68, "END": 19.8, "DUR": 22.4};
+  const tl = gsap.timeline({ paused: true });
+
+  // ---------------- caméra : zooms lissés, jamais de saut dans un plan
+  let curPlan = null;
+  C.CAM.forEach(([t, d, plan, s0, s1, ease]) => {
+    if (plan !== curPlan) { tl.set("#cam", { transformOrigin: C.FACE[plan] }, t); curPlan = plan; }
+    if (s0 !== null) tl.fromTo("#cam", { scale: s0 }, { scale: s1, duration: d, ease, immediateRender: false }, t);
+    else tl.to("#cam", { scale: s1, duration: d, ease }, t);
+  });
+  tl.fromTo("#camw", { filter: "blur(16px)", scale: 1.06 }, { filter: "blur(0px)", scale: 1, duration: 0.8, ease: "power3.inOut" }, 0);
+  tl.to("#camw", { filter: "blur(18px)", scale: 1.06, duration: 0.45, ease: "power2.inOut" }, C.END - 0.25);
+
+  // ---------------- cartes de verre
+  C.CARDS.forEach(card => {
+    const a = card[0][1], b = card[card.length - 1][2];
+    tl.set("#card", { opacity: 1 }, a);
+    tl.fromTo("#card", { y: 420, scale: 0.9, rotation: -3 }, { y: 0, scale: 1, rotation: 0, duration: 0.62, ease: "power3.inOut", immediateRender: false }, a);
+    tl.to("#card", { y: 520, rotation: 3, duration: 0.26, ease: "power2.inOut" }, b - 0.26);
+    tl.set("#card", { opacity: 0 }, b);
+    card.forEach(([name, s, e], i) => {
+      tl.set("#cm-" + name, { opacity: 1 }, s);
+      tl.fromTo("#cm-" + name, { scale: 1.0 }, { scale: 1.05, duration: e - s + 0.25, ease: "sine.inOut", immediateRender: false }, s);
+      if (i > 0) {   // changement de plan dans la carte : flou + reflet
+        tl.fromTo("#cm-" + name, { filter: "blur(16px)" }, { filter: "blur(0px)", duration: 0.3, ease: "power2.out", immediateRender: false }, s);
+        tl.fromTo("#gloss", { xPercent: -200 }, { xPercent: 260, duration: 0.6, ease: "power2.inOut", immediateRender: false }, s - 0.1);
+      }
+      if (i < card.length - 1) tl.set("#cm-" + name, { opacity: 0 }, e + 0.02);
+      else tl.set("#cm-" + name, { opacity: 0 }, e);
+      // fond : le même plan flouté, plein cadre
+      tl.fromTo("#bg-" + name, { opacity: 0 }, { opacity: 1, duration: i ? 0.2 : 0.4, ease: "power2.out", immediateRender: false }, s);
+      tl.to("#bg-" + name, { opacity: 0, duration: i < card.length - 1 ? 0.2 : 0.26, ease: "power2.inOut" }, i < card.length - 1 ? e : e - 0.26);
+    });
+    tl.fromTo("#gloss", { xPercent: -200 }, { xPercent: 260, duration: 0.8, ease: "power2.inOut", immediateRender: false }, a + 0.45);
+  });
+
+  // ---------------- verre liquide
+  C.GLASS.forEach(([shape, x, y, w, h, a, b, dx, dy], i) => {
+    const id = "#g" + i;
+    tl.fromTo(id, { opacity: 0, scale: 0.6, filter: "blur(10px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.6, ease: "power3.out", immediateRender: false }, a);
+    tl.fromTo(id, { x: 0, y: 0 }, { x: dx, y: dy, duration: b - a, ease: "sine.inOut", immediateRender: false }, a);
+    tl.to(id, { opacity: 0, scale: 0.85, duration: 0.25, ease: "power2.in" }, b - 0.25);
+  });
+  C.SWEEPS.forEach((t, i) => {
+    const id = "#sw" + i;
+    tl.set(id, { opacity: 1 }, t - 0.29);
+    tl.fromTo(id, { y: 300 }, { y: -2700, duration: 0.58, ease: "power2.inOut", immediateRender: false }, t - 0.29);
+    tl.set(id, { opacity: 0 }, t + 0.29);
+  });
+
+  // ---------------- traits de lumière (comète, tracé et retrait en power4.inOut)
+  C.ARCS.forEach(([k, t, d, r, hold], i) => {
+    const g = "#arc" + i;
+    tl.set(g, { opacity: 1 }, t);
+    tl.fromTo(g + " .st-halo, " + g + " .st-core", { strokeDasharray: "1000 1000", strokeDashoffset: 1000 },
+              { strokeDashoffset: 0, duration: d, ease: "power4.inOut", immediateRender: false }, t);
+    tl.fromTo(g + " .st-head", { strokeDasharray: "45 2000", strokeDashoffset: 45, opacity: 1 },
+              { strokeDashoffset: -955, duration: d, ease: "power4.inOut", immediateRender: false }, t);
+    tl.to(g + " .st-head", { opacity: 0, duration: 0.2 }, t + d - 0.1);
+    tl.to(g + " .st-halo, " + g + " .st-core", { strokeDashoffset: -1000, duration: r, ease: "power4.inOut" }, t + d + hold);
+    tl.set(g, { opacity: 0 }, t + d + hold + r);
+  });
+
+  // ---------------- sous-titres mot à mot
+  document.querySelectorAll(".cap").forEach(cap => {
+    const a = +cap.dataset.a, b = +cap.dataset.b;
+    tl.set(cap, { opacity: 1, y: 0, filter: "blur(0px)" }, a);
+    cap.querySelectorAll("[data-t]").forEach(w => {
+      const t = Math.max(a, +w.dataset.t - 0.04);
+      tl.fromTo(w, { opacity: 0, y: 22, scale: 1.08, filter: "blur(14px)" },
+                { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.36, ease: "power3.out", immediateRender: false }, t);
+      if (w.classList.contains("arrow")) {
+        tl.fromTo(w, { y: -26 }, { y: 0, duration: 0.4, ease: "back.out(2.5)", immediateRender: false }, t);
+        tl.to(w, { y: 10, duration: 0.14, ease: "power1.out", yoyo: true, repeat: 3 }, t + 0.3);
+      }
+    });
+    tl.to(cap, { y: -14, opacity: 0, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }, b - 0.2);
+  });
+
+  // ---------------- hook : logo officiel
+  tl.fromTo("#hooklogo", { opacity: 0, scale: 1.3, filter: "blur(22px)" },
+            { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.42, ease: "expo.out", immediateRender: false }, C.HOOK_LOGO);
+  tl.to("#hooklogo", { scale: 1.05, duration: 0.4, ease: "sine.inOut" }, C.HOOK_LOGO + 0.42);
+  tl.to("#hooklogo", { opacity: 0, y: -14, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }, 5.10);
+
+  // ---------------- fin B : fond crème, logo, slogan
+  const E = C.END;
+  tl.fromTo("#end", { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(80% at 50% 50%)", duration: 0.8, ease: "power3.inOut", immediateRender: false }, E + 0.05);
+  tl.fromTo("#motif", { y: 0 }, { y: -60, duration: 2.55, ease: "none", immediateRender: false }, E + 0.05);
+  tl.fromTo("#friseT, #friseB", { opacity: 0, scaleX: 0.4 }, { opacity: 1, scaleX: 1, duration: 0.7, ease: "power3.inOut", immediateRender: false }, E + 0.45);
+  tl.fromTo("#endlogo", { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.1, ease: "power3.inOut", immediateRender: false }, E + 0.35);
+  tl.set("#endlens", { opacity: 1 }, E + 0.35);
+  tl.fromTo("#endlens", { x: -40 }, { x: 700, duration: 1.1, ease: "power3.inOut", immediateRender: false }, E + 0.35);
+  tl.to("#endlens", { opacity: 0, duration: 0.25 }, E + 1.3);
+  tl.fromTo("#endshine div", { x: 0 }, { x: 1400, duration: 0.9, ease: "power2.inOut", immediateRender: false }, E + 1.1);
+  tl.to("#filetL, #filetR", { scaleX: 1, duration: 0.7, ease: "power3.inOut" }, E + 1.0);
+  document.querySelectorAll("#slogan span").forEach((s, i) =>
+    tl.fromTo(s, { opacity: 0, y: 14, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.3, ease: "power3.out", immediateRender: false }, E + 1.05 + i * 0.03));
+  tl.fromTo("#endsub", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out", immediateRender: false }, E + 1.75);
+  tl.fromTo("#endcta", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out", immediateRender: false }, E + 1.95);
+  tl.to("#endcta svg", { y: 9, duration: 0.15, ease: "power1.out", yoyo: true, repeat: 3 }, E + 2.1);
+  tl.fromTo("#endblock", { scale: 1 }, { scale: 1.035, duration: 2.55, ease: "sine.inOut", immediateRender: false }, E + 0.05);
+
+  tl.set({}, {}, C.DUR);
+  window.__timelines = window.__timelines || {};
+  window.__timelines["main"] = tl;
+  tl.seek(0);
+  </script>
+</body>
+</html>

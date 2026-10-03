@@ -13,7 +13,6 @@ GAPS_SPEC = [
     (9.78,  [("heart", 1.3, 1.667), ("garlandceil", 1.2, 1.7)]),                           # après « … les associations concernées »
     (12.49, [("rackfocus", 1.0, 1.417), ("tablehrt", 0.5, 1.0), ("teal", 1.05, 1.542)]),  # après « … déjà fourni ! » (atelier)
     (14.87, [("tablewide", 0.5, 1.208), ("interior", 1.55, 2.3)]),                         # après « … tediwhom m3akom ! »
-    (17.30, [("heartlamp", 1.55, 2.0), ("drape", 1.15, 1.667)]),                                # après « … f la description »
 ]
 BEATS = json.load(open("beats.json"))["grid"]          # temps forts de la musique (déjà calée à 0:30)
 FADE_IN, XFADE, FADE_OUT = 0.5, 0.45, 0.45            # fondus flous des intermèdes
@@ -89,9 +88,9 @@ CAM = [
     (12.49, 0.85, "E", 1.14, 1.00, "power2.inOut"),  # retour après b-roll
     (13.34, 1.485, "E", None, 1.03, "sine.inOut"),
     (14.87, 0.85, "F", 1.14, 1.00, "power2.inOut"),  # retour après b-roll
-    (15.72, 1.535, "F", None, 1.03, "sine.inOut"),
-    (17.30, 0.80, "F", 1.04, 1.20, "power2.inOut"),  # retour d'intermède + « Venez nombreux »
-    (18.10, 1.70, "F", None, 1.24, "sine.inOut"),
+    (15.72, 1.295, "F", None, 1.03, "sine.inOut"),
+    (17.06, 0.80, "F", None, 1.22, "power2.inOut"),  # « Venez nombreux » (même plan, pas de coupe)
+    (17.86, 1.94, "F", None, 1.25, "sine.inOut"),
 ]
 
 # ---------------------------------------------------------------- sous-titres
@@ -109,7 +108,7 @@ CAPS = [
     (12.50, 13.46, ["W@12.60 | nzidolkom :@12.70"], 1150, 79),
     (13.50, 14.82, ["les@13.54 | *créations@13.62", "tediwhom@14.05 | m3akom !@14.30"], 300, 64),
     (14.88, 16.26, ["Rah@15.00 | tl9aw@15.20 | ga3@15.40", "les@15.56 | informations@15.70"], 1150, 68),
-    (16.26, 17.28, ["f la@16.30 | *description@16.46 | ↓@16.66"], 1150, 70),
+    (16.26, 17.36, ["f la@16.30 | *description@16.46 | ↓@16.66"], 1150, 70),
     (17.40, 18.66, ["Venez@17.46 | nombreux@17.74", "et@17.94 | *nombreuses !@18.10"], 1130, 73),
     (18.70, 19.70, ["*Marhba@18.75 | *bikom !@19.30"], 1150, 86),
 ]
@@ -122,9 +121,8 @@ GLASS = [
     ("capsule", 690, 1640, 420, 158, 0.85, 3.45, -50, -20),
     ("disc", 840, 1400, 200, 200, 5.45, 9.65, -30, -40),
     ("capsule", -60, 1620, 420, 158, 5.70, 9.65, 60, -25),
-    ("disc", 830, 1440, 220, 220, 15.05, 17.25, -40, -30),
-    ("disc", 830, 1440, 220, 220, 17.45, 19.60, -30, -20),
-    ("capsule", -40, 1650, 400, 150, 17.60, 19.60, 50, -20),
+    ("disc", 830, 1440, 220, 220, 15.05, 19.60, -40, -30),
+    ("capsule", -40, 1650, 400, 150, 17.20, 19.60, 50, -20),
 ]
 SWEEPS = [7.66, 10.50, 13.50, 19.80]   # balayage : entrées/sorties de carte + fin (temps du cut)
 

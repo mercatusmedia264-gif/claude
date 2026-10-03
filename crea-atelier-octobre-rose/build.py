@@ -3,13 +3,31 @@
 (cut = source 1.80 -> 21.60 s). Méthode : guide de montage CRÉA v7."""
 import json
 
-TALK = 19.80                 # durée du face caméra
-END = TALK                   # fin de la voix
+TALK = 19.80                 # durée du face caméra (temps du cut)
+
+# ---------------------------------------------------------------- respirations
+# Intermèdes déco plein cadre insérés entre les phrases (retour client : « trop rapide »).
+# (temps du cut où l'on s'arrête, [(plan, durée)]) — rien n'est coupé dans la voix.
+GAPS = [
+    (5.24,  [("store", 1.0), ("logowall", 0.8)]),   # après « Seulement chez CRÉA ! »
+    (9.78,  [("heart", 1.4)]),                      # après « … les associations concernées »
+    (14.87, [("interior", 1.3)]),                   # après « … tediwhom m3akom ! »
+    (17.30, [("drape", 1.4)]),                      # après « … f la description »
+]
+GAPLEN = [round(sum(d for _, d in shots), 3) for _, shots in GAPS]
+
+def q(t):
+    """temps du cut -> temps de la vidéo finale (décalé par les intermèdes)"""
+    return round(t + sum(g for (at, _), g in zip(GAPS, GAPLEN) if t >= at - 1e-6), 3)
+
+SEGS = [0.0] + [at for at, _ in GAPS] + [TALK]    # morceaux du face caméra
+END = q(TALK)                # fin de la voix
 DUR = round(END + 2.6, 2)    # + fin B
 
 # ---------------------------------------------------------------- b-rolls
 # (nom, fichier, début, fin) — plans consécutifs = une seule carte
 CARDS = [
+    [("fan", 7.66, 9.74)],                                   # « rayhin yroho l'les associations concernées »
     [("pliers", 10.50, 11.55), ("beadbox", 11.55, 12.50)],   # « le matériel déjà fourni »
     [("table", 13.50, 14.85)],                               # « les créations tediwhom m3akom »
 ]
@@ -34,9 +52,9 @@ CAM = [
     (12.49, 0.85, "E", 1.14, 1.00, "power2.inOut"),  # retour après b-roll
     (13.34, 1.485, "E", None, 1.03, "sine.inOut"),
     (14.87, 0.85, "F", 1.14, 1.00, "power2.inOut"),  # retour après b-roll
-    (15.72, 1.295, "F", None, 1.03, "sine.inOut"),
-    (17.06, 0.80, "F", None, 1.22, "power2.inOut"),  # « Venez nombreux »
-    (17.86, 1.94, "F", None, 1.25, "sine.inOut"),
+    (15.72, 1.535, "F", None, 1.03, "sine.inOut"),
+    (17.30, 0.80, "F", 1.04, 1.20, "power2.inOut"),  # retour d'intermède + « Venez nombreux »
+    (18.10, 1.70, "F", None, 1.24, "sine.inOut"),
 ]
 
 # ---------------------------------------------------------------- sous-titres
@@ -45,16 +63,16 @@ CAPS = [
     (0.02, 2.12, ["Un@0.08 | atelier@0.64 | de@0.96 | confection@1.16", "de@1.58 | *bijoux@1.80"], 1150, 70),
     (2.12, 3.62, ["pour@2.16", "*Octobre@2.42 | *Rose ?@2.84"], 1130, 84),
     (3.62, 4.18, ["Oui !@3.66"], 1150, 86),
-    (4.18, 5.30, ["Seulement@4.22 | chez@4.52"], 1110, 73),
+    (4.18, 5.22, ["Seulement@4.22 | chez@4.52"], 1110, 73),
     (5.30, 6.24, ["W@5.36 | nzidolkom ?@5.44"], 1150, 79),
     (6.24, 7.62, ["*50 %@6.30", "des@6.98 | bénéfices@7.18"], 1170, 100),
-    (7.62, 9.74, ["rayhin@7.64 | yroho@7.94 | l’les@8.20", "*associations@8.32 | concernées@8.74"], 1150, 66),
-    (9.76, 10.52, ["W@9.80 | ma@9.86 | tkhmmouch,@9.98"], 1150, 73),
+    (7.62, 9.74, ["rayhin@7.64 | yroho@7.94 | l’les@8.20", "*associations@8.32 | concernées@8.74"], 300, 60),
+    (9.79, 10.52, ["W@9.80 | ma@9.86 | tkhmmouch,@9.98"], 1150, 73),
     (10.54, 12.46, ["parce que@10.56 | le@10.92 | *matériel@11.04", "déjà@11.62 | fourni !@11.86"], 300, 59),
     (12.50, 13.46, ["W@12.60 | nzidolkom :@12.70"], 1150, 79),
     (13.50, 14.82, ["les@13.54 | *créations@13.62", "tediwhom@14.05 | m3akom !@14.30"], 300, 64),
-    (14.86, 16.26, ["Rah@15.00 | tl9aw@15.20 | ga3@15.40", "les@15.56 | informations@15.70"], 1150, 68),
-    (16.26, 17.36, ["f la@16.30 | *description@16.46 | ↓@16.66"], 1150, 70),
+    (14.88, 16.26, ["Rah@15.00 | tl9aw@15.20 | ga3@15.40", "les@15.56 | informations@15.70"], 1150, 68),
+    (16.26, 17.28, ["f la@16.30 | *description@16.46 | ↓@16.66"], 1150, 70),
     (17.40, 18.66, ["Venez@17.46 | nombreux@17.74", "et@17.94 | *nombreuses !@18.10"], 1130, 73),
     (18.70, 19.70, ["*Marhba@18.75 | *bikom !@19.30"], 1150, 86),
 ]
@@ -67,10 +85,11 @@ GLASS = [
     ("capsule", 690, 1640, 420, 158, 0.85, 3.45, -50, -20),
     ("disc", 840, 1400, 200, 200, 5.45, 9.65, -30, -40),
     ("capsule", -60, 1620, 420, 158, 5.70, 9.65, 60, -25),
-    ("disc", 830, 1440, 220, 220, 15.05, 19.60, -40, -30),
-    ("capsule", -40, 1650, 400, 150, 17.20, 19.60, 50, -20),
+    ("disc", 830, 1440, 220, 220, 15.05, 17.25, -40, -30),
+    ("disc", 830, 1440, 220, 220, 17.45, 19.60, -30, -20),
+    ("capsule", -40, 1650, 400, 150, 17.60, 19.60, 50, -20),
 ]
-SWEEPS = [10.50, 12.50, 13.50, 14.86, 19.80]       # balayage centré sur chaque changement
+SWEEPS = [7.66, 9.76, 10.50, 12.50, 13.50, 14.86, 19.80]   # balayage : entrées/sorties de carte + fin (temps du cut)
 
 # ---------------------------------------------------------------- traits de lumière
 PATHS = {
@@ -85,12 +104,43 @@ PATHS = {
 ARCS = [("high", 0.35, 1.3, 0.8, 0.35), ("logoL", HOOK_LOGO + 0.04, 0.4, 0.35, -0.12), ("logoR", HOOK_LOGO + 0.04, 0.4, 0.35, -0.12),
         ("side", 5.60, 1.4, 0.9, 0.35), ("card", 10.95, 0.9, 0.4, 0.2), ("low", 15.10, 1.4, 0.9, 0.35), ("high", 17.30, 1.3, 0.8, 0.3)]
 
+# ---------------------------------------------------------------- passage en temps final
+def shift_line(line):
+    out = []
+    for tok in line.split("|"):
+        w, t = tok.strip().rsplit("@", 1)
+        out.append(f"{w}@{q(float(t))}")
+    return " | ".join(out)
+
+CARDS = [[(n, q(a), q(a) + (b - a)) for n, a, b in card] for card in CARDS]
+CAM = [(q(t), d, p, s0, s1, e) for t, d, p, s0, s1, e in CAM]
+CAPS = [(q(a), q(a) + (b - a), [shift_line(l) for l in lines], y, sz) for a, b, lines, y, sz in CAPS]
+GLASS = [(sh, x, y, w, h, q(a), q(a) + (b - a), dx, dy) for sh, x, y, w, h, a, b, dx, dy in GLASS]
+SWEEPS = [q(t) for t in SWEEPS]
+ARCS = [(k, q(t), d, r, hold) for k, t, d, r, hold in ARCS]
+# intermèdes en temps final : (début, [(plan, début, durée)])
+INTER = []
+for (at, shots), g in zip(GAPS, GAPLEN):
+    t0 = q(at) - g; t = t0; lst = []
+    for name, d in shots:
+        lst.append((name, round(t, 3), d)); t += d
+    INTER.append((round(t0, 3), round(g, 3), lst))
+# morceaux du face caméra : (début final, durée, début dans talk.mp4)
+TALKSEG = []
+for i in range(len(SEGS) - 1):
+    a, b = SEGS[i], SEGS[i + 1]
+    tail = 0.95 if i == len(SEGS) - 2 else 0.40      # passe sous le fondu de l'intermède / sous la fin
+    TALKSEG.append((q(a), round(b - a + tail, 3), a))
+
 # ---------------------------------------------------------------- SFX (pour mix.py)
-CUES = [("whoosh", 0.00, -12), ("whoosh", HOOK_LOGO - 0.12, -12), ("pop", 6.28, -11), ("pop", 11.02, -13),
-        ("sideswoosh", 11.45, -13), ("pop", 13.60, -13), ("tik", 16.70, -12), ("tik", 16.98, -14),
-        ("pop", 18.73, -12), ("riser", 18.95, -14), ("boom", 20.15, -10), ("shutter", 20.95, -13)]
+CUES = [("whoosh", 0.00, -12), ("whoosh", HOOK_LOGO - 0.12, -12), ("pop", q(6.28), -11), ("pop", q(11.02), -13),
+        ("sideswoosh", q(11.45), -13), ("pop", q(13.60), -13), ("tik", q(16.70), -12), ("tik", q(16.98), -14),
+        ("pop", q(18.73), -12), ("riser", END - 0.85, -14), ("boom", END + 0.35, -10), ("shutter", END + 1.15, -13)]
 CUES += [("whoosh", t - 0.28, -13) for t in SWEEPS]
-json.dump({"cues": CUES, "dur": DUR, "end": END}, open("cues.json", "w"), indent=1)
+CUES += [("sideswoosh", t0 - 0.05, -18) for t0, g, _ in INTER]          # entrée douce des intermèdes
+json.dump({"cues": CUES, "dur": DUR, "end": END,
+           "voice": [(a, round(b - a, 3), q(a)) for a, b in zip(SEGS[:-1], SEGS[1:])],
+           "gaps": [(t0, g) for t0, g, _ in INTER]}, open("cues.json", "w"), indent=1)
 
 # ================================================================= HTML
 def media_for_cards():
@@ -157,6 +207,13 @@ SLOGAN = "".join(f'<span>{c if c != " " else "&nbsp;"}</span>' for c in "Osez l�
          "".join(f'<span class="g">{c}</span>' for c in "CRÉA")
 
 bg_html, card_html = media_for_cards()
+talk_html = "\n      ".join(
+    f'<video id="talk{i}" class="clip talk" src="assets/talk.mp4" data-start="{a}" data-duration="{d}" data-media-start="{m}" muted playsinline></video>'
+    for i, (a, d, m) in enumerate(TALKSEG))
+inter_html = "\n      ".join(
+    f'<div class="ish" id="ish-{n}"><video id="vi-{n}" class="clip" src="assets/shots/{n}.mp4" data-start="{t}" '
+    f'data-duration="{round(d + 0.3, 3)}" data-media-start="0" muted playsinline></video></div>'
+    for _, _, lst in INTER for n, t, d in lst)
 glass_html = "\n    ".join(glass_div(f"g{i}", s, x, y, w, h) for i, (s, x, y, w, h, *_ ) in enumerate(GLASS))
 sweep_html = "\n    ".join(glass_div(f"sw{i}", "capsule", -260, 2000, 1600, 380, "transform:rotate(-14deg);") for i in range(len(SWEEPS)))
 strokes_html = "\n      ".join(
@@ -164,7 +221,7 @@ strokes_html = "\n      ".join(
     f'<path class="st-core" d="{PATHS[k]}" pathLength="1000"/><path class="st-head" d="{PATHS[k]}" pathLength="1000"/></g>'
     for i, (k, *_ ) in enumerate(ARCS))
 
-CFG = dict(CARDS=CARDS, FACE=FACE, CAM=CAM, GLASS=GLASS, SWEEPS=SWEEPS, ARCS=ARCS, HOOK_LOGO=HOOK_LOGO, END=END, DUR=DUR)
+CFG = dict(INTER=INTER, CARDS=CARDS, FACE=FACE, CAM=CAM, GLASS=GLASS, SWEEPS=SWEEPS, ARCS=ARCS, HOOK_LOGO=HOOK_LOGO, END=END, DUR=DUR)
 
 html = f"""<!doctype html>
 <html lang="fr" data-resolution="portrait">
@@ -181,8 +238,12 @@ html = f"""<!doctype html>
     </defs></svg>
 
     <div id="camw"><div id="cam">
-      <video id="talk" class="clip" src="assets/talk.mp4" data-start="0" data-duration="{round(TALK + 0.95, 2)}" data-media-start="0" muted playsinline></video>
+      {talk_html}
     </div></div>
+
+    <div id="inter">
+      {inter_html}
+    </div>
 
     {bg_html}
 
@@ -232,6 +293,17 @@ html = f"""<!doctype html>
   }});
   tl.fromTo("#camw", {{ filter: "blur(16px)", scale: 1.06 }}, {{ filter: "blur(0px)", scale: 1, duration: 0.8, ease: "power3.inOut" }}, 0);
   tl.to("#camw", {{ filter: "blur(18px)", scale: 1.06, duration: 0.45, ease: "power2.inOut" }}, C.END - 0.25);
+
+  // ---------------- intermèdes déco : fondu flou à l'entrée, poussée lente, fondu flou à la sortie
+  C.INTER.forEach(([t0, g, shots]) => {{
+    shots.forEach(([n, t, d], i) => {{
+      const id = "#ish-" + n;
+      tl.fromTo(id, {{ opacity: 0, filter: "blur(14px)" }}, {{ opacity: 1, filter: "blur(0px)", duration: i ? 0.3 : 0.4, ease: "power2.inOut", immediateRender: false }}, i ? t - 0.15 : t);
+      tl.fromTo(id + " video", {{ scale: 1.0 }}, {{ scale: 1.06, duration: d + 0.3, ease: "sine.inOut", immediateRender: false }}, t);
+      if (i === shots.length - 1) tl.to(id, {{ opacity: 0, filter: "blur(14px)", duration: 0.28, ease: "power2.inOut" }}, t0 + g);
+      else tl.set(id, {{ opacity: 0 }}, t + d + 0.2);
+    }});
+  }});
 
   // ---------------- cartes de verre
   C.CARDS.forEach(card => {{
@@ -301,9 +373,9 @@ html = f"""<!doctype html>
 
   // ---------------- hook : logo officiel
   tl.fromTo("#hooklogo", {{ opacity: 0, scale: 1.3, filter: "blur(22px)" }},
-            {{ opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.42, ease: "expo.out", immediateRender: false }}, C.HOOK_LOGO);
-  tl.to("#hooklogo", {{ scale: 1.05, duration: 0.4, ease: "sine.inOut" }}, C.HOOK_LOGO + 0.42);
-  tl.to("#hooklogo", {{ opacity: 0, y: -14, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }}, 5.10);
+            {{ opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.34, ease: "expo.out", immediateRender: false }}, C.HOOK_LOGO);
+  
+  tl.to("#hooklogo", {{ opacity: 0, y: -14, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }}, 5.04);
 
   // ---------------- fin B : fond crème, logo, slogan
   const E = C.END;

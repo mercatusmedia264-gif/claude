@@ -20,9 +20,27 @@ m_end = min(m_gain * 10 ** (5 / 20), 0.95)       # montée sur la fin (+5 dB)
 print(f"voice {v_lufs:.1f} LUFS · music {m_lufs:.1f} LUFS → gain {m_gain:.3f}, end {m_end:.3f}")
 
 inputs = ["-i", "assets/voice.wav", "-i", "assets/music.wav"]
-fc = [f"[0:a]apad,atrim=0:{DUR}[v]",
-      f"[1:a]atrim=0:{DUR},volume='if(lt(t,{END - 0.3}),{m_gain:.4f},{m_gain:.4f}+({m_end:.4f}-{m_gain:.4f})*min(1,(t-{END - 0.3})/0.6))':eval=frame,"
-      f"afade=t=out:st={DUR - 0.9}:d=0.9[m]"]
+# voix : morceaux du cut replacés autour des intermèdes (fondus 5 ms, rien de coupé)
+import numpy as np, wave
+SR = 48000
+raw = subprocess.run(["ffmpeg", "-v", "error", "-i", "assets/voice.wav", "-f", "f32le", "-ac", "2", "-ar", str(SR), "-"],
+                     capture_output=True, check=True).stdout
+src = np.frombuffer(raw, np.float32).reshape(-1, 2)
+out = np.zeros((int(DUR * SR) + 1, 2), np.float32)
+fade = int(0.005 * SR); ramp = np.linspace(0, 1, fade, dtype=np.float32)[:, None]
+for a0, d, t in cfg["voice"]:
+    seg = src[int(a0 * SR):int((a0 + d) * SR)].copy()
+    seg[:fade] *= ramp; seg[-fade:] *= ramp[::-1]
+    i0 = int(round(t * SR)); n = min(len(seg), len(out) - i0); out[i0:i0 + n] += seg[:n]
+with wave.open("renders/voice_gapped.wav", "wb") as f:
+    f.setnchannels(2); f.setsampwidth(2); f.setframerate(SR)
+    f.writeframes((np.clip(out, -1, 1) * 32767).astype(np.int16).tobytes())
+inputs[1] = "renders/voice_gapped.wav"
+fc = ["[0:a]anull[v]"]
+# musique : sous la voix, remontée de +5 dB pendant les intermèdes (rampes 0,3 s), montée sur la fin
+boost = "+".join(f"clip(min((t-{g0 - 0.15:.3f})/0.3,({g0 + g + 0.15:.3f}-t)/0.3),0,1)" for g0, g in cfg["gaps"])
+fc.append(f"[1:a]atrim=0:{DUR},volume='if(lt(t,{END - 0.3}),{m_gain:.4f}*(1+0.78*({boost})),{m_gain:.4f}+({m_end:.4f}-{m_gain:.4f})*min(1,(t-{END - 0.3})/0.6))':eval=frame,"
+          f"afade=t=out:st={DUR - 0.9}:d=0.9[m]")
 labels = ["[v]", "[m]"]
 for k, (name, t, db) in enumerate(cfg["cues"]):
     inputs += ["-i", f"assets/sfx/{name}.wav"]

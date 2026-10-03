@@ -86,3 +86,9 @@ html, body { width: 1080px; height: 1920px; overflow: hidden; background: #002F6
 #endcta { position: absolute; left: 0; right: 0; top: 1105px; display: flex; justify-content: center; align-items: center; gap: 14px;
   font-family: "Figtree"; font-weight: 800; font-size: 34px; letter-spacing: .2em; color: #944826; opacity: 0; }
 #endcta svg { width: 30px; height: 40px; }
+
+/* ---------- intermèdes déco (respirations plein cadre) ---------- */
+#inter { position: absolute; inset: 0; pointer-events: none; }
+.ish { position: absolute; inset: 0; opacity: 0; overflow: hidden; }
+.ish video { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; will-change: transform; }
+.talk { position: absolute; inset: 0; width: 1080px; height: 1920px; object-fit: cover; }

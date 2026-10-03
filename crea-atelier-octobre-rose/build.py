@@ -5,16 +5,34 @@ import json
 
 TALK = 19.80                 # durée du face caméra (temps du cut)
 
-# ---------------------------------------------------------------- respirations
-# Intermèdes déco plein cadre insérés entre les phrases (retour client : « trop rapide »).
-# (temps du cut où l'on s'arrête, [(plan, durée)]) — rien n'est coupé dans la voix.
-GAPS = [
-    (5.24,  [("store", 1.0), ("logowall", 0.8)]),   # après « Seulement chez CRÉA ! »
-    (9.78,  [("heart", 1.4)]),                      # après « … les associations concernées »
-    (14.87, [("interior", 1.3)]),                   # après « … tediwhom m3akom ! »
-    (17.30, [("drape", 1.4)]),                      # après « … f la description »
+# ---------------------------------------------------------------- respirations (v3)
+# Intermèdes plein cadre entre les phrases : boutique + atelier, coupes calées sur les temps de la musique.
+# (temps du cut où l'on s'arrête, [(plan, durée souhaitée, durée du fichier)]) — rien n'est coupé dans la voix.
+GAPS_SPEC = [
+    (5.24,  [("store", 1.55, 2.55), ("logowall", 1.3, 1.583)]),                            # après « Seulement chez CRÉA ! »
+    (9.78,  [("heart", 1.3, 1.667), ("garlandceil", 1.2, 1.7)]),                           # après « … les associations concernées »
+    (12.49, [("rackfocus", 1.0, 1.417), ("tablehrt", 0.5, 1.0), ("teal", 1.05, 1.542)]),  # après « … déjà fourni ! » (atelier)
+    (14.87, [("tablewide", 0.75, 1.208), ("interior", 1.55, 2.3)]),                         # après « … tediwhom m3akom ! »
+    (17.30, [("table", 1.55, 2.5), ("drape", 1.15, 1.667)]),                                # après « … f la description »
 ]
-GAPLEN = [round(sum(d for _, d in shots), 3) for _, shots in GAPS]
+BEATS = json.load(open("beats.json"))["grid"]          # temps forts de la musique (déjà calée à 0:30)
+FADE_IN, XFADE, FADE_OUT = 0.5, 0.45, 0.45            # fondus flous des intermèdes
+
+def beat_after(t, lo, hi):
+    """premier temps de la musique >= t, sans dépasser hi (sinon le dernier temps <= hi)"""
+    ok = [b for b in BEATS if lo <= b <= hi]
+    after = [b for b in ok if b >= t - 1e-6]
+    return after[0] if after else (ok[-1] if ok else min(t, hi))
+
+GAPS, GAPLEN, shift = [], [], 0.0
+for at, shots in GAPS_SPEC:
+    t = at + shift; start = t; plan = []
+    for i, (name, want, flen) in enumerate(shots):
+        margin = FADE_OUT if i == len(shots) - 1 else XFADE / 2 + 0.05
+        end = beat_after(t + want, t + min(0.6, want), t + flen - margin)
+        plan.append((name, round(end - t, 3))); t = end
+    g = round(t - start, 3)
+    GAPS.append((at, plan)); GAPLEN.append(g); shift += g
 
 def q(t):
     """temps du cut -> temps de la vidéo finale (décalé par les intermèdes)"""
@@ -89,7 +107,7 @@ GLASS = [
     ("disc", 830, 1440, 220, 220, 17.45, 19.60, -30, -20),
     ("capsule", -40, 1650, 400, 150, 17.60, 19.60, 50, -20),
 ]
-SWEEPS = [7.66, 9.76, 10.50, 12.50, 13.50, 14.86, 19.80]   # balayage : entrées/sorties de carte + fin (temps du cut)
+SWEEPS = [7.66, 9.76, 10.50, 12.47, 13.50, 14.86, 19.80]   # balayage : entrées/sorties de carte + fin (temps du cut)
 
 # ---------------------------------------------------------------- traits de lumière
 PATHS = {
@@ -129,14 +147,14 @@ for (at, shots), g in zip(GAPS, GAPLEN):
 TALKSEG = []
 for i in range(len(SEGS) - 1):
     a, b = SEGS[i], SEGS[i + 1]
-    tail = 0.95 if i == len(SEGS) - 2 else 0.40      # passe sous le fondu de l'intermède / sous la fin
+    tail = 0.95 if i == len(SEGS) - 2 else FADE_IN + 0.1      # passe sous le fondu de l'intermède / sous la fin
     TALKSEG.append((q(a), round(b - a + tail, 3), a))
 
 # ---------------------------------------------------------------- SFX (pour mix.py)
 CUES = [("whoosh", 0.00, -12), ("whoosh", HOOK_LOGO - 0.12, -12), ("pop", q(6.28), -11), ("pop", q(11.02), -13),
         ("sideswoosh", q(11.45), -13), ("pop", q(13.60), -13), ("tik", q(16.70), -12), ("tik", q(16.98), -14),
         ("pop", q(18.73), -12), ("riser", END - 0.85, -14), ("boom", END + 0.35, -10), ("shutter", END + 1.15, -13)]
-CUES += [("whoosh", t - 0.28, -13) for t in SWEEPS]
+CUES += [("whoosh", t - 0.36, -14) for t in SWEEPS]
 CUES += [("sideswoosh", t0 - 0.05, -18) for t0, g, _ in INTER]          # entrée douce des intermèdes
 json.dump({"cues": CUES, "dur": DUR, "end": END,
            "voice": [(a, round(b - a, 3), q(a)) for a, b in zip(SEGS[:-1], SEGS[1:])],
@@ -212,7 +230,7 @@ talk_html = "\n      ".join(
     for i, (a, d, m) in enumerate(TALKSEG))
 inter_html = "\n      ".join(
     f'<div class="ish" id="ish-{n}"><video id="vi-{n}" class="clip" src="assets/shots/{n}.mp4" data-start="{t}" '
-    f'data-duration="{round(d + 0.3, 3)}" data-media-start="0" muted playsinline></video></div>'
+    f'data-duration="{round(d + FADE_OUT + 0.05, 3)}" data-media-start="0" muted playsinline></video></div>'
     for _, _, lst in INTER for n, t, d in lst)
 glass_html = "\n    ".join(glass_div(f"g{i}", s, x, y, w, h) for i, (s, x, y, w, h, *_ ) in enumerate(GLASS))
 sweep_html = "\n    ".join(glass_div(f"sw{i}", "capsule", -260, 2000, 1600, 380, "transform:rotate(-14deg);") for i in range(len(SWEEPS)))
@@ -221,7 +239,7 @@ strokes_html = "\n      ".join(
     f'<path class="st-core" d="{PATHS[k]}" pathLength="1000"/><path class="st-head" d="{PATHS[k]}" pathLength="1000"/></g>'
     for i, (k, *_ ) in enumerate(ARCS))
 
-CFG = dict(INTER=INTER, CARDS=CARDS, FACE=FACE, CAM=CAM, GLASS=GLASS, SWEEPS=SWEEPS, ARCS=ARCS, HOOK_LOGO=HOOK_LOGO, END=END, DUR=DUR)
+CFG = dict(FADE_IN=FADE_IN, XFADE=XFADE, FADE_OUT=FADE_OUT, INTER=INTER, CARDS=CARDS, FACE=FACE, CAM=CAM, GLASS=GLASS, SWEEPS=SWEEPS, ARCS=ARCS, HOOK_LOGO=HOOK_LOGO, END=END, DUR=DUR)
 
 html = f"""<!doctype html>
 <html lang="fr" data-resolution="portrait">
@@ -298,10 +316,10 @@ html = f"""<!doctype html>
   C.INTER.forEach(([t0, g, shots]) => {{
     shots.forEach(([n, t, d], i) => {{
       const id = "#ish-" + n;
-      tl.fromTo(id, {{ opacity: 0, filter: "blur(14px)" }}, {{ opacity: 1, filter: "blur(0px)", duration: i ? 0.3 : 0.4, ease: "power2.inOut", immediateRender: false }}, i ? t - 0.15 : t);
-      tl.fromTo(id + " video", {{ scale: 1.0 }}, {{ scale: 1.06, duration: d + 0.3, ease: "sine.inOut", immediateRender: false }}, t);
-      if (i === shots.length - 1) tl.to(id, {{ opacity: 0, filter: "blur(14px)", duration: 0.28, ease: "power2.inOut" }}, t0 + g);
-      else tl.set(id, {{ opacity: 0 }}, t + d + 0.2);
+      tl.fromTo(id, {{ opacity: 0, filter: "blur(14px)" }}, {{ opacity: 1, filter: "blur(0px)", duration: i ? C.XFADE : C.FADE_IN, ease: "sine.inOut", immediateRender: false }}, i ? t - C.XFADE / 2 : t);
+      tl.fromTo(id + " video", {{ scale: 1.0 }}, {{ scale: 1.05, duration: d + C.FADE_OUT, ease: "sine.inOut", immediateRender: false }}, t);
+      if (i === shots.length - 1) tl.to(id, {{ opacity: 0, filter: "blur(14px)", duration: C.FADE_OUT, ease: "sine.inOut" }}, t0 + g);
+      else tl.set(id, {{ opacity: 0 }}, t + d + C.XFADE / 2 + 0.02);
     }});
   }});
 
@@ -309,8 +327,8 @@ html = f"""<!doctype html>
   C.CARDS.forEach(card => {{
     const a = card[0][1], b = card[card.length - 1][2];
     tl.set("#card", {{ opacity: 1 }}, a);
-    tl.fromTo("#card", {{ y: 420, scale: 0.9, rotation: -3 }}, {{ y: 0, scale: 1, rotation: 0, duration: 0.62, ease: "power3.inOut", immediateRender: false }}, a);
-    tl.to("#card", {{ y: 520, rotation: 3, duration: 0.26, ease: "power2.inOut" }}, b - 0.26);
+    tl.fromTo("#card", {{ y: 420, scale: 0.9, rotation: -3 }}, {{ y: 0, scale: 1, rotation: 0, duration: 0.8, ease: "power3.inOut", immediateRender: false }}, a);
+    tl.to("#card", {{ y: 520, rotation: 3, duration: 0.34, ease: "power2.inOut" }}, b - 0.34);
     tl.set("#card", {{ opacity: 0 }}, b);
     card.forEach(([name, s, e], i) => {{
       tl.set("#cm-" + name, {{ opacity: 1 }}, s);
@@ -323,7 +341,7 @@ html = f"""<!doctype html>
       else tl.set("#cm-" + name, {{ opacity: 0 }}, e);
       // fond : le même plan flouté, plein cadre
       tl.fromTo("#bg-" + name, {{ opacity: 0 }}, {{ opacity: 1, duration: i ? 0.2 : 0.4, ease: "power2.out", immediateRender: false }}, s);
-      tl.to("#bg-" + name, {{ opacity: 0, duration: i < card.length - 1 ? 0.2 : 0.26, ease: "power2.inOut" }}, i < card.length - 1 ? e : e - 0.26);
+      tl.to("#bg-" + name, {{ opacity: 0, duration: i < card.length - 1 ? 0.2 : 0.34, ease: "power2.inOut" }}, i < card.length - 1 ? e : e - 0.34);
     }});
     tl.fromTo("#gloss", {{ xPercent: -200 }}, {{ xPercent: 260, duration: 0.8, ease: "power2.inOut", immediateRender: false }}, a + 0.45);
   }});
@@ -337,9 +355,9 @@ html = f"""<!doctype html>
   }});
   C.SWEEPS.forEach((t, i) => {{
     const id = "#sw" + i;
-    tl.set(id, {{ opacity: 1 }}, t - 0.29);
-    tl.fromTo(id, {{ y: 300 }}, {{ y: -2700, duration: 0.58, ease: "power2.inOut", immediateRender: false }}, t - 0.29);
-    tl.set(id, {{ opacity: 0 }}, t + 0.29);
+    tl.set(id, {{ opacity: 1 }}, t - 0.375);
+    tl.fromTo(id, {{ y: 300 }}, {{ y: -2700, duration: 0.75, ease: "power2.inOut", immediateRender: false }}, t - 0.375);
+    tl.set(id, {{ opacity: 0 }}, t + 0.375);
   }});
 
   // ---------------- traits de lumière (comète, tracé et retrait en power4.inOut)
@@ -362,13 +380,13 @@ html = f"""<!doctype html>
     cap.querySelectorAll("[data-t]").forEach(w => {{
       const t = Math.max(a, +w.dataset.t - 0.04);
       tl.fromTo(w, {{ opacity: 0, y: 22, scale: 1.08, filter: "blur(14px)" }},
-                {{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.36, ease: "power3.out", immediateRender: false }}, t);
+                {{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.45, ease: "power3.out", immediateRender: false }}, t);
       if (w.classList.contains("arrow")) {{
         tl.fromTo(w, {{ y: -26 }}, {{ y: 0, duration: 0.4, ease: "back.out(2.5)", immediateRender: false }}, t);
         tl.to(w, {{ y: 10, duration: 0.14, ease: "power1.out", yoyo: true, repeat: 3 }}, t + 0.3);
       }}
     }});
-    tl.to(cap, {{ y: -14, opacity: 0, filter: "blur(10px)", duration: 0.2, ease: "power2.in" }}, b - 0.2);
+    tl.to(cap, {{ y: -14, opacity: 0, filter: "blur(10px)", duration: 0.28, ease: "power2.in" }}, b - 0.28);
   }});
 
   // ---------------- hook : logo officiel

@@ -9,12 +9,13 @@ TALK = 19.80                 # durée du face caméra (temps du cut)
 # Intermèdes plein cadre entre les phrases : boutique + atelier, coupes calées sur les temps de la musique.
 # (temps du cut où l'on s'arrête, [(plan, durée souhaitée, durée du fichier)]) — rien n'est coupé dans la voix.
 GAPS_SPEC = [
-    (5.24,  [("hindwork", 1.3, 1.7), ("tablewide", 1.0, 1.208)]),    # après « Seulement chez CRÉA ! » : Hind au travail, la table
-    (12.49, [("tablehrt", 0.5, 1.0), ("rackfocus", 1.0, 1.417)]),   # après « … déjà fourni ! » : l'atelier en détail
+    (5.24,  [("tablehrt", 0.5, 1.0), ("tablewide", 1.0, 1.208)]),    # après « Seulement chez CRÉA ! » : Hind au travail, la table
+    (12.49, [("rackfocus", 1.2, 1.417), ("teal", 1.3, 1.542)]),   # après « … déjà fourni ! » : l'atelier en détail
 ]
 # b-rolls atelier PENDANT la fin du discours (sa voix continue, pas de coupe) :
 # de « les informations » jusqu'à juste avant « Marhba bikom » (temps du cut)
-OVER_SPEC = (15.10, 18.66, [("table", 1.0, 2.5), ("teal", 1.3, 1.542)])
+OVER_SPECS = [(13.05, 14.86, [("tableside", 1.5, 1.667)]),   # « les créations tediwhom m3akom » : la table, plein cadre
+              (15.10, 18.66, [("table", 2.0, 2.5)])]           # « Rah tl9aw ga3 les informations f la description »
 BEATS = json.load(open("beats.json"))["grid"]          # temps forts de la musique (déjà calée à 0:30)
 FADE_IN, XFADE, FADE_OUT = 0.5, 0.45, 0.45            # fondus flous des intermèdes
 
@@ -60,15 +61,16 @@ def q(t):
 SEGS = [0.0] + [at for at, _ in GAPS] + [TALK]    # morceaux du face caméra
 VOICE_END = q(TALK)          # fin de la voix
 # b-rolls plein cadre par-dessus la voix : fondu d'entrée centré sur un temps, coupes et sortie sur les temps
-_a, _b, _shots = OVER_SPEC
-_B = next(x for x in BEATS if x >= q(_a) + FADE_IN / 2)
-_v0 = round(_B - FADE_IN / 2, 3); _t = _B; _plan = []
-for i, (name, want, flen) in enumerate(_shots):
-    st = _v0 if i == 0 else _t
-    hi = min(st + flen - 0.05, q(_b) - FADE_OUT / 2)
-    end = beat_after(_t + want, _t + min(0.6, want), hi)
-    _plan.append((name, round(st, 3), round(end - st, 3))); _t = end
-OVER = [(_v0, round(_t - _v0, 3), _plan)]
+OVER = []
+for _a, _b, _shots in OVER_SPECS:
+    _B = next(x for x in BEATS if x >= q(_a) + FADE_IN / 2)
+    _v0 = round(_B - FADE_IN / 2, 3); _t = _B; _plan = []
+    for i, (name, want, flen) in enumerate(_shots):
+        st = _v0 if i == 0 else _t
+        hi = min(st + flen - 0.05, q(_b) - FADE_OUT / 2)
+        end = beat_after(_t + want, _t + min(0.6, want), hi)
+        _plan.append((name, round(st, 3), round(end - st, 3))); _t = end
+    OVER.append((_v0, round(_t - _v0, 3), _plan))
 END = VOICE_END              # début de la fin B
 DUR = round(END + 2.6, 2)    # + fin B
 
@@ -76,7 +78,6 @@ DUR = round(END + 2.6, 2)    # + fin B
 # (nom, fichier, début, fin) — plans consécutifs = une seule carte
 CARDS = [
     [("pliers", 10.50, 11.55), ("beadbox", 11.55, 12.50)],   # « le matériel déjà fourni »
-    [("tableside", 13.50, 14.85)],                           # « les créations tediwhom m3akom »
 ]
 
 # ---------------------------------------------------------------- caméra
@@ -117,7 +118,7 @@ CAPS = [
     (9.79, 10.52, ["W@9.80 | ma@9.86 | tkhmmouch,@9.98"], 1150, 73),
     (10.54, 12.46, ["parce que@10.56 | le@10.92 | *matériel@11.04", "déjà@11.62 | fourni !@11.86"], 300, 59),
     (12.50, 13.46, ["W@12.60 | nzidolkom :@12.70"], 1150, 79),
-    (13.50, 14.82, ["les@13.54 | *créations@13.62", "tediwhom@14.05 | m3akom !@14.30"], 300, 64),
+    (13.50, 14.82, ["les@13.54 | *créations@13.62", "tediwhom@14.05 | m3akom !@14.30"], 1150, 70),
     (14.88, 16.26, ["Rah@15.00 | tl9aw@15.20 | ga3@15.40", "les@15.56 | informations@15.70"], 1150, 68),
     (16.26, 17.36, ["f la@16.30 | *description@16.46 | ↓@16.66"], 1150, 70),
     (17.40, 18.66, ["Venez@17.46 | nombreux@17.74", "et@17.94 | *nombreuses !@18.10"], 1130, 73),
@@ -135,7 +136,7 @@ GLASS = [
     ("disc", 830, 1440, 220, 220, 15.05, 19.60, -40, -30),
     ("capsule", -40, 1650, 400, 150, 17.20, 19.60, 50, -20),
 ]
-SWEEPS = [10.50, 13.50, 14.86]   # balayage : entrées/sorties de carte + fin (temps du cut)
+SWEEPS = [10.50]   # balayage : entrées/sorties de carte + fin (temps du cut)
 
 # ---------------------------------------------------------------- traits de lumière
 PATHS = {

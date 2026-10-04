@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="root" data-composition-id="main" data-start="0" data-duration="30.89" data-width="1080" data-height="1920">
+  <div id="root" data-composition-id="main" data-start="0" data-duration="26.82" data-width="1080" data-height="1920">
     <svg width="0" height="0" style="position:absolute"><defs>
       <filter id="lf-capsule-400x150" x="0" y="0" width="400" height="150" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feImage href="assets/lens-capsule.png" x="0" y="0" width="400" height="150" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="48" xChannelSelector="R" yChannelSelector="G"/></filter>
       <filter id="lf-capsule-420x158" x="0" y="0" width="420" height="158" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feImage href="assets/lens-capsule.png" x="0" y="0" width="420" height="158" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="50" xChannelSelector="R" yChannelSelector="G"/></filter>
@@ -21,7 +21,7 @@
     <div id="camw"><div id="cam">
       <video id="talk0" class="clip talk" src="assets/talk_s0.mp4" data-start="0.0" data-duration="5.828" data-media-start="0" muted playsinline></video>
       <video id="talk1" class="clip talk" src="assets/talk_s1.mp4" data-start="7.597" data-duration="8.058" data-media-start="0" muted playsinline></video>
-      <video id="talk2" class="clip talk" src="assets/talk_s2.mp4" data-start="16.907" data-duration="8.059" data-media-start="0" muted playsinline></video>
+      <video id="talk2" class="clip talk" src="assets/talk_s2.mp4" data-start="16.907" data-duration="8.26" data-media-start="0" muted playsinline></video>
     </div></div>
 
     <div class="bgb" id="bg-pliers"><video id="vb-pliers" class="clip" src="assets/shots/pliers.mp4" data-start="12.857" data-duration="1.3" data-media-start="0" muted playsinline></video></div>
@@ -47,9 +47,8 @@
       <div class="ish" id="ish-tablewide"><video id="vi-tablewide" class="clip" src="assets/shots/tablewide.mp4" data-start="6.562" data-duration="1.535" data-media-start="0" muted playsinline></video></div>
       <div class="ish" id="ish-tablehrt"><video id="vi-tablehrt" class="clip" src="assets/shots/tablehrt.mp4" data-start="15.105" data-duration="1.268" data-media-start="0" muted playsinline></video></div>
       <div class="ish" id="ish-rackfocus"><video id="vi-rackfocus" class="clip" src="assets/shots/rackfocus.mp4" data-start="15.873" data-duration="1.534" data-media-start="0" muted playsinline></video></div>
-      <div class="ish" id="ish-table"><video id="vi-table" class="clip" src="assets/shots/table.mp4" data-start="24.416" data-duration="2.302" data-media-start="0" muted playsinline></video></div>
-      <div class="ish" id="ish-teal"><video id="vi-teal" class="clip" src="assets/shots/teal.mp4" data-start="26.218" data-duration="1.534" data-media-start="0" muted playsinline></video></div>
-      <div class="ish" id="ish-hindwork2"><video id="vi-hindwork2" class="clip" src="assets/shots/hindwork2.mp4" data-start="27.252" data-duration="2.035" data-media-start="0" muted playsinline></video></div>
+      <div class="ish" id="ish-table"><video id="vi-table" class="clip" src="assets/shots/table.mp4" data-start="19.761" data-duration="1.784" data-media-start="0" muted playsinline></video></div>
+      <div class="ish" id="ish-teal"><video id="vi-teal" class="clip" src="assets/shots/teal.mp4" data-start="21.045" data-duration="1.535" data-media-start="0" muted playsinline></video></div>
     </div>
 
     <svg id="strokes" viewBox="0 0 1080 1920">
@@ -101,7 +100,7 @@
   </div>
 
   <script>
-  const C = {"FADE_IN": 0.5, "XFADE": 0.45, "FADE_OUT": 0.45, "INTER": [[5.278, 2.319, [["hindwork", 5.278, 1.284], ["tablewide", 6.562, 1.035]]], [15.105, 1.802, [["tablehrt", 15.105, 0.768], ["rackfocus", 15.873, 1.034]]], [24.416, 3.871, [["table", 24.416, 1.802], ["teal", 26.218, 1.034], ["hindwork2", 27.252, 1.035]]]], "CARDS": [{"shots": [["pliers", 12.857, 13.907], ["beadbox", 13.907, 15.655]], "into": true}, {"shots": [["tableside", 17.917, 19.267]], "into": false}], "FACE": {"A": "583px 648px", "B": "670px 713px", "C": "693px 551px", "D": "713px 616px", "E": "638px 745px", "F": "612px 583px"}, "CAM": [[0.0, 0.8, "A", 1.12, 1.0, "power3.inOut"], [0.8, 1.155, "A", null, 1.04, "sine.inOut"], [2.0, 0.8, "A", null, 1.18, "power2.inOut"], [2.8, 0.685, "A", null, 1.2, "sine.inOut"], [3.53, 0.9, "B", 1.2, 1.1, "power2.inOut"], [4.43, 0.765, "B", null, 1.14, "sine.inOut"], [7.597, 0.615, "C", 1.0, 1.03, "sine.inOut"], [8.257, 0.8, "C", null, 1.22, "power2.inOut"], [9.057, 3.035, "C", null, 1.25, "sine.inOut"], [12.137, 0.9, "D", 1.12, 1.02, "power2.inOut"], [13.037, 1.765, "D", null, 1.05, "sine.inOut"], [16.907, 0.85, "E", 1.14, 1.0, "power2.inOut"], [17.757, 1.485, "E", null, 1.03, "sine.inOut"], [19.287, 0.85, "F", 1.14, 1.0, "power2.inOut"], [20.137, 1.295, "F", null, 1.03, "sine.inOut"], [21.477, 0.8, "F", null, 1.22, "power2.inOut"], [22.277, 1.94, "F", null, 1.25, "sine.inOut"]], "GLASS": [["disc", 40, 1420, 230, 230, 0.55, 3.45, 40, -30], ["capsule", 690, 1640, 420, 158, 0.85, 3.45, -50, -20], ["disc", 840, 1400, 200, 200, 7.807, 12.007000000000001, -30, -40], ["capsule", -60, 1620, 420, 158, 8.057, 12.007000000000001, 60, -25], ["disc", 830, 1440, 220, 220, 19.467, 24.017, -40, -30], ["capsule", -40, 1650, 400, 150, 21.617, 24.017000000000003, 50, -20]], "SWEEPS": [12.857, 17.917, 19.277], "ARCS": [["high", 0.35, 1.3, 0.8, 0.35], ["logoL", 4.72, 0.4, 0.35, -0.12], ["logoR", 4.72, 0.4, 0.35, -0.12], ["side", 7.957, 1.4, 0.9, 0.35], ["card", 13.307, 0.9, 0.4, 0.2], ["low", 19.517, 1.4, 0.9, 0.35], ["high", 21.717, 1.3, 0.8, 0.3]], "HOOK_LOGO": 4.68, "END": 28.287, "DUR": 30.89};
+  const C = {"OVER": [[19.761, 2.319, [["table", 19.761, 1.284], ["teal", 21.045, 1.035]]]], "FADE_IN": 0.5, "XFADE": 0.45, "FADE_OUT": 0.45, "INTER": [[5.278, 2.319, [["hindwork", 5.278, 1.284], ["tablewide", 6.562, 1.035]]], [15.105, 1.802, [["tablehrt", 15.105, 0.768], ["rackfocus", 15.873, 1.034]]]], "CARDS": [{"shots": [["pliers", 12.857, 13.907], ["beadbox", 13.907, 15.655]], "into": true}, {"shots": [["tableside", 17.917, 19.267]], "into": false}], "FACE": {"A": "583px 648px", "B": "670px 713px", "C": "693px 551px", "D": "713px 616px", "E": "638px 745px", "F": "612px 583px"}, "CAM": [[0.0, 0.8, "A", 1.12, 1.0, "power3.inOut"], [0.8, 1.155, "A", null, 1.04, "sine.inOut"], [2.0, 0.8, "A", null, 1.18, "power2.inOut"], [2.8, 0.685, "A", null, 1.2, "sine.inOut"], [3.53, 0.9, "B", 1.2, 1.1, "power2.inOut"], [4.43, 0.765, "B", null, 1.14, "sine.inOut"], [7.597, 0.615, "C", 1.0, 1.03, "sine.inOut"], [8.257, 0.8, "C", null, 1.22, "power2.inOut"], [9.057, 3.035, "C", null, 1.25, "sine.inOut"], [12.137, 0.9, "D", 1.12, 1.02, "power2.inOut"], [13.037, 1.765, "D", null, 1.05, "sine.inOut"], [16.907, 0.85, "E", 1.14, 1.0, "power2.inOut"], [17.757, 1.485, "E", null, 1.03, "sine.inOut"], [19.287, 0.85, "F", 1.14, 1.0, "power2.inOut"], [20.137, 1.295, "F", null, 1.03, "sine.inOut"], [21.477, 0.8, "F", null, 1.22, "power2.inOut"], [22.277, 1.94, "F", null, 1.25, "sine.inOut"]], "GLASS": [["disc", 40, 1420, 230, 230, 0.55, 3.45, 40, -30], ["capsule", 690, 1640, 420, 158, 0.85, 3.45, -50, -20], ["disc", 840, 1400, 200, 200, 7.807, 12.007000000000001, -30, -40], ["capsule", -60, 1620, 420, 158, 8.057, 12.007000000000001, 60, -25], ["disc", 830, 1440, 220, 220, 19.467, 24.017, -40, -30], ["capsule", -40, 1650, 400, 150, 21.617, 24.017000000000003, 50, -20]], "SWEEPS": [12.857, 17.917, 19.277], "ARCS": [["high", 0.35, 1.3, 0.8, 0.35], ["logoL", 4.72, 0.4, 0.35, -0.12], ["logoR", 4.72, 0.4, 0.35, -0.12], ["side", 7.957, 1.4, 0.9, 0.35], ["card", 13.307, 0.9, 0.4, 0.2], ["low", 19.517, 1.4, 0.9, 0.35], ["high", 21.717, 1.3, 0.8, 0.3]], "HOOK_LOGO": 4.68, "END": 24.217, "DUR": 26.82};
   const tl = gsap.timeline({ paused: true });
 
   // ---------------- caméra : zooms lissés, jamais de saut dans un plan
@@ -112,15 +111,15 @@
     else tl.to("#cam", { scale: s1, duration: d, ease }, t);
   });
   tl.fromTo("#camw", { filter: "blur(16px)", scale: 1.06 }, { filter: "blur(0px)", scale: 1, duration: 0.8, ease: "power3.inOut" }, 0);
-  tl.to("#inter", { filter: "blur(18px)", scale: 1.06, duration: 0.45, ease: "power2.inOut" }, C.END - 0.25);
+  tl.to("#camw", { filter: "blur(18px)", scale: 1.06, duration: 0.45, ease: "power2.inOut" }, C.END - 0.25);
 
   // ---------------- intermèdes déco : fondu flou à l'entrée, poussée lente, fondu flou à la sortie
-  C.INTER.forEach(([t0, g, shots], k) => {
+  C.INTER.concat(C.OVER).forEach(([t0, g, shots], k) => {
     shots.forEach(([n, t, d], i) => {
       const id = "#ish-" + n;
       tl.fromTo(id, { opacity: 0, filter: "blur(14px)" }, { opacity: 1, filter: "blur(0px)", duration: i ? C.XFADE : C.FADE_IN, ease: "sine.inOut", immediateRender: false }, i ? t - C.XFADE / 2 : t);
       tl.fromTo(id + " video", { scale: 1.0 }, { scale: 1.05, duration: d + C.FADE_OUT, ease: "sine.inOut", immediateRender: false }, t);
-      if (i === shots.length - 1) { if (k < C.INTER.length - 1) tl.to(id, { opacity: 0, filter: "blur(14px)", duration: C.FADE_OUT, ease: "sine.inOut" }, t0 + g); }
+      if (i === shots.length - 1) tl.to(id, { opacity: 0, filter: "blur(14px)", duration: C.FADE_OUT, ease: "sine.inOut" }, t0 + g);
       else tl.set(id, { opacity: 0 }, t + d + C.XFADE / 2 + 0.02);
     });
   });

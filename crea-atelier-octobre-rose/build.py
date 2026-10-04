@@ -12,8 +12,9 @@ GAPS_SPEC = [
     (5.24,  [("hindwork", 1.3, 1.7), ("tablewide", 1.0, 1.208)]),    # après « Seulement chez CRÉA ! » : Hind au travail, la table
     (12.49, [("tablehrt", 0.5, 1.0), ("rackfocus", 1.0, 1.417)]),   # après « … déjà fourni ! » : l'atelier en détail
 ]
-# montage atelier final, après « Marhba bikom ! », avant la fin B
-END_SPEC = [("table", 1.55, 2.5), ("teal", 1.3, 1.542), ("hindwork2", 1.0, 1.18)]
+# b-rolls atelier PENDANT la fin du discours (sa voix continue, pas de coupe) :
+# de « les informations » jusqu'à juste avant « Marhba bikom » (temps du cut)
+OVER_SPEC = (15.10, 18.66, [("table", 1.0, 2.5), ("teal", 1.3, 1.542)])
 BEATS = json.load(open("beats.json"))["grid"]          # temps forts de la musique (déjà calée à 0:30)
 FADE_IN, XFADE, FADE_OUT = 0.5, 0.45, 0.45            # fondus flous des intermèdes
 
@@ -58,16 +59,17 @@ def q(t):
 
 SEGS = [0.0] + [at for at, _ in GAPS] + [TALK]    # morceaux du face caméra
 VOICE_END = q(TALK)          # fin de la voix
-# montage atelier final : entrée sur le 1er temps après « bikom », coupes sur les temps
-_ve = voice_end(TALK) + shift
-_B = next(b for b in BEATS if b >= _ve + 0.05)
+# b-rolls plein cadre par-dessus la voix : fondu d'entrée centré sur un temps, coupes et sortie sur les temps
+_a, _b, _shots = OVER_SPEC
+_B = next(x for x in BEATS if x >= q(_a) + FADE_IN / 2)
 _v0 = round(_B - FADE_IN / 2, 3); _t = _B; _plan = []
-for i, (name, want, flen) in enumerate(END_SPEC):
+for i, (name, want, flen) in enumerate(_shots):
     st = _v0 if i == 0 else _t
-    end = beat_after(_t + want, _t + min(0.6, want), st + flen - 0.05)
+    hi = min(st + flen - 0.05, q(_b) - FADE_OUT / 2)
+    end = beat_after(_t + want, _t + min(0.6, want), hi)
     _plan.append((name, round(st, 3), round(end - st, 3))); _t = end
-INTER.append((_v0, round(_t - _v0, 3), _plan))
-END = round(_t, 3)           # début de la fin B (sur un temps)
+OVER = [(_v0, round(_t - _v0, 3), _plan)]
+END = VOICE_END              # début de la fin B
 DUR = round(END + 2.6, 2)    # + fin B
 
 # ---------------------------------------------------------------- b-rolls
@@ -175,8 +177,10 @@ ARCS = [(k, q(t), d, r, hold) for k, t, d, r, hold in ARCS]
 TALKSEG = []
 for i in range(len(SEGS) - 1):
     a, b = SEGS[i], SEGS[i + 1]
-    # image figée jusqu'à ce que l'intermède suivant (ou le montage final) couvre tout
-    d = max(b - a, INTER[i][0] + FADE_IN + 0.05 - q(a))
+    if i == len(SEGS) - 2:
+        d = b - a + 0.95                                          # passe sous la fin B
+    else:                                                         # image figée jusqu'à ce que l'intermède couvre tout
+        d = max(b - a, INTER[i][0] + FADE_IN + 0.05 - q(a))
     TALKSEG.append((q(a), round(d, 3), i))
 
 # ---------------------------------------------------------------- SFX (pour mix.py)
@@ -184,7 +188,7 @@ CUES = [("whoosh", 0.00, -12), ("whoosh", HOOK_LOGO - 0.12, -12), ("pop", q(6.28
         ("sideswoosh", q(11.45), -13), ("pop", q(13.60), -13), ("tik", q(16.70), -12), ("tik", q(16.98), -14),
         ("pop", q(18.73), -12), ("riser", END - 0.85, -14), ("boom", END + 0.35, -10), ("shutter", END + 1.15, -13)]
 CUES += [("whoosh", t - 0.36, -14) for t in SWEEPS]
-CUES += [("sideswoosh", t0 - 0.05, -18) for t0, g, _ in INTER]          # entrée douce des intermèdes
+CUES += [("sideswoosh", t0 - 0.05, -18) for t0, g, _ in INTER + OVER]          # entrée douce des intermèdes
 json.dump({"cues": CUES, "dur": DUR, "end": END,
            "voice": [(a, round(b - a, 3), q(a)) for a, b in zip(SEGS[:-1], SEGS[1:])],
            "gaps": [(t0, g) for t0, g, _ in INTER]}, open("cues.json", "w"), indent=1)
@@ -260,8 +264,8 @@ talk_html = "\n      ".join(
     for i, (a, d, m) in enumerate(TALKSEG))
 inter_html = "\n      ".join(
     f'<div class="ish" id="ish-{n}"><video id="vi-{n}" class="clip" src="assets/shots/{n}.mp4" data-start="{t}" '
-    f'data-duration="{round(d + (1.0 if k == len(INTER) - 1 and j == len(lst) - 1 else FADE_OUT + 0.05), 3)}" data-media-start="0" muted playsinline></video></div>'
-    for k, (_, _, lst) in enumerate(INTER) for j, (n, t, d) in enumerate(lst))   # le dernier plan reste sous la fin B
+    f'data-duration="{round(d + FADE_OUT + 0.05, 3)}" data-media-start="0" muted playsinline></video></div>'
+    for _, _, lst in INTER + OVER for n, t, d in lst)
 glass_html = "\n    ".join(glass_div(f"g{i}", s, x, y, w, h) for i, (s, x, y, w, h, *_ ) in enumerate(GLASS))
 sweep_html = "\n    ".join(glass_div(f"sw{i}", "capsule", -260, 2000, 1600, 380, "transform:rotate(-14deg);") for i in range(len(SWEEPS)))
 strokes_html = "\n      ".join(
@@ -269,7 +273,7 @@ strokes_html = "\n      ".join(
     f'<path class="st-core" d="{PATHS[k]}" pathLength="1000"/><path class="st-head" d="{PATHS[k]}" pathLength="1000"/></g>'
     for i, (k, *_ ) in enumerate(ARCS))
 
-CFG = dict(FADE_IN=FADE_IN, XFADE=XFADE, FADE_OUT=FADE_OUT, INTER=INTER, CARDS=CARDS, FACE=FACE, CAM=CAM, GLASS=GLASS, SWEEPS=SWEEPS, ARCS=ARCS, HOOK_LOGO=HOOK_LOGO, END=END, DUR=DUR)
+CFG = dict(OVER=OVER, FADE_IN=FADE_IN, XFADE=XFADE, FADE_OUT=FADE_OUT, INTER=INTER, CARDS=CARDS, FACE=FACE, CAM=CAM, GLASS=GLASS, SWEEPS=SWEEPS, ARCS=ARCS, HOOK_LOGO=HOOK_LOGO, END=END, DUR=DUR)
 
 html = f"""<!doctype html>
 <html lang="fr" data-resolution="portrait">
@@ -340,15 +344,15 @@ html = f"""<!doctype html>
     else tl.to("#cam", {{ scale: s1, duration: d, ease }}, t);
   }});
   tl.fromTo("#camw", {{ filter: "blur(16px)", scale: 1.06 }}, {{ filter: "blur(0px)", scale: 1, duration: 0.8, ease: "power3.inOut" }}, 0);
-  tl.to("#inter", {{ filter: "blur(18px)", scale: 1.06, duration: 0.45, ease: "power2.inOut" }}, C.END - 0.25);
+  tl.to("#camw", {{ filter: "blur(18px)", scale: 1.06, duration: 0.45, ease: "power2.inOut" }}, C.END - 0.25);
 
   // ---------------- intermèdes déco : fondu flou à l'entrée, poussée lente, fondu flou à la sortie
-  C.INTER.forEach(([t0, g, shots], k) => {{
+  C.INTER.concat(C.OVER).forEach(([t0, g, shots], k) => {{
     shots.forEach(([n, t, d], i) => {{
       const id = "#ish-" + n;
       tl.fromTo(id, {{ opacity: 0, filter: "blur(14px)" }}, {{ opacity: 1, filter: "blur(0px)", duration: i ? C.XFADE : C.FADE_IN, ease: "sine.inOut", immediateRender: false }}, i ? t - C.XFADE / 2 : t);
       tl.fromTo(id + " video", {{ scale: 1.0 }}, {{ scale: 1.05, duration: d + C.FADE_OUT, ease: "sine.inOut", immediateRender: false }}, t);
-      if (i === shots.length - 1) {{ if (k < C.INTER.length - 1) tl.to(id, {{ opacity: 0, filter: "blur(14px)", duration: C.FADE_OUT, ease: "sine.inOut" }}, t0 + g); }}
+      if (i === shots.length - 1) tl.to(id, {{ opacity: 0, filter: "blur(14px)", duration: C.FADE_OUT, ease: "sine.inOut" }}, t0 + g);
       else tl.set(id, {{ opacity: 0 }}, t + d + C.XFADE / 2 + 0.02);
     }});
   }});

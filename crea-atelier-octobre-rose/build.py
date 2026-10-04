@@ -9,11 +9,11 @@ TALK = 19.80                 # durée du face caméra (temps du cut)
 # Intermèdes plein cadre entre les phrases : boutique + atelier, coupes calées sur les temps de la musique.
 # (temps du cut où l'on s'arrête, [(plan, durée souhaitée, durée du fichier)]) — rien n'est coupé dans la voix.
 GAPS_SPEC = [
-    (5.24,  [("store", 1.55, 2.55), ("logowall", 1.3, 1.583)]),                            # après « Seulement chez CRÉA ! »
-    (9.78,  [("heart", 1.3, 1.667), ("garlandceil", 1.2, 1.7)]),                           # après « … les associations concernées »
-    (12.49, [("rackfocus", 1.0, 1.417), ("tablehrt", 0.5, 1.0), ("teal", 1.05, 1.542)]),  # après « … déjà fourni ! » (atelier)
-    (14.87, [("tablewide", 0.5, 1.208), ("interior", 1.55, 2.3)]),                         # après « … tediwhom m3akom ! »
+    (5.24,  [("hindwork", 1.3, 1.7), ("tablewide", 1.0, 1.208)]),    # après « Seulement chez CRÉA ! » : Hind au travail, la table
+    (12.49, [("tablehrt", 0.5, 1.0), ("rackfocus", 1.0, 1.417)]),   # après « … déjà fourni ! » : l'atelier en détail
 ]
+# montage atelier final, après « Marhba bikom ! », avant la fin B
+END_SPEC = [("table", 1.55, 2.5), ("teal", 1.3, 1.542), ("hindwork2", 1.0, 1.18)]
 BEATS = json.load(open("beats.json"))["grid"]          # temps forts de la musique (déjà calée à 0:30)
 FADE_IN, XFADE, FADE_OUT = 0.5, 0.45, 0.45            # fondus flous des intermèdes
 
@@ -57,15 +57,24 @@ def q(t):
     return round(t + sum(g for (at, _), g in zip(GAPS, GAPLEN) if t >= at - 1e-6), 3)
 
 SEGS = [0.0] + [at for at, _ in GAPS] + [TALK]    # morceaux du face caméra
-END = q(TALK)                # fin de la voix
+VOICE_END = q(TALK)          # fin de la voix
+# montage atelier final : entrée sur le 1er temps après « bikom », coupes sur les temps
+_ve = voice_end(TALK) + shift
+_B = next(b for b in BEATS if b >= _ve + 0.05)
+_v0 = round(_B - FADE_IN / 2, 3); _t = _B; _plan = []
+for i, (name, want, flen) in enumerate(END_SPEC):
+    st = _v0 if i == 0 else _t
+    end = beat_after(_t + want, _t + min(0.6, want), st + flen - 0.05)
+    _plan.append((name, round(st, 3), round(end - st, 3))); _t = end
+INTER.append((_v0, round(_t - _v0, 3), _plan))
+END = round(_t, 3)           # début de la fin B (sur un temps)
 DUR = round(END + 2.6, 2)    # + fin B
 
 # ---------------------------------------------------------------- b-rolls
 # (nom, fichier, début, fin) — plans consécutifs = une seule carte
 CARDS = [
-    [("fan", 7.66, 9.74)],                                   # « rayhin yroho l'les associations concernées »
     [("pliers", 10.50, 11.55), ("beadbox", 11.55, 12.50)],   # « le matériel déjà fourni »
-    [("table", 13.50, 14.85)],                               # « les créations tediwhom m3akom »
+    [("tableside", 13.50, 14.85)],                           # « les créations tediwhom m3akom »
 ]
 
 # ---------------------------------------------------------------- caméra
@@ -102,7 +111,7 @@ CAPS = [
     (4.18, 5.22, ["Seulement@4.22 | chez@4.52"], 1110, 73),
     (5.30, 6.24, ["W@5.36 | nzidolkom ?@5.44"], 1150, 79),
     (6.24, 7.62, ["*50 %@6.30", "des@6.98 | bénéfices@7.18"], 1170, 100),
-    (7.62, 9.74, ["rayhin@7.64 | yroho@7.94 | l’les@8.20", "*associations@8.32 | concernées@8.74"], 300, 60),
+    (7.62, 9.74, ["rayhin@7.64 | yroho@7.94 | l’les@8.20", "*associations@8.32 | concernées@8.74"], 1150, 66),
     (9.79, 10.52, ["W@9.80 | ma@9.86 | tkhmmouch,@9.98"], 1150, 73),
     (10.54, 12.46, ["parce que@10.56 | le@10.92 | *matériel@11.04", "déjà@11.62 | fourni !@11.86"], 300, 59),
     (12.50, 13.46, ["W@12.60 | nzidolkom :@12.70"], 1150, 79),
@@ -124,7 +133,7 @@ GLASS = [
     ("disc", 830, 1440, 220, 220, 15.05, 19.60, -40, -30),
     ("capsule", -40, 1650, 400, 150, 17.20, 19.60, 50, -20),
 ]
-SWEEPS = [7.66, 10.50, 13.50, 19.80]   # balayage : entrées/sorties de carte + fin (temps du cut)
+SWEEPS = [10.50, 13.50, 14.86]   # balayage : entrées/sorties de carte + fin (temps du cut)
 
 # ---------------------------------------------------------------- traits de lumière
 PATHS = {
@@ -166,10 +175,8 @@ ARCS = [(k, q(t), d, r, hold) for k, t, d, r, hold in ARCS]
 TALKSEG = []
 for i in range(len(SEGS) - 1):
     a, b = SEGS[i], SEGS[i + 1]
-    if i == len(SEGS) - 2:
-        d = b - a + 0.95                                          # passe sous la fin B
-    else:                                                         # image figée jusqu'à ce que l'intermède couvre tout
-        d = max(b - a, INTER[i][0] + FADE_IN + 0.05 - q(a))
+    # image figée jusqu'à ce que l'intermède suivant (ou le montage final) couvre tout
+    d = max(b - a, INTER[i][0] + FADE_IN + 0.05 - q(a))
     TALKSEG.append((q(a), round(d, 3), i))
 
 # ---------------------------------------------------------------- SFX (pour mix.py)
@@ -253,8 +260,8 @@ talk_html = "\n      ".join(
     for i, (a, d, m) in enumerate(TALKSEG))
 inter_html = "\n      ".join(
     f'<div class="ish" id="ish-{n}"><video id="vi-{n}" class="clip" src="assets/shots/{n}.mp4" data-start="{t}" '
-    f'data-duration="{round(d + FADE_OUT + 0.05, 3)}" data-media-start="0" muted playsinline></video></div>'
-    for _, _, lst in INTER for n, t, d in lst)
+    f'data-duration="{round(d + (1.0 if k == len(INTER) - 1 and j == len(lst) - 1 else FADE_OUT + 0.05), 3)}" data-media-start="0" muted playsinline></video></div>'
+    for k, (_, _, lst) in enumerate(INTER) for j, (n, t, d) in enumerate(lst))   # le dernier plan reste sous la fin B
 glass_html = "\n    ".join(glass_div(f"g{i}", s, x, y, w, h) for i, (s, x, y, w, h, *_ ) in enumerate(GLASS))
 sweep_html = "\n    ".join(glass_div(f"sw{i}", "capsule", -260, 2000, 1600, 380, "transform:rotate(-14deg);") for i in range(len(SWEEPS)))
 strokes_html = "\n      ".join(
@@ -333,15 +340,15 @@ html = f"""<!doctype html>
     else tl.to("#cam", {{ scale: s1, duration: d, ease }}, t);
   }});
   tl.fromTo("#camw", {{ filter: "blur(16px)", scale: 1.06 }}, {{ filter: "blur(0px)", scale: 1, duration: 0.8, ease: "power3.inOut" }}, 0);
-  tl.to("#camw", {{ filter: "blur(18px)", scale: 1.06, duration: 0.45, ease: "power2.inOut" }}, C.END - 0.25);
+  tl.to("#inter", {{ filter: "blur(18px)", scale: 1.06, duration: 0.45, ease: "power2.inOut" }}, C.END - 0.25);
 
   // ---------------- intermèdes déco : fondu flou à l'entrée, poussée lente, fondu flou à la sortie
-  C.INTER.forEach(([t0, g, shots]) => {{
+  C.INTER.forEach(([t0, g, shots], k) => {{
     shots.forEach(([n, t, d], i) => {{
       const id = "#ish-" + n;
       tl.fromTo(id, {{ opacity: 0, filter: "blur(14px)" }}, {{ opacity: 1, filter: "blur(0px)", duration: i ? C.XFADE : C.FADE_IN, ease: "sine.inOut", immediateRender: false }}, i ? t - C.XFADE / 2 : t);
       tl.fromTo(id + " video", {{ scale: 1.0 }}, {{ scale: 1.05, duration: d + C.FADE_OUT, ease: "sine.inOut", immediateRender: false }}, t);
-      if (i === shots.length - 1) tl.to(id, {{ opacity: 0, filter: "blur(14px)", duration: C.FADE_OUT, ease: "sine.inOut" }}, t0 + g);
+      if (i === shots.length - 1) {{ if (k < C.INTER.length - 1) tl.to(id, {{ opacity: 0, filter: "blur(14px)", duration: C.FADE_OUT, ease: "sine.inOut" }}, t0 + g); }}
       else tl.set(id, {{ opacity: 0 }}, t + d + C.XFADE / 2 + 0.02);
     }});
   }});

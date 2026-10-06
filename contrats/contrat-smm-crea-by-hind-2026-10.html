@@ -4,86 +4,61 @@
 <meta charset="utf-8">
 <title>Contrat SMM Créa by Hind</title>
 <style>
-  @page { size: A4; margin: 18mm 18mm 20mm 18mm; }
-  * { box-sizing: border-box; }
-  body { font-family: "Inter", "DejaVu Sans", sans-serif; font-size: 10pt; line-height: 1.55; color: #1a1a1a; background: #fff; margin: 0; }
-  .brand { font-size: 15pt; font-weight: 700; letter-spacing: .04em; margin-bottom: 18px; }
-  h1 { font-size: 15pt; text-align: center; margin: 0 0 2px; letter-spacing: .05em; }
-  .subtitle { text-align: center; font-size: 11pt; margin: 0 0 22px; color: #444; }
-  h2 { font-size: 10.5pt; margin: 0 0 6px; text-transform: none; }
-  h3 { font-size: 10pt; margin: 16px 0 6px; }
-  p { margin: 0 0 6px; text-align: justify; }
-  ul { margin: 0 0 6px; padding-left: 18px; }
-  li { margin-bottom: 2px; }
-  .article { page-break-inside: avoid; break-inside: avoid; margin-bottom: 14px; }
-  table.party { border-collapse: collapse; width: 100%; margin: 4px 0 8px; font-size: 9.5pt; }
-  table.party td { border: 1px solid #bbb; padding: 4px 8px; vertical-align: top; }
-  table.party td:first-child { width: 32%; font-weight: 600; background: #f4f4f4; }
-  .client p { margin: 0 0 2px; text-align: left; }
-  .amount { font-weight: 600; }
-  .closing { page-break-inside: avoid; break-inside: avoid; }
-  .signatures { display: flex; gap: 28px; margin-top: 18px; }
-  .signatures > div { flex: 1; border: 1px solid #bbb; padding: 12px 14px; min-height: 190px; }
-  .signatures p { text-align: left; margin-bottom: 4px; }
-  .line { margin-top: 26px; }
+  @page { size: A4; margin: 72pt; }
+  html, body { margin: 0; padding: 0; background: #fff; color: #000; }
+  body { font-family: Arial, "Liberation Sans", sans-serif; font-size: 11pt; line-height: 1.3214; }
+  p { margin: 0 0 12pt; }
+  .title { font-size: 23pt; font-weight: bold; margin: 24pt 0 0; }
+  .subtitle { font-size: 17pt; font-weight: bold; margin: 18pt 0 0; }
+  .h3 { font-size: 13pt; font-weight: bold; margin: 14pt 0 0; }
+  .subtitle + .h3 { margin-top: 14pt; }
+  .h3 + p { margin-top: 12pt; }
+  h1 { font-size: 23pt; font-weight: bold; margin: 24pt 0 12pt; break-after: avoid; page-break-after: avoid; }
+  h2 { font-size: 17pt; font-weight: bold; margin: 18pt 0 12pt; break-after: avoid; page-break-after: avoid; }
+  b { font-weight: bold; }
+  ul { list-style: none; margin: 0 0 12pt; padding: 0 0 0 36pt; }
+  li { position: relative; margin: 0; }
+  li::before { content: "●"; position: absolute; left: -18pt; }
+  .newpage { break-before: page; page-break-before: always; }
 </style>
 </head>
 <body>
 
-<div class="brand">Mercātus</div>
-
-<h1>CONTRAT DE PRESTATION DE SERVICES</h1>
+<p class="title">CONTRAT DE PRESTATION DE SERVICES</p>
 <p class="subtitle">Gestion des réseaux sociaux</p>
-
-<div class="article">
-<h2>Entre les soussignés</h2>
-<h3>Le Prestataire</h3>
-<table class="party">
-  <tr><td>Nom</td><td>Wassim Sid</td></tr>
-  <tr><td>Statut</td><td>Entrepreneur indépendant (auto-entrepreneur)</td></tr>
-  <tr><td>Nom commercial</td><td>Mercātus</td></tr>
-  <tr><td>Adresse</td><td>212 Logements AADL, Bâtiment A2, N°35, Zéralda, Alger</td></tr>
-  <tr><td>Téléphone</td><td>+213 554 97 17 00</td></tr>
-  <tr><td>E-mail</td><td>wassimsid77@gmail.com</td></tr>
-  <tr><td>NI</td><td>100050586016680006</td></tr>
-  <tr><td>NIF</td><td>10516300166814361680</td></tr>
-</table>
-<p>Ci-après dénommé « le Prestataire », opérant sous le nom commercial « Mercātus ».</p>
-
-<h3>Et le Client</h3>
-<div class="client">
-  <p><strong>Créa by Hind</strong></p>
-  <p>Création de bijoux et d'accessoires</p>
-  <p>Représentée par : Hind Chaalane</p>
-  <p>Téléphone : +213 542 27 15 74</p>
-  <p>E-mail : boutiqueaccessoireshind@gmail.com</p>
-</div>
-<p style="margin-top:6px">Ci-après dénommée « le Client ».</p>
+<p class="h3">Entre les soussignés</p>
+<p><b>Le Prestataire</b></p>
+<p><b>Wassim Sid</b><br>Auto-entrepreneur</p>
+<p>Adresse : 212 Logements AADL, Bâtiment A2, N°35, Zéralda, Alger</p>
+<p>Téléphone : +213 554 97 17 00</p>
+<p>E-mail : wassimsid77@gmail.com</p>
+<p>Ci-après dénommé « le Prestataire ».</p>
+<p>Et</p>
+<p><b>Créa by Hind</b></p>
+<p>Création de bijoux et d'accessoires</p>
+<p>Représentée par : Hind Chaalane</p>
+<p>Téléphone : +213 542 27 15 74</p>
+<p>E-mail : boutiqueaccessoireshind@gmail.com</p>
+<p>Ci-après dénommé « le Client ».</p>
 <p>Les parties conviennent de ce qui suit :</p>
-</div>
 
-<div class="article">
-<h2>Article 1 — Objet du contrat</h2>
+<h1>Article 1 Objet du contrat</h1>
 <p>Le présent contrat a pour objet la prise en charge complète de la communication digitale de Créa by Hind.</p>
 <p>Le Prestataire assure la stratégie de communication, la création des contenus, la planification, la publication ainsi que la gestion quotidienne des réseaux sociaux du Client.</p>
-</div>
 
-<div class="article">
-<h2>Article 2 — Durée du contrat</h2>
-<p>Le présent contrat prend effet le 01/10/2026. Il est conclu pour une durée minimale ferme de trois (3) mois, couvrant les mois d'octobre, novembre et décembre 2026, soit jusqu'au 31/12/2026.</p>
+<h1>Article 2 Durée du contrat</h1>
+<p>Le présent contrat est conclu pour une durée minimale ferme de <b>trois (3) mois</b>, couvrant les mois d'octobre, novembre et décembre.</p>
 <p>Pendant cette période, aucune des deux parties ne pourra mettre fin au contrat de manière anticipée, sauf accord écrit entre les parties ou faute grave.</p>
-<p>À l'issue de cette période, le contrat pourra être renouvelé d'un commun accord, par écrit.</p>
-</div>
+<p>À l'issue de cette période, le contrat pourra être renouvelé d'un commun accord.</p>
 
-<div class="article">
-<h2>Article 3 — Prestations incluses</h2>
+<h1>Article 3 Prestations incluses</h1>
 <p>Le Prestataire assure la gestion complète de la communication digitale du Client sur Instagram, Facebook et TikTok.</p>
 <p>Les prestations comprennent notamment :</p>
 <ul>
   <li>Élaboration de la stratégie de communication.</li>
   <li>Création du planning éditorial mensuel.</li>
   <li>Organisation des journées de tournage.</li>
-  <li>Prises de vues photo et vidéo des créations, de l'atelier et de la boutique.</li>
+  <li>Prises de vues photo et vidéo.</li>
   <li>Montage vidéo.</li>
   <li>Création des visuels.</li>
   <li>Rédaction des publications.</li>
@@ -96,121 +71,93 @@
   <li>Suivi des performances et recommandations.</li>
 </ul>
 <p>Le Prestataire organise librement la production des contenus afin d'assurer une communication cohérente et régulière.</p>
-<p>Sont exclus du présent contrat, sauf accord écrit distinct : le budget de sponsoring et de publicité payante sur les plateformes, la gestion des commandes, des ventes, de la livraison et du service après-vente, la création d'un site web ou d'une boutique en ligne, ainsi que la conception d'une identité visuelle (logo, charte graphique).</p>
-</div>
 
-<div class="article">
-<h2>Article 4 — Méthode de travail</h2>
+<h1>Article 4 Méthode de travail</h1>
 <p>Le fonctionnement repose sur une préparation anticipée des contenus.</p>
-<p>Chaque mois est préparé durant la deuxième quinzaine du mois précédent afin que l'ensemble des contenus soit prêt avant le début du mois concerné. À titre d'exemple, les contenus du mois de novembre sont réalisés durant la deuxième moitié du mois d'octobre afin que les publications puissent débuter dès le 1er novembre.</p>
-<p>Les échanges courants se font par WhatsApp. Les contenus à valider sont transmis via WhatsApp ou un dossier partagé (Google Drive).</p>
-<p>Le Client s'engage à mettre à disposition les informations, les créations et produits à photographier ou filmer, ses disponibilités pour les tournages, l'accès à l'atelier et à la boutique ainsi que tout élément nécessaire à la réalisation des contenus.</p>
+<p>Chaque mois est préparé durant la deuxième quinzaine du mois précédent afin que l'ensemble des contenus soit prêt avant le début du mois concerné.</p>
+<p>À titre d'exemple, les contenus du mois d'octobre sont réalisés durant la deuxième moitié du mois de septembre afin que les publications puissent débuter dès le 1er octobre.</p>
+<p>Le Client s'engage à mettre à disposition les informations, ses disponibilités, les produits et créations à mettre en valeur ainsi que tout élément nécessaire à la réalisation des contenus.</p>
 <p>Tout retard provenant du Client, notamment une indisponibilité pour les tournages, un manque d'informations ou une validation tardive, pourra entraîner un décalage du calendrier de production sans que la responsabilité du Prestataire ne puisse être engagée.</p>
-</div>
 
-<div class="article">
-<h2>Article 5 — Conditions financières</h2>
+<h1>Article 5 Conditions financières</h1>
 <p>Le montant de la prestation est fixé à :</p>
-<p class="amount">60 000 DA (soixante mille dinars algériens) par mois, net, le Prestataire n'étant pas assujetti à la TVA.</p>
-<p>Soit un montant total de 180 000 DA (cent quatre-vingt mille dinars algériens) pour la durée ferme de trois (3) mois.</p>
-<p>Le règlement est effectué au début de chaque mois de prestation, en espèces ou par virement :</p>
-<ul>
-  <li>Mois d'octobre 2026 : 60 000 DA, payables au début du mois d'octobre 2026.</li>
-  <li>Mois de novembre 2026 : 60 000 DA, payables au début du mois de novembre 2026.</li>
-  <li>Mois de décembre 2026 : 60 000 DA, payables au début du mois de décembre 2026.</li>
-</ul>
-<p>En cas de retard de paiement non justifié par l'article 6, le Prestataire pourra, après simple notification écrite au Client, suspendre la publication des contenus jusqu'à régularisation, sans que cette suspension ne modifie les échéances suivantes.</p>
-</div>
+<p><b>60 000 DA net par mois.</b></p>
+<p>Le règlement est effectué au début de chaque mois de prestation.</p>
+<p>Le paiement du mois d'octobre est effectué au début du mois d'octobre.</p>
+<p>Le paiement du mois de novembre est effectué au début du mois de novembre.</p>
+<p>Le paiement du mois de décembre est effectué au début du mois de décembre.</p>
 
-<div class="article">
-<h2>Article 6 — Garantie d'exécution</h2>
+<h1>Article 6 Garantie d'exécution</h1>
 <p>Le Prestataire s'engage à préparer les contenus avant le début du mois concerné.</p>
 <p>Si une partie des contenus n'a pas pu être finalisée en raison d'un retard exclusivement imputable au Prestataire, le paiement du mois concerné est reporté jusqu'à la livraison complète des contenus prévus.</p>
 <p>Cette disposition constitue une garantie pour le Client afin que le paiement corresponde à des livrables effectivement réalisés.</p>
 <p>En revanche, lorsque le retard résulte d'un manque d'informations, d'une absence de validation, d'une indisponibilité pour les tournages ou de toute autre cause indépendante du Prestataire, les échéances de paiement restent inchangées.</p>
-</div>
 
-<div class="article">
-<h2>Article 7 — Validation des contenus</h2>
+<h1>Article 7 Validation des contenus</h1>
 <p>Les contenus sont transmis au Client avant leur publication afin qu'il puisse formuler ses éventuelles remarques.</p>
 <p>Le Client s'engage à communiquer ses retours dans un délai compatible avec le calendrier éditorial.</p>
 <p>En l'absence de retour du Client avant la date prévue de publication, les contenus seront considérés comme validés et pourront être publiés par le Prestataire sans validation supplémentaire.</p>
 <p>Les demandes de modification formulées après publication seront prises en compte selon les disponibilités du Prestataire.</p>
-</div>
 
-<div class="article">
-<h2>Article 8 — Obligations du Client</h2>
+<h1>Article 8 Obligations du Client</h1>
 <p>Le Client s'engage à :</p>
 <ul>
-  <li>Fournir toutes les informations nécessaires à la création des contenus (nouveautés, collections, prix, ateliers, offres).</li>
+  <li>Fournir toutes les informations nécessaires à la création des contenus.</li>
   <li>Informer le Prestataire de toute modification concernant les horaires, les tarifs, les produits ou les services proposés.</li>
-  <li>Mettre à disposition les créations et produits à photographier ou filmer lors des journées de tournage.</li>
-  <li>Faciliter l'accès à l'atelier et à la boutique lors des journées de tournage.</li>
-  <li>Être disponible, ou rendre disponibles les personnes concernées, aux horaires convenus.</li>
-  <li>Fournir et maintenir les accès aux comptes Instagram, Facebook et TikTok nécessaires à la publication et à la gestion des messages.</li>
-  <li>Respecter les délais de validation et les échéances de paiement prévues à l'article 5.</li>
+  <li>Mettre à disposition les produits et créations lors des journées de tournage.</li>
+  <li>Être disponible aux horaires convenus.</li>
+  <li>Respecter les délais de validation.</li>
 </ul>
-</div>
 
-<div class="article">
-<h2>Article 9 — Obligations du Prestataire</h2>
+<h1>Article 9 Obligations du Prestataire</h1>
 <p>Le Prestataire s'engage à :</p>
 <ul>
-  <li>Assurer une communication professionnelle conforme à l'image et à l'univers du Client.</li>
-  <li>Livrer les contenus de chaque mois avant le début du mois concerné, dans les conditions de l'article 4.</li>
-  <li>Publier les contenus conformément au planning éditorial établi.</li>
-  <li>Traiter les messages privés et les commentaires avec diligence et transmettre au Client les demandes qui relèvent de sa décision (commandes, réclamations, demandes particulières).</li>
-  <li>Informer le Client sans délai de toute difficulté pouvant impacter le calendrier de publication.</li>
-  <li>Utiliser les accès aux comptes du Client exclusivement pour l'exécution de la mission et les restituer à la fin du contrat.</li>
+  <li>Assurer une communication professionnelle conforme à l'image du Client.</li>
   <li>Respecter la confidentialité des informations obtenues dans le cadre de la mission.</li>
+  <li>Publier les contenus conformément au planning établi.</li>
+  <li>Informer le Client de toute difficulté pouvant impacter le calendrier de publication.</li>
+  <li>Réaliser les prestations avec professionnalisme et diligence.</li>
 </ul>
-</div>
 
-<div class="article">
-<h2>Article 10 — Propriété des contenus</h2>
+<h1>Article 10 Propriété des contenus</h1>
 <p>Après paiement intégral de la prestation concernée, les contenus réalisés deviennent la propriété du Client.</p>
 <p>Le Prestataire conserve toutefois le droit d'utiliser les réalisations à des fins de communication, de portfolio ou de présentation de son savoir-faire, sauf opposition écrite du Client.</p>
-</div>
 
-<div class="article">
-<h2>Article 11 — Résiliation</h2>
-<p>Le présent contrat est conclu pour une durée minimale de trois (3) mois.</p>
+<h1>Article 11 Résiliation</h1>
+<p>Le présent contrat est conclu pour une durée minimale de trois mois.</p>
 <p>Aucune résiliation anticipée ne pourra intervenir durant cette période, sauf accord écrit des deux parties ou faute grave.</p>
 <p>En cas de non-paiement ou de manquement grave aux obligations contractuelles, la partie lésée pourra mettre fin au contrat après une mise en demeure restée sans effet pendant un délai de quinze (15) jours.</p>
-</div>
 
-<div class="article">
-<h2>Article 12 — Confidentialité</h2>
+<h1>Article 12 Confidentialité</h1>
 <p>Chaque partie s'engage à conserver confidentielles les informations commerciales, techniques ou stratégiques obtenues dans le cadre de la présente collaboration.</p>
 <p>Cette obligation demeure applicable après la fin du contrat.</p>
-</div>
 
-<div class="closing">
-<div class="article">
-<h2>Article 13 — Litiges</h2>
+<h1>Article 13 Litiges</h1>
 <p>Les parties s'engagent à rechercher une solution amiable à tout différend relatif à l'exécution du présent contrat.</p>
 <p>À défaut d'accord amiable, les tribunaux compétents d'Alger seront seuls compétents.</p>
-</div>
 
-<div class="article">
-<h2>Article 14 — Signatures</h2>
-<p>Fait à ..................................................... , le ......... / ......... / 2026</p>
-<p>Fait en deux exemplaires originaux, l'un destiné au Prestataire, l'autre au Client.</p>
-<div class="signatures">
-  <div>
-    <p><strong>Le Prestataire</strong></p>
-    <p>Wassim Sid — Mercātus</p>
-    <p>Signature précédée de la mention « Lu et approuvé »</p>
-    <p class="line">..........................................</p>
-  </div>
-  <div>
-    <p><strong>Le Client</strong></p>
-    <p>Créa by Hind — représentée par Hind Chaalane</p>
-    <p>Signature précédée de la mention « Lu et approuvé »</p>
-    <p class="line">..........................................</p>
-  </div>
-</div>
-</div>
+<div class="newpage">
+<p>Fait à .....................................................</p>
+<p>Le ......... / ......... / 2026</p>
+<p>En deux exemplaires originaux, un pour chacune des parties.</p>
+
+<h2>Le Prestataire</h2>
+<p><b>Wassim Sid</b></p>
+<p>Signature précédée de la mention :</p>
+<p>« Lu et approuvé »</p>
+<p>Signature :</p>
+<p>..........................................</p>
+
+<h2>Le Client</h2>
+<p><b>Créa by Hind</b></p>
+<p>Nom du représentant :</p>
+<p>Hind Chaalane</p>
+<p>Fonction :</p>
+<p>..........................................</p>
+<p>Signature précédée de la mention :</p>
+<p>« Lu et approuvé »</p>
+<p>Signature :</p>
+<p>..........................................</p>
 </div>
 
 </body>

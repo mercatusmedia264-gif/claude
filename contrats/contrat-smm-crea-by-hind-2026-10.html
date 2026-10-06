@@ -7,7 +7,9 @@
   @page { size: A4; margin: 72pt; }
   html, body { margin: 0; padding: 0; background: #fff; color: #000; }
   body { font-family: Arial, "Liberation Sans", sans-serif; font-size: 11pt; line-height: 1.3214; }
-  p { margin: 0 0 12pt; }
+  p, li { margin: 0 0 12pt; break-inside: avoid; page-break-inside: avoid; }
+  li { margin: 0; }
+  .logo { display: block; width: 96pt; height: auto; margin: 0; }
   .title { font-size: 23pt; font-weight: bold; margin: 24pt 0 0; }
   .subtitle { font-size: 17pt; font-weight: bold; margin: 18pt 0 0; }
   .h3 { font-size: 13pt; font-weight: bold; margin: 14pt 0 0; }
@@ -23,6 +25,8 @@
 </style>
 </head>
 <body>
+
+<img class="logo" src="assets/logo-mercatus.png" alt="Mercātus">
 
 <p class="title">CONTRAT DE PRESTATION DE SERVICES</p>
 <p class="subtitle">Gestion des réseaux sociaux</p>

@@ -1,95 +1,99 @@
 # Speech — Part II (Wassim Sid) · Slides 10 to 15
 
-Estimated length: about 7 to 8 minutes at a calm pace.
+Simple version. About 6 to 7 minutes at a calm pace.
 
 ---
 
-## Slide 10 — Heckscher-Ohlin theory (≈ 1 min 30)
+## Slide 10 — Heckscher-Ohlin theory
 
 Thank you, Norhane.
 
-So far, we have seen that Ricardo explains trade through differences in technology, meaning how productive labor is in each country. But this leaves an important question open: *why* are countries different in the first place?
+Ricardo says countries trade because they have different technology. But why are countries different in the first place?
 
-In the twentieth century, two Swedish economists, Eli Heckscher in 1919 and Bertil Ohlin in 1933, gave a new answer. For them, trade is explained by differences in **factor endowments**.
+Two Swedish economists gave an answer: Eli Heckscher in 1919, and Bertil Ohlin in 1933.
 
-A country's factor endowment is the relative quantity of production factors it has: labor, capital and land. Some countries have a lot of workers, others have a lot of capital, others a lot of land.
+Their idea is about **factor endowments**. This simply means what a country has: workers, money and machines, which we call capital, and land.
 
-The principle is simple: a country **exports** the goods that use intensively its **abundant** factor, and it **imports** the goods that require its **scarce** factor.
+Some countries have many workers. Others have a lot of capital. Others have a lot of land.
 
-Take two examples. Bangladesh has abundant labor, so it exports labor-intensive goods such as textiles. Germany has abundant capital, so it exports capital-intensive goods such as machinery.
+The rule is simple: a country sells what it can make with what it has a lot of. And it buys what needs what it lacks.
 
-But this theory was challenged. In 1953, Wassily Leontief tested it on the United States, the most capital-abundant country in the world. According to the theory, the US should export capital-intensive goods. Yet he found the opposite: American exports were *more labor-intensive* than its imports. This is known as the **Leontief paradox**, and it pushed economists to look for other explanations.
+Two examples. Bangladesh has many workers, so it exports textiles, which need a lot of workers. Germany has a lot of capital, so it exports machines.
 
----
+But in 1953, Wassily Leontief tested this idea on the United States. The US has more capital than any other country, so it should export capital-intensive goods. But he found the opposite: US exports needed more workers than its imports.
 
-## Slide 11 — New Trade Theory (≈ 1 min 30)
-
-One of those explanations came from Paul Krugman, at the end of the 1970s and the beginning of the 1980s. His work earned him the Nobel Prize in Economics in 2008.
-
-Krugman started from a fact that the earlier theories could not explain: most international trade takes place **between similar countries, in similar goods**. For example, France and Germany both export *and* import cars. Ricardo and Heckscher-Ohlin cannot explain this, because these two countries have similar technology and similar endowments.
-
-Krugman's answer rests on three key concepts.
-
-First, **economies of scale**: the more a firm produces, the lower its average cost per unit. So production concentrates in a few places and serves the whole world market.
-
-Second, **imperfect competition**: in reality, markets are not made of many small identical firms, but are dominated by a few large ones.
-
-Third, **product variety**: consumers like choice. So countries exchange different versions of the same type of product. This is called intra-industry trade.
-
-This theory also has a policy implication: because of scale effects and the advantage of being first on a market, state support for strategic industries can sometimes be justified.
+This is called the **Leontief paradox**. It showed that the theory was not enough, so economists looked for new answers.
 
 ---
 
-## Slide 12 — Limitations: inequalities between countries (≈ 1 min 15)
+## Slide 11 — New Trade Theory
 
-All the theories we have presented so far reach the same conclusion: trade benefits everyone. But in practice, **the gains are unequally shared**.
+One new answer came from Paul Krugman, in the late 1970s and early 1980s. He won the Nobel Prize in Economics in 2008 for this work.
 
-First, many developing countries depend on exporting raw materials whose prices are very volatile. Algeria is a clear example with hydrocarbons. Meanwhile, developed countries export manufactured goods with a much higher value.
+Krugman noticed something strange: most trade happens **between similar countries, selling similar products**. For example, France sells cars to Germany, and Germany sells cars to France. The old theories cannot explain this.
 
-Second, this creates dependence and vulnerability to external shocks. When oil prices fall, as they did sharply in 2014, the whole economy of an exporting country is hit.
+Krugman explains it with three ideas.
 
-Third, even inside a country, trade creates winners and losers. Consumers and exporters usually gain, but workers in industries exposed to import competition may lose their jobs.
+One: **economies of scale**. The more a company produces, the cheaper each product becomes. So production is done in a few places and sold to the whole world.
 
-Finally, these observations feed the debate between free trade and protectionism, as well as critical approaches such as dependency theory.
+Two: **imperfect competition**. In real life, a few big companies control most markets.
 
----
+Three: **product variety**. People like to have choice. So countries buy and sell different versions of the same product. This is called intra-industry trade.
 
-## Slide 13 — Global value chains and multinational corporations (≈ 1 min 30)
-
-There is another reality that traditional theories struggle to explain: **global value chains**.
-
-A global value chain is the splitting of the production process of a good across several countries, each one specializing in one stage: research and design, components, assembly, marketing and services. Remember the smartphone from our introduction: designed in California, assembled in China, with a chip made in Taiwan. That is a global value chain.
-
-The consequence is important: countries no longer trade only finished goods, **they trade tasks**.
-
-These chains are organized by **multinational corporations**, firms that operate in several countries. Through foreign direct investment, they move capital, technology and know-how across borders.
-
-This has advantages: lower production costs, and technology transfer and job creation in the host countries.
-
-But it also has risks. Countries become dependent on a few suppliers or regions. Chains are vulnerable to disruptions, as we saw with the supply chain crisis of 2020 and 2021. And the value is unequally distributed: the stages that create the most value, like design and branding, stay mostly in developed countries.
-
-So traditional theories, which were built for trade in finished goods between nations, only partly explain this reality.
+What does this mean for governments? Sometimes, it can make sense for the state to support important industries.
 
 ---
 
-## Slide 14 — Conclusion (≈ 1 min 15)
+## Slide 12 — Inequalities between countries
 
-To conclude, theories of international trade evolved alongside reality.
+All these theories say that trade is good for everyone. But in reality, **not everyone gains the same**.
 
-With **mercantilism**, trade was seen as a zero-sum game, and wealth was measured in gold.
+First, many poor countries sell raw materials, and their prices go up and down a lot. Algeria is a good example with oil and gas. Rich countries, on the other hand, sell expensive manufactured goods.
 
-With **Smith and Ricardo**, specialization and comparative advantage showed that all countries can gain.
+Second, this makes poor countries dependent and fragile. When oil prices fell in 2014, oil-exporting countries suffered a lot.
 
-With **Heckscher and Ohlin**, trade was explained by factor endowments.
+Third, even inside one country, there are winners and losers. Consumers and exporters usually win. But some workers lose their jobs because of cheaper imports.
 
-And with **Krugman**, by economies of scale, imperfect competition and product variety.
-
-Each theory corrects the limits of the previous one, yet none of them explains everything. Today, with global value chains, persistent inequalities and a mix of open trade and protectionist measures, the debate remains open.
-
-So, to answer our problématique: economic theories do explain why countries trade, but they must be combined with the realities of the global economy to understand it fully.
+Finally, this is why people still debate free trade versus protectionism.
 
 ---
 
-## Slide 15 — Thank you (≈ 10 s)
+## Slide 13 — Global value chains and multinational corporations
 
-Thank you for your attention. Norhane and I will be happy to answer your questions.
+Today, there is another reality the old theories don't fully explain: **global value chains**.
+
+This means one product is made in many countries, step by step: design, parts, assembly, marketing and services. Remember the smartphone from our introduction: designed in California, assembled in China, with a chip from Taiwan.
+
+So today, countries don't only trade finished products. **They trade steps of production.**
+
+These chains are organized by **multinational companies**, which work in many countries. They invest abroad and bring money, technology and know-how.
+
+The good side: lower costs, new technology and new jobs in the host countries.
+
+The bad side: countries depend on a few suppliers. One problem can block everything, like the supply chain crisis of 2020 and 2021. And the most profitable steps, like design and branding, stay mostly in rich countries.
+
+So the old theories, made for trade in finished goods, only explain part of this reality.
+
+---
+
+## Slide 14 — Conclusion
+
+To conclude, trade theories changed as the world changed.
+
+**Mercantilism**: trade is a zero-sum game, and wealth is gold.
+
+**Smith and Ricardo**: countries should specialize, and everyone can gain.
+
+**Heckscher and Ohlin**: countries trade based on what they have.
+
+**Krugman**: economies of scale, big companies and product variety.
+
+Each theory fixes the weaknesses of the one before. But no theory explains everything. Today, with global value chains, inequalities and protectionism, the debate is still open.
+
+So, our answer to the problématique: theories explain why countries trade, but we must also look at the real world economy to fully understand it.
+
+---
+
+## Slide 15 — Thank you
+
+Thank you for your attention. Norhane and I are happy to answer your questions.

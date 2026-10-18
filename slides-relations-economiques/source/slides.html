@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>International Economic Relations</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<style>
+@page { size: 1920px 1080px; margin: 0; }
+:root {
+  --navy: #1a2b78;
+  --blue: #2340a0;
+  --blue-2: #3a5ac4;
+  --mag: #b3155f;
+  --mag-d: #930e4c;
+  --cyan: #a6e3fa;
+  --ink: #1c2347;
+  --muted: #5d6588;
+  --line: #dde2f0;
+  --soft: #f1f4fb;
+  --white: #ffffff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #fff; }
+body {
+  font-family: 'DM Sans', Inter, sans-serif;
+  color: var(--ink);
+  font-size: 24px;
+  line-height: 1.5;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.slide { width: 1920px; height: 1080px; position: relative; overflow: hidden; break-after: page; background: #fff; }
+.slide:last-child { break-after: auto; }
+h1, h2, h3, .serif { font-family: 'Lora', Georgia, serif; }
+h1, h2, h3 { font-weight: 600; letter-spacing: -0.01em; line-height: 1.14; }
+h2 { font-size: 64px; color: var(--navy); }
+h3 { font-size: 30px; color: var(--navy); }
+p { text-wrap: pretty; }
+b, strong { font-weight: 700; }
+.photo { background-size: cover; background-position: center; position: absolute; }
+.abs { position: absolute; }
+.muted { color: var(--muted); }
+
+/* ---------- chrome ---------- */
+.brand { position: absolute; left: 72px; top: 52px; display: flex; align-items: center; gap: 14px;
+  font-family: 'Lora', serif; font-size: 23px; font-weight: 600; color: var(--navy); z-index: 5; }
+.brand .logo { width: 46px; height: 46px; border-radius: 50%; background: var(--navy); display: grid; place-items: center; }
+.brand .logo svg { width: 26px; height: 26px; stroke: #fff; }
+.on-dark .brand { color: #fff; }
+.on-dark .brand .logo { background: #fff; }
+.on-dark .brand .logo svg { stroke: var(--navy); }
+
+.pager { position: absolute; right: 60px; top: 60px; display: flex; flex-direction: column; gap: 12px; z-index: 5; }
+.pager i { width: 13px; height: 13px; border-radius: 50%; border: 2px solid var(--navy); opacity: .45; }
+.pager i.on { background: var(--navy); opacity: 1; }
+.on-dark .pager i { border-color: #fff; }
+.on-dark .pager i.on { background: #fff; }
+
+.foot { position: absolute; left: 72px; right: 72px; bottom: 40px; display: flex; justify-content: space-between;
+  font-size: 17px; letter-spacing: .04em; color: var(--muted); z-index: 5; }
+.foot .who::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--mag); margin-right: 10px; vertical-align: 2px; }
+.on-dark .foot { color: rgba(255,255,255,.72); }
+.foot.right-only { justify-content: flex-end; }
+
+.bars { position: absolute; display: flex; height: 12px; z-index: 4; }
+.bars i { width: 120px; height: 100%; }
+.bars i:nth-child(1) { background: #fff; }
+.bars i:nth-child(2) { background: var(--mag); }
+.bars i:nth-child(3) { background: var(--blue-2); }
+
+.eyebrow { display: flex; align-items: center; gap: 14px; color: var(--mag); font-size: 17px; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase; margin-bottom: 22px; }
+.eyebrow::before { content: ""; width: 46px; height: 2px; background: currentColor; }
+.on-dark .eyebrow, .eyebrow.light { color: var(--cyan); }
+
+.ic { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.chip { display: inline-flex; align-items: center; gap: 10px; padding: 9px 20px; border-radius: 999px; border: 1.5px solid var(--line);
+  font-size: 19px; color: var(--ink); background: #fff; white-space: nowrap; }
+.label { font-size: 16px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--mag); margin-bottom: 8px; }
+.callout { border-left: 5px solid var(--mag); background: var(--soft); padding: 20px 26px; border-radius: 0 10px 10px 0; font-size: 22px; }
+.callout .label { margin-bottom: 4px; }
+ul.ticks { list-style: none; display: grid; gap: 12px; }
+ul.ticks li { display: flex; gap: 14px; align-items: flex-start; font-size: 22px; line-height: 1.45; }
+ul.ticks li .ic { width: 26px; height: 26px; margin-top: 2px; color: var(--mag); }
+.num { font-family: 'Lora', serif; font-weight: 600; }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><path d="M3 7.5l9-4.5 9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5l9 4.5 9-4.5M12 12v9"/></symbol>
+    <symbol id="i-factory" viewBox="0 0 24 24"><path d="M3 21V10l6 4v-4l6 4V5h5v16z"/><path d="M2 21h20M7 18h2M12 18h2"/></symbol>
+    <symbol id="i-exchange" viewBox="0 0 24 24"><path d="M4 8h15M15 4l4 4-4 4M20 16H5M9 12l-4 4 4 4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M7.5 12.3l3 3 6-6.3"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5l9.5 16.5h-19z"/><path d="M12 10v4.5M12 17.2v.3"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 7c3 0 4 2 6 5s3 5 7 5"/></symbol>
+    <symbol id="i-firms" viewBox="0 0 24 24"><circle cx="8.5" cy="9" r="5"/><circle cx="17" cy="14" r="3.5"/><circle cx="9.5" cy="19" r="2"/></symbol>
+    <symbol id="i-variety" viewBox="0 0 24 24"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="3.75"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="3.75"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M4 20l1-4.5L16 4.5l3.5 3.5L8.5 19z"/><path d="M13.5 7l3.5 3.5"/></symbol>
+    <symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9.5 2.5V6M14.5 2.5V6M9.5 18v3.5M14.5 18v3.5M2.5 9.5H6M2.5 14.5H6M18 9.5h3.5M18 14.5h3.5"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></symbol>
+    <symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 10v4h3.5L15 19V5L6.5 10z"/><path d="M18.5 9c1.4 1.7 1.4 4.3 0 6"/></symbol>
+    <symbol id="i-service" viewBox="0 0 24 24"><path d="M4.5 14v-2a7.5 7.5 0 0115 0v2"/><rect x="3.5" y="13.5" width="4" height="6" rx="1.5"/><rect x="16.5" y="13.5" width="4" height="6" rx="1.5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M14 6l6 6-6 6"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M17 14.3c2.5.2 4.1 1.9 4.5 4.7"/></symbol>
+    <symbol id="i-machine" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4.5"/><circle cx="8" cy="15" r="1.4"/><path d="M12.5 15H21V8h-6l-2.5 3.5M15 8V4.5h4V8"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M10 7c-3 .6-5 2.9-5 6v4h5v-5H7.3c.2-1.6 1.2-2.7 2.7-3.1zM19 7c-3 .6-5 2.9-5 6v4h5v-5h-2.7c.2-1.6 1.2-2.7 2.7-3.1z" fill="currentColor" stroke="none"/></symbol>
+  </defs>
+</svg>
+
+<!-- ============ 1 · TITLE ============ -->
+<section class="slide on-dark" style="background:var(--navy)">
+  <div class="photo" style="inset:0;background-image:url(img/port_aerial.jpg)"></div>
+  <div class="abs" style="inset:0;background:linear-gradient(90deg,rgba(26,43,120,.96) 0%,rgba(26,43,120,.86) 42%,rgba(26,43,120,.25) 100%)"></div>
+  <div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div>
+  <div class="pager"><i class="on"></i><i></i><i></i></div>
+
+  <div class="abs" style="left:120px;top:250px;width:1180px">
+    <div class="eyebrow light">Course · International Economics</div>
+    <h1 style="font-size:96px;color:#fff;line-height:1.08">Theoretical Framework of International Economic Relations</h1>
+    <div style="display:flex;gap:22px;margin-top:64px;align-items:center">
+      <span style="background:var(--mag);color:#fff;padding:18px 38px;border-radius:8px;font-size:22px;font-weight:600">International Economics</span>
+      <span style="color:#fff;font-size:22px;font-weight:500;border-bottom:2px solid rgba(255,255,255,.6);padding-bottom:4px">Why do countries trade?</span>
+    </div>
+  </div>
+
+  <div class="abs" style="right:120px;bottom:150px;width:520px;background:rgba(20,33,96,.88);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:30px 34px;color:#fff">
+    <div style="font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:18px">Presented by</div>
+    <div style="display:flex;align-items:center;gap:18px;margin-bottom:16px">
+      <span style="width:58px;height:58px;border-radius:50%;background:var(--mag);display:grid;place-items:center;font-weight:700;font-size:20px">NB</span>
+      <span style="font-size:26px;font-family:Lora,serif;font-weight:600">Norhane Benazala</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:18px">
+      <span style="width:58px;height:58px;border-radius:50%;background:#fff;color:var(--navy);display:grid;place-items:center;font-weight:700;font-size:20px">WS</span>
+      <span style="font-size:26px;font-family:Lora,serif;font-weight:600">Wassim Sid</span>
+    </div>
+  </div>
+  <div class="bars" style="right:0;bottom:0"><i></i><i></i><i></i></div>
+</section>
+
+<!-- ============ 2 · PLAN ============ -->
+<section class="slide">
+  <div class="abs" style="left:0;top:0;width:700px;height:1080px;background:var(--navy)"></div>
+  <div class="on-dark"><div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div></div>
+  <div class="photo" style="left:72px;top:170px;width:560px;height:740px;border-radius:6px;background-image:url(img/maersk.jpg);background-position:40% center"></div>
+  <div class="bars" style="left:72px;top:910px"><i></i><i></i><i></i></div>
+  <div class="pager"><i class="on"></i><i></i><i></i></div>
+
+  <div class="abs" style="left:820px;top:150px;width:1000px">
+    <div class="eyebrow">Agenda</div>
+    <h2 style="font-size:84px;margin-bottom:46px">Plan</h2>
+    <div style="display:grid;gap:0">
+      <div class="plan-row"><span class="num">01</span><span>Introduction to international economic relations</span><span class="chip">Norhane</span></div>
+      <div class="plan-row"><span class="num">02</span><span>Classical theories of international trade</span><span class="chip">Norhane</span></div>
+      <div class="plan-row"><span class="num">03</span><span>Modern theories of international trade</span><span class="chip">Wassim</span></div>
+      <div class="plan-row"><span class="num">04</span><span>Limitations and contemporary relevance</span><span class="chip">Wassim</span></div>
+      <div class="plan-row"><span class="num">05</span><span>Conclusion</span><span class="chip">Wassim</span></div>
+    </div>
+  </div>
+  <style>
+    .plan-row { display: grid; grid-template-columns: 92px 1fr auto; align-items: center; gap: 10px; padding: 24px 0; border-bottom: 1.5px solid var(--line); font-size: 30px; }
+    .plan-row:first-child { border-top: 1.5px solid var(--line); }
+    .plan-row .num { font-size: 36px; color: var(--mag); }
+    .plan-row .chip { font-size: 17px; color: var(--muted); }
+  </style>
+  <div class="foot right-only"><span>02 / 15</span></div>
+</section>
+
+<!-- ============ 3 · INTRODUCTION ============ -->
+<section class="slide">
+  <div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div>
+  <div class="photo" style="left:1180px;top:0;width:740px;height:1080px;background-image:url(img/phone.jpg);background-position:60% center"></div>
+  <div class="on-dark"><div class="pager"><i class="on"></i><i></i><i></i></div></div>
+
+  <div class="abs" style="left:120px;top:170px;width:960px">
+    <div class="eyebrow">01 · Introduction</div>
+    <h2 style="font-size:60px">Few products are made entirely in one country.</h2>
+
+    <div class="chain">
+      <div><span class="dot"><svg class="ic"><use href="#i-pen"/></svg></span><b>Designed</b><span>California</span></div>
+      <div><span class="dot"><svg class="ic"><use href="#i-gear"/></svg></span><b>Assembled</b><span>China</span></div>
+      <div><span class="dot"><svg class="ic"><use href="#i-chip"/></svg></span><b>Chip made</b><span>Taiwan</span></div>
+      <div><span class="dot"><svg class="ic"><use href="#i-globe"/></svg></span><b>Raw materials</b><span>Several continents</span></div>
+    </div>
+
+    <p style="font-size:24px;color:var(--muted);max-width:740px">The same interdependence applies to <b style="color:var(--ink)">Algeria</b>, which exports hydrocarbons and imports wheat, vehicles and machinery.</p>
+    <p class="serif" style="font-size:40px;color:var(--mag);font-weight:600;margin-top:44px">Why do countries trade with each other?</p>
+  </div>
+  <style>
+    .chain { display: grid; grid-template-columns: repeat(4, 1fr); margin: 50px 0 44px; position: relative; }
+    .chain::before { content: ""; position: absolute; left: 32px; right: 12%; top: 32px; height: 2px; background: repeating-linear-gradient(90deg, var(--blue-2) 0 10px, transparent 10px 18px); }
+    .chain > div { display: flex; flex-direction: column; gap: 2px; position: relative; font-size: 21px; }
+    .chain .dot { width: 64px; height: 64px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; margin-bottom: 14px; box-shadow: 0 0 0 6px #fff; }
+    .chain b { font-size: 21px; color: var(--navy); }
+    .chain span:last-child { color: var(--muted); }
+  </style>
+
+  <div class="abs" style="left:960px;bottom:120px;width:840px;background:var(--mag);color:#fff;border-radius:14px;padding:44px 52px 40px">
+    <svg class="ic" style="width:54px;height:54px;color:rgba(255,255,255,.55);margin-bottom:6px"><use href="#i-quote"/></svg>
+    <p class="serif" style="font-size:27px;font-style:italic;font-weight:500;line-height:1.5">If a foreign country can supply us with a commodity cheaper than we ourselves can make it, better buy it of them with some part of the produce of our own industry, employed in a way in which we have some advantage.</p>
+    <p style="margin-top:20px;font-size:19px;letter-spacing:.06em;color:rgba(255,255,255,.85)">— Adam Smith, <i>The Wealth of Nations</i> (1776)</p>
+  </div>
+  <div class="bars" style="right:0;bottom:0"><i></i><i></i><i></i></div>
+  <div class="foot"><span class="who">Norhane Benazala</span><span style="color:var(--navy)">03 / 15</span></div>
+</section>
+
+<!-- ============ 4 · DEFINITION ============ -->
+<section class="slide on-dark">
+  <div class="abs" style="left:0;top:0;width:1920px;height:540px;background:var(--mag)"></div>
+  <div class="photo" style="left:1300px;top:0;width:620px;height:540px;background-image:url(img/ship.jpg)"></div>
+  <div class="abs" style="left:1300px;top:0;width:620px;height:540px;background:linear-gradient(90deg,var(--mag) 0%,rgba(179,21,95,0) 45%)"></div>
+  <div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div>
+  <div class="pager"><i class="on"></i><i></i><i></i></div>
+
+  <div class="abs" style="left:120px;top:160px;width:1160px;color:#fff">
+    <div class="eyebrow" style="color:#fff">01 · Introduction</div>
+    <h2 style="color:#fff;font-size:60px;margin-bottom:24px">Definition and main forms</h2>
+    <p style="font-size:24px;color:rgba(255,255,255,.92)"><b>International economic relations</b> are all the economic exchanges between countries: movements of goods, services, capital, labor and technology across borders. They shape growth, employment, prices and the development level of every economy.</p>
+  </div>
+
+  <div class="abs" style="left:120px;top:600px;width:1680px;display:grid;grid-template-columns:repeat(3,1fr);gap:36px">
+    <div class="form-card">
+      <span class="fic"><svg class="ic"><use href="#i-box"/></svg></span>
+      <h3>International trade</h3>
+      <p>The exchange of goods and services between countries.</p>
+      <div class="eg">e.g., Algeria’s gas exports to Europe</div>
+    </div>
+    <div class="form-card">
+      <span class="fic"><svg class="ic"><use href="#i-factory"/></svg></span>
+      <h3>International investment</h3>
+      <p>Capital invested abroad, especially <b>FDI</b>: a firm acquires or builds productive assets in another country.</p>
+      <div class="eg">e.g., a foreign carmaker opening a factory</div>
+    </div>
+    <div class="form-card">
+      <span class="fic"><svg class="ic"><use href="#i-exchange"/></svg></span>
+      <h3>International financial flows</h3>
+      <p>Movements of money between countries.</p>
+      <div class="eg">Loans, migrants’ remittances, portfolio investment, currency exchange</div>
+    </div>
+  </div>
+  <div class="abs" style="left:120px;top:556px;font-size:17px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--navy)">Three main forms</div>
+  <style>
+    .form-card { background: #fff; border-radius: 14px; padding: 34px 36px; box-shadow: 0 18px 50px rgba(26,43,120,.14); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; color: var(--ink); }
+    .form-card .fic { width: 60px; height: 60px; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; margin-bottom: 6px; }
+    .form-card p { font-size: 21px; color: var(--muted); line-height: 1.45; }
+    .form-card .eg { margin-top: auto; font-size: 18px; color: var(--mag); font-weight: 600; background: #fbeef4; padding: 10px 16px; border-radius: 8px; }
+  </style>
+  <div class="foot" style="color:var(--muted)"><span class="who">Norhane Benazala</span><span>04 / 15</span></div>
+</section>
+
+<!-- ============ 5 · PROBLÉMATIQUE ============ -->
+<section class="slide">
+  <div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div>
+  <div class="photo" style="left:430px;top:0;width:1490px;height:820px;background-image:url(img/stacks.jpg)"></div>
+  <div class="bars" style="right:0;top:808px"><i></i><i></i><i></i></div>
+  <div class="on-dark"><div class="pager"><i class="on"></i><i></i><i></i></div></div>
+
+  <div class="abs on-dark" style="left:120px;top:300px;width:1180px;background:rgba(26,43,120,.95);padding:64px 70px 70px;color:#fff">
+    <div class="eyebrow">Problématique</div>
+    <h2 style="color:#fff;font-size:54px;line-height:1.2">How do economic theories explain why countries trade, and what are their limits?</h2>
+    <p style="font-size:21px;color:rgba(255,255,255,.75);margin-top:26px;max-width:960px">To answer it, we follow the evolution of trade theories:</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:30px">
+      <div><div class="num" style="font-size:52px;line-height:1">01</div><div style="font-size:24px;font-weight:600;margin-top:12px">Classical theories</div><div style="font-size:19px;color:rgba(255,255,255,.7)">first</div></div>
+      <div><div class="num" style="font-size:52px;line-height:1">02</div><div style="font-size:24px;font-weight:600;margin-top:12px">Modern theories</div><div style="font-size:19px;color:rgba(255,255,255,.7)">then</div></div>
+      <div><div class="num" style="font-size:52px;line-height:1">03</div><div style="font-size:24px;font-weight:600;margin-top:12px">Their limits today</div><div style="font-size:19px;color:rgba(255,255,255,.7)">in today’s global economy</div></div>
+    </div>
+  </div>
+  <div class="foot"><span class="who">Norhane Benazala</span><span>05 / 15</span></div>
+</section>
+
+<!-- ============ 6 · MERCANTILISM ============ -->
+<section class="slide">
+  <div class="photo" style="left:0;top:0;width:720px;height:1080px;background-image:url(img/bombay.jpg);background-position:42% center"></div>
+  <div class="abs" style="left:0;top:0;width:720px;height:200px;background:linear-gradient(180deg,rgba(26,43,120,.75),rgba(26,43,120,0))"></div>
+  <div class="on-dark"><div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div></div>
+  <div class="abs" style="left:0;bottom:160px;width:520px;background:var(--mag);color:#fff;padding:30px 40px 30px 72px">
+    <div style="font-size:16px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;opacity:.85">Europe</div>
+    <div class="serif" style="font-size:46px;font-weight:600;line-height:1.1">16th – 18th century</div>
+  </div>
+  <div class="bars" style="left:0;bottom:148px"><i></i><i></i><i></i></div>
+  <div class="pager"><i></i><i class="on"></i><i></i></div>
+
+  <div class="abs" style="left:820px;top:120px;width:1000px">
+    <div class="eyebrow">02 · Classical theories</div>
+    <h2 style="margin-bottom:22px">Mercantilism</h2>
+    <p style="font-size:22px;color:var(--muted)">The dominant economic doctrine in Europe from the 16th to the 18th century. A nation’s wealth is measured by its <b style="color:var(--ink)">stock of precious metals</b> (gold and silver), and the state must actively manage trade to accumulate them.</p>
+    <div style="display:flex;align-items:center;gap:20px;margin:28px 0 30px;padding:18px 24px;background:var(--navy);border-radius:10px;color:#fff">
+      <span class="serif" style="font-size:28px;font-weight:600;white-space:nowrap">Zero-sum game</span>
+      <span style="width:2px;height:40px;background:rgba(255,255,255,.3)"></span>
+      <span style="font-size:20px;color:rgba(255,255,255,.85)">What one country gains, another necessarily loses.</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:44px">
+      <div>
+        <div class="label">Main principles</div>
+        <ul class="ticks">
+          <li><svg class="ic"><use href="#i-check"/></svg>Export as much as possible, import as little as possible, to build a trade surplus</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Strong state intervention in the economy</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Protection of domestic industries</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Colonies as sources of raw materials and markets</li>
+        </ul>
+      </div>
+      <div>
+        <div class="label">Tools used</div>
+        <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <span class="chip">Tariffs</span><span class="chip">Import bans</span><span class="chip">Export subsidies</span><span class="chip">Trade monopolies</span>
+        </div>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:30px"><div class="label">Limit</div>It confuses money with real wealth. A country can hold a lot of gold and still produce little.</div>
+  </div>
+  <div class="foot" style="left:820px"><span class="who">Norhane Benazala</span><span>06 / 15</span></div>
+</section>
+
+<!-- ============ 7 · ADAM SMITH ============ -->
+<section class="slide on-dark" style="background:var(--mag)">
+  <div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div>
+  <div class="pager"><i></i><i class="on"></i><i></i></div>
+  <div class="photo" style="left:120px;top:160px;width:540px;height:720px;border-radius:8px;background-image:url(img/smith.jpg);background-position:center 20%"></div>
+  <div class="abs" style="left:160px;top:830px;width:460px;background:var(--navy);border-radius:10px;padding:20px 28px;color:#fff;box-shadow:0 14px 40px rgba(0,0,0,.2)">
+    <div class="serif" style="font-size:30px;font-weight:600">Adam Smith</div>
+    <div style="font-size:18px;color:rgba(255,255,255,.75)"><i>The Wealth of Nations</i> · 1776</div>
+  </div>
+
+  <div class="abs" style="left:780px;top:130px;width:1040px;color:#fff">
+    <div class="eyebrow" style="color:#fff">02 · Classical theories</div>
+    <h2 style="color:#fff;font-size:58px;margin-bottom:20px">Adam Smith and absolute advantage</h2>
+    <p style="font-size:21px;color:rgba(255,255,255,.88)">Smith criticizes mercantilism: a nation’s wealth lies in its <b>production capacity</b> (labor, productivity), not in its stock of gold. Free trade and the division of labor increase this wealth.</p>
+    <div style="background:#fff;color:var(--ink);border-radius:12px;padding:24px 30px;margin:26px 0">
+      <div class="label">Definition</div>
+      <p style="font-size:23px">A country has an <b style="color:var(--navy)">absolute advantage</b> in a good when it can produce it using <b>fewer resources</b> (less labor) than another country.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
+      <div class="idea"><span class="num">1</span>Specialize in the goods it produces most efficiently</div>
+      <div class="idea"><span class="num">2</span>Import the goods others produce more efficiently</div>
+      <div class="idea"><span class="num">3</span>Trade is a <b>positive-sum game</b>: all countries can gain</div>
+    </div>
+    <div style="display:flex;gap:14px;align-items:flex-start;margin-top:26px;font-size:20px;color:rgba(255,255,255,.92)">
+      <svg class="ic" style="color:var(--cyan);margin-top:2px"><use href="#i-alert"/></svg>
+      <span><b>Limit:</b> the theory does not explain trade for a country that has no absolute advantage in any good.</span>
+    </div>
+  </div>
+  <style>
+    .idea { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.28); border-radius: 12px; padding: 20px 22px; font-size: 20px; line-height: 1.4; }
+    .idea .num { display: block; font-size: 34px; color: var(--cyan); line-height: 1; margin-bottom: 10px; }
+  </style>
+  <div class="foot" style="left:780px"><span class="who">Norhane Benazala</span><span>07 / 15</span></div>
+</section>
+
+<!-- ============ 8 · RICARDO ============ -->
+<section class="slide">
+  <div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div>
+  <div class="pager"><i></i><i class="on"></i><i></i></div>
+
+  <div class="abs" style="left:120px;top:140px;width:1680px">
+    <div class="eyebrow">02 · Classical theories</div>
+    <h2 style="font-size:58px">David Ricardo and comparative advantage</h2>
+  </div>
+
+  <div class="abs" style="left:120px;top:330px;width:700px">
+    <div style="display:flex;gap:26px;align-items:center;margin-bottom:24px">
+      <div class="photo" style="position:relative;width:150px;height:190px;border-radius:8px;background-image:url(img/ricardo.jpg);background-position:center 15%;flex:none"></div>
+      <div>
+        <div class="serif" style="font-size:28px;font-weight:600;color:var(--navy)">David Ricardo</div>
+        <div style="font-size:19px;color:var(--muted)"><i>Principles of Political Economy and Taxation</i> · 1817</div>
+      </div>
+    </div>
+    <p style="font-size:21px;color:var(--muted)">Trade can benefit both countries <b style="color:var(--ink)">even if one is more efficient in everything</b>.</p>
+    <div style="background:var(--navy);color:#fff;border-radius:12px;padding:24px 28px;margin-top:22px">
+      <div class="label" style="color:var(--cyan)">Definition</div>
+      <p style="font-size:21px">A country has a <b>comparative advantage</b> in a good when its <b>opportunity cost</b> of producing it (the quantity of another good it must give up) is lower than in the other country.</p>
+    </div>
+  </div>
+
+  <div class="abs" style="left:900px;top:330px;width:900px">
+    <div class="label" style="color:var(--muted)">Classic example · hours of labor needed to produce one unit</div>
+    <table class="rt">
+      <thead><tr><th></th><th>Cloth</th><th>Wine</th></tr></thead>
+      <tbody>
+        <tr><td>England</td><td class="hl-b">100</td><td>120</td></tr>
+        <tr><td>Portugal</td><td>90</td><td class="hl-m">80</td></tr>
+      </tbody>
+    </table>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0 18px">
+      <div class="oc"><div class="k">England · cost of 1 cloth</div><div class="v"><span class="num">0.83</span> wine</div><div class="f">100 / 120</div></div>
+      <div class="oc"><div class="k">Portugal · cost of 1 cloth</div><div class="v"><span class="num">1.125</span> wine</div><div class="f">90 / 80</div></div>
+    </div>
+    <ul class="ticks">
+      <li><svg class="ic"><use href="#i-check"/></svg>Portugal has an absolute advantage in both goods.</li>
+      <li><svg class="ic"><use href="#i-check"/></svg><span>England gives up less wine to produce cloth: <b style="color:var(--blue-2)">England → cloth</b>, <b style="color:var(--mag)">Portugal → wine</b>.</span></li>
+    </ul>
+  </div>
+  <style>
+    .rt { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 26px; margin-top: 6px; }
+    .rt th { text-align: center; font-weight: 600; color: var(--muted); font-size: 19px; letter-spacing: .1em; text-transform: uppercase; padding: 10px; }
+    .rt td { text-align: center; padding: 16px; border-top: 1.5px solid var(--line); font-family: 'Lora', serif; font-weight: 600; font-size: 32px; color: var(--ink); }
+    .rt td:first-child { text-align: left; font-family: 'DM Sans', sans-serif; font-size: 24px; font-weight: 600; color: var(--navy); }
+    .rt tr:last-child td { border-bottom: 1.5px solid var(--line); }
+    .rt .hl-b { background: var(--blue-2); color: #fff; border-radius: 8px; }
+    .rt .hl-m { background: var(--mag); color: #fff; border-radius: 8px; }
+    .oc { background: var(--soft); border-radius: 10px; padding: 16px 22px; }
+    .oc .k { font-size: 17px; color: var(--muted); }
+    .oc .v { font-size: 22px; color: var(--ink); }
+    .oc .v .num { font-size: 38px; color: var(--navy); margin-right: 4px; }
+    .oc .f { font-size: 16px; color: var(--muted); }
+  </style>
+  <div class="foot"><span class="who">Norhane Benazala</span><span>08 / 15</span></div>
+</section>
+
+<!-- ============ 9 · GAINS FROM TRADE ============ -->
+<section class="slide on-dark" style="background:var(--navy)">
+  <div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div>
+  <div class="pager"><i></i><i class="on"></i><i></i></div>
+
+  <div class="abs" style="left:120px;top:140px;width:1680px;color:#fff">
+    <div class="eyebrow">02 · Classical theories</div>
+    <h2 style="color:#fff;font-size:58px">Ricardo: the gains from trade</h2>
+  </div>
+
+  <div class="abs" style="left:120px;top:320px;width:900px;display:grid;grid-template-columns:1fr 1fr;gap:24px">
+    <div class="gt">
+      <div class="label" style="color:var(--muted)">Before trade</div>
+      <p class="sub">Each country produces one unit of each good</p>
+      <div class="row"><span>England</span><span>1 cloth + 1 wine</span><b>220 h</b></div>
+      <div class="row"><span>Portugal</span><span>1 cloth + 1 wine</span><b>170 h</b></div>
+      <div class="world">World: <b>2 cloth · 2 wine</b></div>
+    </div>
+    <div class="gt after">
+      <div class="label">After specialization</div>
+      <p class="sub">Same total hours</p>
+      <div class="row"><span>England</span><span>220 h → cloth</span><b>2.2 cloth</b></div>
+      <div class="row"><span>Portugal</span><span>170 h → wine</span><b>2.125 wine</b></div>
+      <div class="world">World: <b>2.2 cloth · 2.125 wine</b></div>
+    </div>
+  </div>
+  <style>
+    .gt { background: #fff; color: var(--ink); border-radius: 14px; padding: 28px 30px; }
+    .gt.after { box-shadow: inset 0 6px 0 var(--mag); }
+    .gt .sub { font-size: 18px; color: var(--muted); margin-bottom: 14px; }
+    .gt .row { display: grid; grid-template-columns: 1fr; gap: 0; padding: 12px 0; border-top: 1.5px solid var(--line); font-size: 18px; color: var(--muted); }
+    .gt .row span:first-child { font-weight: 700; color: var(--navy); font-size: 19px; }
+    .gt .row b { font-family: 'Lora', serif; font-size: 28px; color: var(--ink); font-weight: 600; }
+    .gt .world { margin-top: 10px; padding: 12px 16px; background: var(--soft); border-radius: 8px; font-size: 19px; }
+  </style>
+
+  <!-- chart: world output, same total hours -->
+  <div class="abs" style="left:1080px;top:320px;width:720px;height:476px;background:#fff;border-radius:14px;padding:26px 32px;color:var(--ink)">
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <div style="font-size:21px;font-weight:700;color:var(--navy)">World output, same resources</div>
+      <div style="display:flex;gap:18px;font-size:16px;color:var(--muted)">
+        <span><i style="display:inline-block;width:14px;height:14px;border-radius:3px;background:#bcc3da;vertical-align:-1px;margin-right:6px"></i>Before</span>
+        <span><i style="display:inline-block;width:14px;height:14px;border-radius:3px;background:var(--blue-2);vertical-align:-1px;margin-right:6px"></i>After</span>
+      </div>
+    </div>
+    <svg width="656" height="390" viewBox="0 0 656 390" style="margin-top:6px;font-family:'DM Sans',sans-serif">
+      <!-- scale: 0..2.5 units -> 300px; baseline y=330 -->
+      <g stroke="#e6e9f3" stroke-width="1">
+        <line x1="44" x2="656" y1="330" y2="330" stroke="#9aa2bf"/>
+        <line x1="44" x2="656" y1="210" y2="210"/>
+        <line x1="44" x2="656" y1="90" y2="90"/>
+      </g>
+      <g font-size="15" fill="#5d6588" text-anchor="end">
+        <text x="34" y="335">0</text><text x="34" y="215">1</text><text x="34" y="95">2</text>
+      </g>
+      <!-- Cloth: before 2 (240px), after 2.2 (264px) -->
+      <path d="M118 330 V94 a4 4 0 0 1 4-4 h84 a4 4 0 0 1 4 4 V330 Z" fill="#bcc3da"/>
+      <path d="M212 330 V70 a4 4 0 0 1 4-4 h84 a4 4 0 0 1 4 4 V330 Z" fill="#3a5ac4"/>
+      <!-- Wine: before 2 (240px), after 2.125 (255px) -->
+      <path d="M390 330 V94 a4 4 0 0 1 4-4 h84 a4 4 0 0 1 4 4 V330 Z" fill="#bcc3da"/>
+      <path d="M484 330 V79 a4 4 0 0 1 4-4 h84 a4 4 0 0 1 4 4 V330 Z" fill="#3a5ac4"/>
+      <g font-size="17" fill="#1c2347" text-anchor="middle" font-weight="600">
+        <text x="164" y="80">2</text><text x="258" y="56">2.2</text>
+        <text x="436" y="80">2</text><text x="530" y="65">2.125</text>
+      </g>
+      <g font-size="19" fill="#1a2b78" text-anchor="middle" font-weight="700">
+        <text x="211" y="362">Cloth</text><text x="483" y="362">Wine</text>
+      </g>
+      <g font-size="15" fill="#b3155f" text-anchor="middle" font-weight="700">
+        <text x="211" y="384">+0.2 unit</text><text x="483" y="384">+0.125 unit</text>
+      </g>
+    </svg>
+  </div>
+
+  <p class="abs serif" style="left:120px;top:830px;width:1680px;font-size:27px;color:#fff;font-weight:500">With the same resources, world production increases: through trade, both countries can consume more than before.</p>
+  <div class="abs" style="left:120px;top:905px;width:1680px;display:flex;gap:14px;align-items:center;flex-wrap:wrap">
+    <span style="font-size:16px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-right:8px">Assumptions & limits</span>
+    <span class="chip dk">Only one factor: labor</span><span class="chip dk">No transport costs</span><span class="chip dk">Perfect competition & full employment</span><span class="chip dk">Identical goods, no economies of scale</span>
+  </div>
+  <style>.chip.dk { background: transparent; color: #fff; border-color: rgba(255,255,255,.4); font-size: 18px; }</style>
+  <div class="foot"><span class="who">Norhane Benazala</span><span>09 / 15</span></div>
+</section>
+
+<!-- ============ 10 · HECKSCHER-OHLIN ============ -->
+<section class="slide">
+  <div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div>
+  <div class="photo" style="left:1260px;top:0;width:660px;height:1080px;background-image:url(img/garment.jpg);background-position:35% center"></div>
+  <div class="abs" style="left:1260px;top:0;width:660px;height:110px;background:linear-gradient(180deg,rgba(26,43,120,.6),rgba(26,43,120,0))"></div>
+  <div class="on-dark"><div class="pager"><i></i><i class="on"></i><i></i></div></div>
+  <div class="abs" style="left:1260px;bottom:0;width:660px;background:var(--mag);color:#fff;padding:22px 36px;font-size:19px">
+    <span style="font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:15px;opacity:.85">Part II</span><br><span class="serif" style="font-size:28px;font-weight:600">Wassim Sid</span>
+  </div>
+
+  <div class="abs" style="left:120px;top:140px;width:1060px">
+    <div class="eyebrow">03 · Modern theories</div>
+    <h2 style="font-size:58px;margin-bottom:16px">Heckscher-Ohlin theory</h2>
+    <div style="display:flex;gap:12px;margin-bottom:22px"><span class="chip">Eli Heckscher · 1919</span><span class="chip">Bertil Ohlin · 1933</span></div>
+    <p style="font-size:23px;color:var(--muted)">Unlike Ricardo (differences in technology), it explains trade by differences in <b style="color:var(--ink)">factor endowments</b>: the relative quantity of production factors a country possesses (labor, capital and land).</p>
+    <div style="background:var(--navy);color:#fff;border-radius:12px;padding:24px 28px;margin:26px 0">
+      <div class="label" style="color:var(--cyan)">Principle</div>
+      <p style="font-size:24px">A country <b>exports</b> the goods that use intensively its <b>abundant</b> factor, and <b>imports</b> the goods that require its <b>scarce</b> factor.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+      <div class="ex"><svg class="ic"><use href="#i-people"/></svg><div><b>Labor-abundant</b> · e.g., Bangladesh<br><span>exports labor-intensive goods: textiles</span></div></div>
+      <div class="ex"><svg class="ic"><use href="#i-machine"/></svg><div><b>Capital-abundant</b> · e.g., Germany<br><span>exports capital-intensive goods: machinery</span></div></div>
+    </div>
+    <div class="callout" style="margin-top:26px;font-size:21px;padding:20px 26px"><div class="label">Criticism · the Leontief paradox (1953)</div>Leontief tested the theory on the United States, the most capital-abundant country: its exports were <b>more labor-intensive</b> than its imports. This pushed economists to look for other explanations.</div>
+  </div>
+  <style>
+    .ex { display: flex; gap: 16px; align-items: flex-start; border: 1.5px solid var(--line); border-radius: 12px; padding: 20px 22px; font-size: 21px; line-height: 1.4; }
+    .ex .ic { width: 36px; height: 36px; color: var(--mag); }
+    .ex b { color: var(--navy); }
+    .ex span { color: var(--muted); }
+  </style>
+  <div class="foot" style="right:740px"><span class="who">Wassim Sid</span><span>10 / 15</span></div>
+</section>
+
+<!-- ============ 11 · NEW TRADE THEORY ============ -->
+<section class="slide">
+  <div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div>
+  <div class="photo" style="left:1160px;top:0;width:760px;height:560px;background-image:url(img/cars.jpg)"></div>
+  <div class="on-dark"><div class="pager"><i></i><i class="on"></i><i></i></div></div>
+  <div class="abs" style="left:1160px;top:470px;width:560px;background:var(--navy);color:#fff;padding:20px 30px;font-size:19px;line-height:1.4">
+    <div class="label" style="color:var(--cyan);margin-bottom:4px">Intra-industry trade</div>France and Germany both export <i>and</i> import cars.
+  </div>
+  <div class="bars" style="right:0;top:548px"><i></i><i></i><i></i></div>
+
+  <div class="abs" style="left:120px;top:130px;width:960px">
+    <div class="eyebrow">03 · Modern theories</div>
+    <h2 style="font-size:58px;margin-bottom:16px">New Trade Theory</h2>
+    <div style="display:flex;gap:12px;margin-bottom:20px"><span class="chip">Paul Krugman · late 1970s – early 1980s</span><span class="chip" style="border-color:var(--mag);color:var(--mag);font-weight:600">Nobel Prize 2008</span></div>
+    <p style="font-size:22px;color:var(--muted)">It responds to a fact earlier theories could not explain: <b style="color:var(--ink)">most trade takes place between similar countries, in similar goods.</b></p>
+  </div>
+
+  <div class="abs" style="left:120px;top:610px;width:1680px;display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
+    <div class="kc"><span class="fic"><svg class="ic"><use href="#i-scale"/></svg></span><h3>Economies of scale</h3><p>The more a firm produces, the lower its average cost per unit. Production concentrates in a few places and serves the world market.</p></div>
+    <div class="kc"><span class="fic"><svg class="ic"><use href="#i-firms"/></svg></span><h3>Imperfect competition</h3><p>Markets are dominated by a few large firms, not by many small identical ones.</p></div>
+    <div class="kc"><span class="fic"><svg class="ic"><use href="#i-variety"/></svg></span><h3>Product variety</h3><p>Consumers value choice, so countries exchange differentiated versions of the same product (intra-industry trade).</p></div>
+  </div>
+  <div class="abs" style="left:120px;top:900px;width:1680px;background:var(--mag);color:#fff;border-radius:10px;padding:18px 28px;font-size:20px;display:flex;gap:18px;align-items:center">
+    <span style="font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:15px;white-space:nowrap">Policy implication</span>
+    <span>Because of scale effects and first-mover advantages, state support for strategic industries can sometimes be justified.</span>
+  </div>
+  <style>
+    .kc { border: 1.5px solid var(--line); border-radius: 14px; padding: 26px 30px; background: #fff; }
+    .kc .fic { width: 54px; height: 54px; border-radius: 50%; background: var(--soft); color: var(--navy); display: grid; place-items: center; margin-bottom: 12px; }
+    .kc h3 { font-size: 27px; margin-bottom: 8px; }
+    .kc p { font-size: 19px; color: var(--muted); line-height: 1.45; }
+  </style>
+  <div class="foot"><span class="who">Wassim Sid</span><span>11 / 15</span></div>
+</section>
+
+<!-- ============ 12 · LIMITATIONS ============ -->
+<section class="slide on-dark" style="background:var(--blue)">
+  <div class="photo" style="left:1060px;top:0;width:860px;height:1080px;background-image:url(img/melbourne.jpg);clip-path:polygon(24% 0,100% 0,100% 100%,0 100%)"></div>
+  <div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div>
+  <div class="pager"><i></i><i></i><i class="on"></i></div>
+
+  <div class="abs" style="left:120px;top:140px;width:900px;color:#fff">
+    <div class="eyebrow">04 · Limitations</div>
+    <h2 style="color:#fff;font-size:58px;margin-bottom:22px">Inequalities between countries</h2>
+    <p class="serif" style="font-size:27px;font-weight:500;color:#fff;line-height:1.4">The theories conclude that trade benefits everyone, but in practice <span style="background:var(--mag);padding:0 8px">the gains are unequally shared.</span></p>
+    <div style="display:grid;gap:18px;margin-top:36px">
+      <div class="lim"><span class="num">01</span><p>Many developing countries depend on exporting <b>raw materials with volatile prices</b> (e.g., Algeria and hydrocarbons), while developed countries export higher-value manufactured goods.</p></div>
+      <div class="lim"><span class="num">02</span><p>This creates <b>dependence and vulnerability</b> to external shocks such as price drops.</p></div>
+      <div class="lim"><span class="num">03</span><p>Within countries, trade creates <b>winners and losers</b>: consumers and exporters gain, workers in industries exposed to import competition may lose their jobs.</p></div>
+      <div class="lim"><span class="num">04</span><p>These observations feed the debate between <b>free trade and protectionism</b>, and critical approaches such as dependency theory.</p></div>
+    </div>
+  </div>
+  <style>
+    .lim { display: grid; grid-template-columns: 64px 1fr; gap: 10px; align-items: start; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.22); }
+    .lim .num { font-size: 30px; color: var(--cyan); line-height: 1.1; }
+    .lim p { font-size: 20px; color: rgba(255,255,255,.88); line-height: 1.45; }
+    .lim b { color: #fff; }
+  </style>
+  <div class="bars" style="right:0;bottom:0"><i></i><i></i><i></i></div>
+  <div class="foot" style="right:900px"><span class="who">Wassim Sid</span><span>12 / 15</span></div>
+</section>
+
+<!-- ============ 13 · GLOBAL VALUE CHAINS ============ -->
+<section class="slide">
+  <div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div>
+  <div class="pager"><i></i><i></i><i class="on"></i></div>
+
+  <div class="abs" style="left:120px;top:130px;width:1680px">
+    <div class="eyebrow">04 · Contemporary relevance</div>
+    <h2 style="font-size:54px;margin-bottom:14px">Global value chains and multinational corporations</h2>
+    <p style="font-size:21px;color:var(--muted);max-width:1500px">A <b style="color:var(--ink)">global value chain (GVC)</b> is the splitting of the production process of a good across several countries, each specializing in a stage.</p>
+  </div>
+
+  <div class="abs gvc" style="left:120px;top:370px;width:1680px">
+    <div class="st hv"><span class="fic"><svg class="ic"><use href="#i-pen"/></svg></span><b>Research & design</b><em>High value</em></div>
+    <svg class="ic ar"><use href="#i-arrow"/></svg>
+    <div class="st"><span class="fic"><svg class="ic"><use href="#i-chip"/></svg></span><b>Components</b></div>
+    <svg class="ic ar"><use href="#i-arrow"/></svg>
+    <div class="st"><span class="fic"><svg class="ic"><use href="#i-gear"/></svg></span><b>Assembly</b></div>
+    <svg class="ic ar"><use href="#i-arrow"/></svg>
+    <div class="st hv"><span class="fic"><svg class="ic"><use href="#i-mega"/></svg></span><b>Marketing</b><em>High value</em></div>
+    <svg class="ic ar"><use href="#i-arrow"/></svg>
+    <div class="st"><span class="fic"><svg class="ic"><use href="#i-service"/></svg></span><b>Services</b></div>
+  </div>
+  <style>
+    .gvc { display: flex; align-items: center; justify-content: space-between; }
+    .gvc .st { width: 270px; height: 150px; border: 1.5px solid var(--line); border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; font-size: 21px; color: var(--navy); position: relative; background: #fff; }
+    .gvc .st .fic { width: 52px; height: 52px; border-radius: 50%; background: var(--soft); display: grid; place-items: center; color: var(--navy); }
+    .gvc .st.hv { border-color: var(--mag); }
+    .gvc .st.hv .fic { background: var(--mag); color: #fff; }
+    .gvc .st em { position: absolute; top: -15px; background: var(--mag); color: #fff; font-style: normal; font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; padding: 3px 12px; border-radius: 999px; }
+    .gvc .ar { color: var(--blue-2); width: 34px; height: 34px; }
+  </style>
+
+  <div class="abs" style="left:120px;top:560px;width:1680px;display:flex;align-items:center;gap:22px">
+    <span style="font-size:16px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mag);white-space:nowrap">Consequence</span>
+    <span class="serif" style="font-size:30px;font-weight:600;color:var(--navy)">Countries no longer trade only finished goods, they trade <span style="color:var(--mag)">tasks</span>.</span>
+  </div>
+
+  <div class="abs" style="left:120px;top:640px;width:1680px;display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:30px">
+    <div style="background:var(--navy);color:#fff;border-radius:14px;padding:24px 28px">
+      <div class="label" style="color:var(--cyan)">Multinational corporations</div>
+      <p style="font-size:19px;line-height:1.45">Firms that operate in several countries. They organize these chains and move <b>capital, technology and know-how</b> through FDI.</p>
+    </div>
+    <div style="border:1.5px solid var(--line);border-radius:14px;padding:24px 28px">
+      <div class="label" style="color:var(--blue-2)">Advantages</div>
+      <ul class="ticks" style="gap:8px"><li style="font-size:19px"><svg class="ic" style="color:var(--blue-2)"><use href="#i-check"/></svg>Lower production costs</li><li style="font-size:19px"><svg class="ic" style="color:var(--blue-2)"><use href="#i-check"/></svg>Technology transfer and job creation in host countries</li></ul>
+    </div>
+    <div style="border:1.5px solid var(--line);border-radius:14px;padding:24px 28px">
+      <div class="label">Risks</div>
+      <ul class="ticks" style="gap:8px"><li style="font-size:19px"><svg class="ic"><use href="#i-alert"/></svg>Dependence on a few suppliers or regions</li><li style="font-size:19px"><svg class="ic"><use href="#i-alert"/></svg>Disruptions (e.g., supply chain crisis of 2020-2021)</li><li style="font-size:19px"><svg class="ic"><use href="#i-alert"/></svg>Unequal value: design and branding stay mostly in developed countries</li></ul>
+    </div>
+  </div>
+  <p class="abs" style="left:120px;top:942px;width:1680px;font-size:19px;color:var(--muted);font-style:italic">Traditional theories, built for trade in finished goods between nations, only partly explain this reality.</p>
+  <div class="foot"><span class="who">Wassim Sid</span><span>13 / 15</span></div>
+</section>
+
+<!-- ============ 14 · CONCLUSION ============ -->
+<section class="slide">
+  <div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div>
+  <div class="photo" style="left:200px;top:0;width:1720px;height:560px;background-image:url(img/amsterdam.jpg);background-position:center 40%"></div>
+  <div class="bars" style="right:0;top:548px"><i></i><i></i><i></i></div>
+  <div class="on-dark"><div class="pager"><i></i><i></i><i class="on"></i></div></div>
+
+  <div class="abs on-dark" style="left:120px;top:220px;width:1420px;background:rgba(26,43,120,.95);padding:48px 60px 46px;color:#fff">
+    <div class="eyebrow">05 · Conclusion</div>
+    <h2 style="color:#fff;font-size:50px;margin-bottom:36px">Theories of international trade evolved alongside reality</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:36px">
+      <div class="tl"><div class="yr">16th–18th c.</div><b>Mercantilism</b><p>Trade as a zero-sum game, wealth measured in gold</p></div>
+      <div class="tl"><div class="yr">1776 · 1817</div><b>Smith & Ricardo</b><p>Specialization and comparative advantage, with gains for all</p></div>
+      <div class="tl"><div class="yr">1919 · 1933</div><b>Heckscher-Ohlin</b><p>Trade explained by factor endowments</p></div>
+      <div class="tl"><div class="yr">Late 1970s</div><b>Krugman</b><p>Economies of scale, imperfect competition and variety</p></div>
+    </div>
+  </div>
+  <style>
+    .tl { border-top: 2px solid rgba(255,255,255,.3); padding-top: 18px; position: relative; }
+    .tl::before { content: ""; position: absolute; top: -8px; left: 0; width: 14px; height: 14px; border-radius: 50%; background: var(--mag); box-shadow: 0 0 0 3px var(--navy); }
+    .tl .yr { font-family: 'Lora', serif; font-size: 34px; font-weight: 600; line-height: 1.1; margin-bottom: 10px; }
+    .tl b { font-size: 21px; color: var(--cyan); }
+    .tl p { font-size: 18px; color: rgba(255,255,255,.78); line-height: 1.4; margin-top: 4px; }
+  </style>
+
+  <div class="abs" style="left:120px;top:800px;width:880px">
+    <p style="font-size:20px;color:var(--muted);line-height:1.5">Each theory corrects the limits of the previous one, yet <b style="color:var(--ink)">none explains everything</b>. Today, with global value chains, persistent inequalities and a mix of open trade and protectionist measures, the debate remains open.</p>
+  </div>
+  <div class="abs" style="left:1060px;top:790px;width:740px;background:var(--mag);color:#fff;border-radius:12px;padding:22px 30px">
+    <div class="label" style="color:#fff;opacity:.85">Answer to the problématique</div>
+    <p class="serif" style="font-size:22px;font-weight:500;line-height:1.4">Theories explain why countries trade, but they must be combined with the realities of the global economy to understand it fully.</p>
+  </div>
+  <div class="foot"><span class="who">Wassim Sid</span><span>14 / 15</span></div>
+</section>
+
+<!-- ============ 15 · THANK YOU ============ -->
+<section class="slide on-dark" style="background:var(--blue)">
+  <div class="photo" style="left:900px;top:0;width:1020px;height:1080px;background-image:url(img/crane.jpg);background-position:30% center;clip-path:polygon(30% 0,100% 0,100% 100%,0 100%)"></div>
+  <div class="brand"><span class="logo"><svg class="ic"><use href="#i-globe"/></svg></span>International Economics</div>
+  <div class="pager"><i></i><i></i><i class="on"></i></div>
+  <div class="abs" style="left:120px;top:330px;color:#fff;width:900px">
+    <h1 style="font-size:150px;line-height:1">Thank you</h1>
+    <p class="serif" style="font-size:48px;color:var(--cyan);font-weight:500;margin-top:16px">Questions?</p>
+    <div style="margin-top:60px;font-size:22px;color:rgba(255,255,255,.85)">Norhane Benazala &nbsp;·&nbsp; Wassim Sid</div>
+    <div style="font-size:19px;color:rgba(255,255,255,.6);margin-top:4px">Theoretical Framework of International Economic Relations</div>
+  </div>
+  <div class="bars" style="left:120px;bottom:120px"><i></i><i></i><i></i></div>
+</section>
+
+</body>
+</html>

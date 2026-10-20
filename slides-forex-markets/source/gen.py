@@ -104,14 +104,14 @@ S.append(f"""
   </div>
   <div class="abs" style="right:120px;bottom:130px;width:540px;background:rgba(20,33,96,.9);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:28px 34px;color:#fff">
     <div style="font-size:16px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:16px">Presented by</div>
-    {"".join(f'<div style="display:flex;align-items:center;gap:16px;margin-top:12px"><span style="width:50px;height:50px;border-radius:50%;background:{bg};color:{fg};display:grid;place-items:center;font-weight:700;font-size:17px">{ini}</span><span style="font-size:24px;font-family:Lora,serif;font-weight:600">{nm}</span></div>' for ini, nm, bg, fg in [("NB", N, "var(--mag)", "#fff"), ("WS", W, "#fff", "var(--navy)"), ("AS", A, "var(--blue-2)", "#fff"), ("KO", K, "var(--cyan)", "var(--navy)")])}
+    {"".join(f'<div style="display:flex;align-items:center;gap:16px;margin-top:12px"><span style="width:50px;height:50px;border-radius:50%;background:{bg};color:{fg};display:grid;place-items:center;font-weight:700;font-size:17px">{ini}</span><span style="font-size:24px;font-family:Lora,serif;font-weight:600">{nm}</span></div>' for ini, nm, bg, fg in [("NB", N, "var(--mag)", "#fff"), ("WS", W, "#fff", "var(--navy)"), ("KO", K, "var(--blue-2)", "#fff"), ("AS", A, "var(--cyan)", "var(--navy)")])}
   </div>
   {bars("right:0;bottom:0")}
 </section>""")
 
 # 2 · PLAN
 rows = [("00", "Introduction", ""), ("I", "Understanding the forex market", "Norhane"), ("II", "How currencies are traded", "Wassim"),
-        ("III", "What moves exchange rates", "Adam"), ("IV", "Risks and real-world impact", "Kamil"), ("—", "Conclusion", "")]
+        ("III", "What moves exchange rates", "Kamil"), ("IV", "Risks and real-world impact", "Adam"), ("—", "Conclusion", "")]
 S.append(f"""
 <section class="slide">
   <div class="abs" style="left:0;top:0;width:700px;height:1080px;background:var(--navy)"></div>
@@ -441,7 +441,7 @@ S.append(f"""
 S.append(f"""
 <section class="slide">
   {brand()}{pager(3)}
-  <div class="badge-part" style="left:1180px">Part III<b>{A}</b></div>
+  <div class="badge-part" style="left:1180px">Part III<b>{K}</b></div>
   <div class="abs" style="left:120px;top:150px;width:1680px">
     {eyebrow("Part III · What moves exchange rates")}
     <h2 style="font-size:58px">Supply and demand</h2>
@@ -466,7 +466,7 @@ S.append(f"""
     .sd .chip {{ background:rgba(255,255,255,.15); color:#fff; border-color:rgba(255,255,255,.4); font-size:20px; }}
   </style>
   <p class="abs serif" style="left:120px;top:860px;width:1680px;font-size:38px;font-weight:600;color:var(--navy);text-align:center">The question is: <span style="color:var(--mag)">what drives this supply and demand?</span></p>
-  {foot(13, A)}
+  {foot(13, K)}
 </section>""")
 
 # 14 · INTEREST RATES AND INFLATION
@@ -498,7 +498,7 @@ S.append(f"""
     .chain .res {{ color:#fff !important; font-weight:600; border-radius:12px; padding:14px 16px; display:flex; gap:8px; align-items:center; }}
     .chain .res.up {{ background:var(--blue-2); }} .chain .res.dn {{ background:var(--mag); }}
   </style>
-  {foot(14, A)}
+  {foot(14, K)}
 </section>""")
 
 # 15 · CENTRAL BANKS
@@ -524,7 +524,7 @@ S.append(f"""
     <span class="chip" style="background:var(--mag);color:#fff;border-color:var(--mag);font-weight:700">Above all: credibility</span>
   </div>
   {bars("right:0;bottom:0")}
-  {foot(15, A)}
+  {foot(15, K)}
 </section>""")
 
 # 16 · BREXIT
@@ -562,14 +562,14 @@ S.append(f"""
     <div style="font-size:15px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.9;margin-bottom:4px">Key takeaway · Part III</div>
     Exchange rates are driven by interest rates, inflation, central banks and, above all, <b>confidence</b>.
   </div>
-  {foot(16, A, "right:840px")}
+  {foot(16, K, "right:840px")}
 </section>""")
 
 # 17 · EXCHANGE-RATE RISK (Part IV)
 S.append(f"""
 <section class="slide">
   {brand()}{pager(4)}
-  <div class="badge-part" style="left:1180px">Part IV<b>{K}</b></div>
+  <div class="badge-part" style="left:1180px">Part IV<b>{A}</b></div>
   <div class="abs" style="left:120px;top:150px;width:780px">
     {eyebrow("Part IV · Risks and real-world impact")}
     <h2 style="font-size:58px;margin-bottom:24px">Exchange-rate risk</h2>
@@ -586,7 +586,7 @@ S.append(f"""
       <div style="font-size:21px;opacity:.92">without doing anything wrong.</div>
     </div>
   </div>
-  {foot(17, K)}
+  {foot(17, A)}
 </section>""")
 
 # 18 · HEDGING
@@ -614,7 +614,7 @@ S.append(f"""
     .hg .hn {{ font-size:19px; color:var(--muted); margin-top:10px; }}
   </style>
   <p class="abs serif" style="left:120px;top:860px;width:1680px;font-size:30px;color:#fff;font-weight:500">The company gives up a possible gain to remove the risk of a loss. <span style="color:var(--cyan)">It buys certainty.</span></p>
-  {foot(18, K)}
+  {foot(18, A)}
 </section>""")
 
 # 19 · SPECULATION & LEVERAGE
@@ -656,7 +656,7 @@ S.append(f"""
       <p style="font-size:19px;line-height:1.45;color:rgba(255,255,255,.92)">George Soros bet against the British pound. The Bank of England could not defend it, and Soros reportedly earned <b>around $1 billion in a single day</b>.</p>
     </div>
   </div>
-  {foot(19, K)}
+  {foot(19, A)}
 </section>""")
 
 # 20 · EVERYDAY LIFE
@@ -693,7 +693,7 @@ S.append(f"""
     </div>
   </div>
   <div class="key" style="bottom:96px"><span class="k">Key takeaway</span><span>Forex risk is real for companies and traders, and its effects reach everyone through prices.</span></div>
-  {foot(20, K)}
+  {foot(20, A)}
 </section>""")
 
 # 21 · CONCLUSION
@@ -730,7 +730,7 @@ S.append(f"""
   <div class="abs" style="left:120px;top:320px;color:#fff;width:960px">
     <h1 style="font-size:150px;line-height:1">Thank you</h1>
     <p class="serif" style="font-size:48px;color:var(--cyan);font-weight:500;margin-top:16px">Questions?</p>
-    <div style="margin-top:60px;font-size:22px;color:rgba(255,255,255,.88)">Norhane Benazala · Wassim Sid · Adam Sam · Kamil Mohamed Ounis</div>
+    <div style="margin-top:60px;font-size:22px;color:rgba(255,255,255,.88)">Norhane Benazala · Wassim Sid · Kamil Mohamed Ounis · Adam Sam</div>
     <div style="font-size:19px;color:rgba(255,255,255,.6);margin-top:4px">Foreign Exchange Markets: The Price of Money</div>
   </div>
   {bars("left:120px;bottom:120px")}
